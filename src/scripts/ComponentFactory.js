@@ -5,7 +5,6 @@ import Header from './components/Header.js';
 import IconLabel from './components/IconLabel.js';
 import Modal from './components/Modal.js';
 import ScrambledText from './components/ScrambledText.js';
-//import Scroller from './components/Scroller.js';
 import TargetCursor from './components/TargetCursor.js';
 import YouTube from './components/YouTube.js';
 import RotatingText from './components/RotatingText.js';
@@ -22,7 +21,6 @@ export default class ComponentFactory {
       IconLabel,
       Modal,
       ScrambledText,
-      //Scroller,
       TargetCursor,
       YouTube,
       RotatingText,
