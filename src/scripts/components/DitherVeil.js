@@ -59,6 +59,23 @@ export default class DitherVeil {
     this.setOptions();
     this.setColors();
 
+    // 1. Si l'image est déjà chargée (ex: cache du navigateur), on lance direct
+    if (this.image.complete) {
+      this.initObserver();
+    } else {
+      // 2. Sinon, on attend la fin du chargement de l'image avant d'observer
+      this.image.addEventListener(
+        'load',
+        () => {
+          this.initObserver();
+        },
+        { once: true },
+      );
+    }
+  }
+
+  // On sépare la création de l'observateur dans sa propre méthode
+  initObserver() {
     // Chaque image utilise un contexte WebGL, et les navigateurs en limitent le nombre (~16).
     // Le dither est donc créé quand l'image approche de l'écran, et retiré quand elle s'éloigne.
     // Au doigt, on le prépare bien avant (100 % d'écran) pour qu'il soit prêt à temps.
