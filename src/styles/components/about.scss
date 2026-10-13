@@ -17,6 +17,17 @@
         @media screen and (max-width: $breakpoint-md) {
             gap: var(--grid-gap-mobile);
         }
+
+        img {
+            opacity: 0.1;
+        }
+    }
+
+    /* Empêcher la sélection des windows pour qu'en mobile on puisse révéler la couleur */
+    .window {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
     }
 
     /*
@@ -44,13 +55,12 @@
         grid-row: 10 / 15;
         z-index: 2;
     }
-    .passion {
+    .passion-camera {
         grid-column: 9 / 13;
-        grid-row: 11 / 13;
-    }
-    .camera {
-        grid-column: 9 / 13;
-        grid-row: 12 / 17;
+        grid-row: 10 / 17;
+        display: flex;
+        flex-direction: column;
+        gap: var(--grid-gap);
     }
     .skill--soft {
         grid-column: 10 / 13;
@@ -116,6 +126,9 @@
      ========================================================================== */
 
     @media screen and (min-width: $breakpoint-sm) and (max-width: $breakpoint-lg) {
+        .passion-camera {
+            gap: var(--grid-gap-mobile);
+        }
         .intro {
             grid-row: 1 / 5;
         }
@@ -123,11 +136,8 @@
         .artist {
             grid-row: 5 / 10;
         }
-        .passion {
-            grid-row: 11 / 15;
-        }
-        .camera {
-            grid-row: 15 / 20;
+        .passion-camera {
+            grid-row: 11 / 20;
         }
         .skill--hard {
             grid-row: 13 / 19;
@@ -151,6 +161,11 @@
             margin: var(--spacing-md) 0;
         }
 
+        .passion-camera {
+            grid-column: 1 / 5;
+            grid-row: 19 / 26;
+            gap: var(--grid-gap-mobile);
+        }
         .friend {
             grid-column: 1 / 4;
             grid-row: 5 / 11;
@@ -167,17 +182,9 @@
             grid-column: 3 / 5;
             grid-row: 13 / 18;
         }
-        .passion {
-            grid-column: 1 / 5;
-            grid-row: 19 / 21;
-        }
         .couple {
             grid-column: 3 / 5;
             grid-row: 8 / 12;
-        }
-        .camera {
-            grid-column: 1 / 5;
-            grid-row: 21 / 26;
         }
 
         .skill {
@@ -220,9 +227,8 @@
             grid-column: 3 / 5;
             grid-row: 14 / 19;
         }
-        .camera {
-            grid-column: 1 / 5;
-            grid-row: 21 / 28;
+        .passion-camera {
+            grid-row: 19 / 28;
         }
         .skill {
             grid-row: 29 / 35;

@@ -12,9 +12,11 @@ export default class Scroller {
       smooth: 1, // durée du rattrapage, en secondes
       effects: true, // active les data-speed et data-lag
       smoothTouch: 0.1, // au doigt : léger lissage, synchronisé avec les data-lag (pas de jitter)
+      normalizeScroll: true, // normalise le défilement tactile pour limiter les à-coups mobiles
       ease: 'expo.out',
     };
     this.arrivalDuration = 1.2; // descente à l'arrivée depuis une autre page, en secondes
+    this.menuAnchorDuration = 0.8;
     this.smoother = null;
 
     this.init();
@@ -93,20 +95,36 @@ export default class Scroller {
       history.pushState(null, '', link.hash);
     }
 
-    this.scrollToTarget(target);
-  }
+    const nav = this.element.querySelector('.header__nav');
+    if (nav && document.documentElement.classList.contains('nav-is-active')) {
+      const onNavClose = (event) => {
+        if (event.target !== nav || event.propertyName !== 'transform') return;
 
-  // Défilement animé jusqu'à une cible (un élément ou 0 pour le haut). Au doigt,
-  // ScrollSmoother ne lisse pas le scroll : on demande au navigateur de le faire.
-  scrollToTarget(target) {
-    // ScrollTrigger.isTouch === 1 : appareil seulement tactile (même test que ScrollSmoother)
-    if (ScrollTrigger.isTouch !== 1 || this.options.smoothTouch) {
-      this.smoother.scrollTo(target, true, 'top top');
+        nav.removeEventListener('transitionend', onNavClose);
+        this.scrollToTarget(target, this.menuAnchorDuration);
+      };
+
+      nav.addEventListener('transitionend', onNavClose);
+      document.documentElement.classList.remove('nav-is-active');
       return;
     }
 
-    const top = target ? this.smoother.offset(target, 'top top') : 0;
-    window.scrollTo({ top: top, behavior: 'smooth' });
+    this.scrollToTarget(target);
+  }
+
+  // Défilement animé jusqu'à une cible (un élément ou 0 pour le haut).
+  scrollToTarget(target, duration) {
+    if (duration) {
+      gsap.to(this.smoother, {
+        scrollTop: this.smoother.offset(target, 'top top'),
+        duration,
+        ease: 'power2.inOut',
+        overwrite: true,
+      });
+      return;
+    }
+
+    this.smoother.scrollTo(target, true, 'top top');
   }
 
   onLoad() {
@@ -121,8 +139,6 @@ export default class Scroller {
       this.element.scrollTop = 0; // annule le saut du navigateur
       this.smoother.scrollTop(0);
 
-      // Vraie animation (départ et arrivée en douceur) : le rattrapage de
-      // ScrollSmoother seul part trop vite sur une longue distance
       gsap.to(this.smoother, {
         scrollTop: this.smoother.offset(target, 'top top'),
         duration: this.arrivalDuration,

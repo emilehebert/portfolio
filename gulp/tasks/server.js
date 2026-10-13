@@ -17,6 +17,8 @@ export function serve(cb) {
     server: {
       baseDir: [paths.dest],
     },
+    host: '0.0.0.0',
+    open: 'external',
     ghostMode: false,
     notify: false,
     browser: browsers,

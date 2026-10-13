@@ -43,7 +43,10 @@ export default class Header {
   setHeaderState() {
     if (
       this.scrollPosition >
-      document.scrollingElement.scrollHeight * this.options.threshold
+      Math.max(
+        this.element.offsetHeight,
+        document.scrollingElement.scrollHeight * this.options.threshold,
+      )
     ) {
       this.html.classList.add('header-is-hidden');
     } else {
@@ -52,10 +55,10 @@ export default class Header {
   }
 
   setDirections() {
-    if (this.scrollPosition >= this.lastScrollPosition) {
+    if (this.scrollPosition > this.lastScrollPosition) {
       this.html.classList.add('is-scrolling-down');
       this.html.classList.remove('is-scrolling-up');
-    } else {
+    } else if (this.scrollPosition < this.lastScrollPosition) {
       this.html.classList.add('is-scrolling-up');
       this.html.classList.remove('is-scrolling-down');
     }

@@ -1,5 +1,6 @@
 import DitherCanvas from '../utils/dither/DitherCanvas.js';
 
+// Écran tactile sans survol (téléphone, tablette)
 const isTouch = window.matchMedia(
   '(hover: none) and (pointer: coarse)',
 ).matches;
@@ -38,39 +39,33 @@ export default class DitherVeil {
     this.setOptions();
     this.setColors();
 
-    // 1. On attend que l'image soit prête avant de lancer l'observateur.
+    // FIX OPTIMISÉ : On s'assure que l'image est décodée en mémoire avant de l'observer
     this.waitForImage()
       .then(() => {
         this.initObserver();
       })
-      .catch((err) => {
-        console.warn('Erreur chargement image DitherVeil:', err);
-        // On initialise quand même au cas où c'est un problème de cache bizarre,
-        // mais le canvas risque d'être vide.
+      .catch(() => {
+        // Fallback si l'image plante, on lance quand même pour ne pas tout bloquer
         this.initObserver();
       });
   }
 
-  // Utilitaire pour s'assurer que l'image est décodée en mémoire
+  // Utilise l'API native decode() pour décharger le processeur principal
   waitForImage() {
     return new Promise((resolve, reject) => {
       if (this.image.complete) {
-        // L'image est dans le cache
-        // Optionnel : this.image.decode() permet de forcer le décodage asynchrone
         if (this.image.decode) {
           this.image
             .decode()
             .then(resolve)
-            .catch(() => resolve()); // On resolve même si erreur decode
+            .catch(() => resolve());
         } else {
           resolve();
         }
       } else {
-        // On attend le chargement réseau
         this.image.addEventListener(
           'load',
           () => {
-            // Pareil, on force le décodage si possible pour éviter les lags
             if (this.image.decode) {
               this.image
                 .decode()
@@ -111,9 +106,7 @@ export default class DitherVeil {
       hoverTarget = this.element.closest(this.options.trigger) || this.element;
     }
 
-    this.options.frozen = false;
-
-    // Le canvas est créé SEULEMENT quand l'image est garantie chargée
+    this.options.frozen = isTouch;
     this.dither = new DitherCanvas(
       this.element,
       this.image,
@@ -144,39 +137,25 @@ export default class DitherVeil {
   }
 
   setOptions() {
-    // ... [Ton code setOptions original reste identique] ...
-    if (this.element.dataset.fit) {
-      this.options.fit = this.element.dataset.fit;
-    }
-    if (this.element.dataset.pattern) {
+    if (this.element.dataset.fit) this.options.fit = this.element.dataset.fit;
+    if (this.element.dataset.pattern)
       this.options.pattern = this.element.dataset.pattern;
-    }
-    if (this.element.dataset.palette) {
+    if (this.element.dataset.palette)
       this.options.palette = this.element.dataset.palette;
-    }
-    if (this.element.dataset.pixelSize) {
+    if (this.element.dataset.pixelSize)
       this.options.pixelSize = Number(this.element.dataset.pixelSize);
-    }
-    if (this.element.dataset.levels) {
+    if (this.element.dataset.levels)
       this.options.levels = Number(this.element.dataset.levels);
-    }
-    if (this.element.dataset.contrast) {
+    if (this.element.dataset.contrast)
       this.options.contrast = Number(this.element.dataset.contrast);
-    }
-    if (this.element.dataset.brightness) {
+    if (this.element.dataset.brightness)
       this.options.brightness = Number(this.element.dataset.brightness);
-    }
-    if (this.element.dataset.trigger) {
+    if (this.element.dataset.trigger)
       this.options.trigger = this.element.dataset.trigger;
-    }
-    if (this.element.dataset.reveal) {
+    if (this.element.dataset.reveal)
       this.options.reveal = this.element.dataset.reveal;
-    }
-    if (this.element.dataset.revealRadius) {
+    if (this.element.dataset.revealRadius)
       this.options.revealRadius = Number(this.element.dataset.revealRadius);
-    }
-    if ('reverse' in this.element.dataset) {
-      this.options.reverse = true;
-    }
+    if ('reverse' in this.element.dataset) this.options.reverse = true;
   }
 }
