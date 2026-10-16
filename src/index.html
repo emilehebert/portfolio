@@ -1,245 +1,265 @@
 {% include '_partials/_header.html' %}
 
-<section class="hero has-bg-grid">
-    <div class="bg-grid" style="--grid-top: 10%" data-speed="clamp(0.25)" aria-hidden="true"></div>
-    <div class="wrapper">
-        <div class="hero__content" data-speed="1">
-            <h3>
-                <span class="rotating-text accent--primary" data-component="RotatingText" data-words="Designer|Intégrateur|Animateur|Créateur">Designer</span>
-                Determiné.
-            </h3>
-            <div class="nom" data-lag=".00001">
-                <h1 data-component="ScrambledText" data-chars="EMILEX.:;=" data-duration="2" data-intro>Emile</h1>
-                <h1 data-component="ScrambledText" data-chars="HEBERTX.:;=" data-duration="2" data-intro>Hebert</h1>
+<div class="hero-story-track">
+    <section class="hero has-bg-grid" data-component="HeroPortraitScroll">
+        <div class="bg-grid" style="--grid-top: 10%" data-speed="clamp(0.25)" aria-hidden="true"></div>
+        <div class="wrapper">
+            <div class="hero__content" data-speed="1">
+                <h3>
+                    <span class="rotating-text accent--primary" data-component="RotatingText" data-words="Designer|Intégrateur|Animateur|Créateur">
+                        Designer
+                    </span>
+                    Determiné.
+                </h3>
+                <div class="nom" data-lag=".00001">
+                    <h1 data-component="ScrambledText" data-chars="EMILEX.:;=" data-duration="2" data-intro>Emile</h1>
+                    <h1 data-component="ScrambledText" data-chars="HEBERTX.:;=" data-duration="2" data-intro>Hebert</h1>
+                </div>
+            </div>
+            <div class="hero__media">
+                <div class="window js-pinned" data-pin-overflow="img" data-pin-end=".hero-story-track__landing">
+                    <div class="window__content"><img src="assets/images/Portfolio_portrait_web.webp" alt="Portrait" /></div>
+                    <div class="window__footer">
+                        <p class="small">Photo : Loïc Blanchette Favela</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="hero__media" data-speed="1.2">
-            <div class="window">
-                <div class="window__content"><img src="assets/images/Portfolio_portrait_web.webp" alt="Portrait" data-lag=".1" /></div>
-                <div class="window__footer">
-                    <p class="small">Photo : Loïc Blanchette Favela</p>
-                </div>
-            </div>
+        <div class="list-icons hero__socials js-fixed" data-component="IconLabel">
+            <a href="https://github.com/emilehebert" target="_blank" class="logo--link cursor-target" aria-label="GitHub">
+                <svg class="icon icon--lg logo--icon">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            </a>
+            <a href="https://www.youtube.com/@emile_heb" target="_blank" class="logo--link cursor-target" aria-label="YouTube">
+                <svg class="icon icon--lg logo--icon">
+                    <use xlink:href="#icon-youtube"></use>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/emile_heb/" target="_blank" class="logo--link cursor-target" aria-label="Instagram">
+                <svg class="icon icon--lg logo--icon">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            </a>
+            <a href="https://ca.pinterest.com/hebertemile/" target="_blank" class="logo--link cursor-target" aria-label="Pinterest">
+                <svg class="icon icon--lg logo--icon">
+                    <use xlink:href="#icon-pinterest"></use>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/%C3%A9mile-h%C3%A9bert-9b5849308/" target="_blank" class="logo--link cursor-target" aria-label="LinkedIn">
+                <svg class="icon icon--lg logo--icon">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            </a>
+            <a href="https://www.artstation.com/emile-hebert" target="_blank" class="logo--link cursor-target" aria-label="ArtStation">
+                <svg class="icon icon--lg logo--icon">
+                    <use xlink:href="#icon-artstation"></use>
+                </svg>
+            </a>
         </div>
-    </div>
-    <div class="list-icons hero__socials js-fixed" data-component="IconLabel">
-        <a href="https://github.com/emilehebert" target="_blank" class="logo--link cursor-target" aria-label="GitHub">
-            <svg class="icon icon--lg logo--icon">
-                <use xlink:href="#icon-github"></use>
-            </svg>
-        </a>
-        <a href="https://www.youtube.com/@emile_heb" target="_blank" class="logo--link cursor-target" aria-label="YouTube">
-            <svg class="icon icon--lg logo--icon">
-                <use xlink:href="#icon-youtube"></use>
-            </svg>
-        </a>
-        <a href="https://www.instagram.com/emile_heb/" target="_blank" class="logo--link cursor-target" aria-label="Instagram">
-            <svg class="icon icon--lg logo--icon">
-                <use xlink:href="#icon-instagram"></use>
-            </svg>
-        </a>
-        <a href="https://ca.pinterest.com/hebertemile/" target="_blank" class="logo--link cursor-target" aria-label="Pinterest">
-            <svg class="icon icon--lg logo--icon">
-                <use xlink:href="#icon-pinterest"></use>
-            </svg>
-        </a>
-        <a href="https://www.linkedin.com/in/%C3%A9mile-h%C3%A9bert-9b5849308/" target="_blank" class="logo--link cursor-target" aria-label="LinkedIn">
-            <svg class="icon icon--lg logo--icon">
-                <use xlink:href="#icon-linkedin"></use>
-            </svg>
-        </a>
-        <a href="https://www.artstation.com/emile-hebert" target="_blank" class="logo--link cursor-target" aria-label="ArtStation">
-            <svg class="icon icon--lg logo--icon">
-                <use xlink:href="#icon-artstation"></use>
-            </svg>
-        </a>
-    </div>
-</section>
+    </section>
 
-<section class="about has-bg-grid" id="about">
-    <div class="bg-grid" style="--grid-top: 25%" data-speed="0.25"></div>
-    <div class="bg-grid" style="--grid-top: 115%" data-speed="0.25"></div>
-    <div class="halftone-marquee" data-component="HalftoneMarquee" data-text="A propos \">
-        <canvas class="halftone-marquee__canvas"></canvas>
-    </div>
-    <div class="wrapper">
-        <h2 data-speed="1.05">En tant que créateur multimédia...</h2>
-        <div class="about__grid">
-            <div class="window friend cursor-target" data-speed="1.1" data-lag=".21">
-                <div class="window__header">
-                    <p>Mes meilleurs amis</p>
-                </div>
-                <div class="window__content">
-                    <div class="window__media" data-component="DitherVeil">
-                        <img
-                            src="assets/images/about-friends.webp"
-                            alt="Mes amis et moi"
-                            title="Moi et mes amis durant notre voyage en Nouvelle-Écosse, on se connait depuis le secondaire."
-                        />
-                    </div>
-                </div>
-            </div>
+    <section class="short-story short-story--bottom" data-component="ShortStory">
+        <div class="wrapper">
+            <h2 class="short-story__step js-story-step">Designer.</h2>
+            <h2 class="short-story__step js-story-step">Intégrateur.</h2>
+            <h2 class="short-story__step js-story-step">Animateur.</h2>
+        </div>
+    </section>
 
-            <div class="text intro" data-speed="1.15" data-lag="0.1">
-                <p>
-                    J'approfondis la
-                    <span class="accent--primary">qualité visuelle</span>
-                    de mes projets
-                    <span class="accent--primary">3D et interactifs</span>
-                    en me mettant à la place du spectateur pour sentir si ça surprend et se comprend d'un coup d'œil. Ma
-                    <span class="accent--primary">vision créative</span>
-                    me pousse à peaufiner le détail que personne d'autre n'aurait remarqué.
-                </p>
-            </div>
-
-            <div class="window cat cursor-target" data-speed="1.4" data-lag="0.05">
-                <div class="window__header">
-                    <p>Mon chat</p>
-                </div>
-                <div class="window__content">
-                    <div class="window__media" data-component="DitherVeil">
-                        <img src="assets/images/about-cat.webp" alt="Mon chat" title="Son nom c'est Rosie, on l'a depuis 8 ans maintenant." />
-                    </div>
-                </div>
-            </div>
-
-            <div class="window artist cursor-target" data-speed="1.4" data-lag="0.05">
-                <div class="window__header">
-                    <p>Mon artiste préféré</p>
-                </div>
-                <div class="window__content">
-                    <div class="window__media" data-component="DitherVeil">
-                        <img
-                            src="assets/images/about-artist.webp"
-                            alt="Mon artiste préféré"
-                            title="Don Toliver au Centre Bell de Montréal, mon 2 ème à ce jour."
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div class="window couple cursor-target" data-speed="1.4" data-lag="0.2">
-                <div class="window__header">
-                    <p>Mon couple</p>
-                </div>
-                <div class="window__content">
-                    <div class="window__media" data-component="DitherVeil">
-                        <img src="assets/images/about-couple.webp" alt="Moi et ma copine" title="3 ans de relation avec mon amoureuse. XOXO" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="passion-camera" data-speed="1.5" data-lag="0.3">
-                <div class="text passion">
-                    <p>
-                        Je suis passionné par
-                        <span class="accent--primary">l'esthétique rétro</span>
-                        des années 2000 et les vieux hardwares, j'aiguise mon regard dans la
-                        <span class="accent--primary">vidéo</span>
-                        le
-                        <span class="accent--primary">streetwear</span>
-                        et la
-                        <span class="accent--primary">musique.</span>
-                    </p>
-                </div>
-
-                <div class="window camera cursor-target">
+    <section class="about has-bg-grid">
+        <div class="wrapper">
+            <div class="hero-story-track__landing" aria-hidden="true"></div>
+        </div>
+        <div class="bg-grid" style="--grid-top: 25%" data-speed="0.25"></div>
+        <div class="bg-grid" style="--grid-top: 115%" data-speed="0.25"></div>
+        <div class="halftone-marquee" data-component="HalftoneMarquee" data-text="A propos \">
+            <canvas class="halftone-marquee__canvas"></canvas>
+        </div>
+        <div class="wrapper">
+            <h2 data-speed="1.05">En tant que créateur multimédia...</h2>
+            <div class="about__grid">
+                <div class="window friend cursor-target" data-speed="1.1" data-lag=".21">
                     <div class="window__header">
-                        <p>Ma caméra VHS</p>
+                        <p>Mes meilleurs amis</p>
                     </div>
                     <div class="window__content">
                         <div class="window__media" data-component="DitherVeil">
-                            <img src="assets/images/about-camera.webp" alt="Friends" title="Ma Sony DCR-HC26, qui m'a été offerte par un ami." />
+                            <img
+                                src="assets/images/about-friends.webp"
+                                alt="Mes amis et moi"
+                                title="Moi et mes amis durant notre voyage en Nouvelle-Écosse, on se connait depuis le secondaire."
+                            />
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="skill skill--soft" data-speed="1.2" data-lag="0.5">
-                <h4 class="about--title">Soft Skills</h4>
-                <ul>
-                    <li class="tag">Créativité</li>
-                    <li class="tag">Curiosité</li>
-                    <li class="tag">Minutie</li>
-                    <li class="tag">Obsession du détail</li>
-                    <li class="tag">Dépassement de soi</li>
-                </ul>
-            </div>
+                <div class="text intro" data-speed="1.15" data-lag="0.1">
+                    <p>
+                        J'approfondis la
+                        <span class="accent--primary">qualité visuelle</span>
+                        de mes projets
+                        <span class="accent--primary">3D et interactifs</span>
+                        en me mettant à la place du spectateur pour sentir si ça surprend et se comprend d'un coup d'œil. Ma
+                        <span class="accent--primary">vision créative</span>
+                        me pousse à peaufiner le détail que personne d'autre n'aurait remarqué.
+                    </p>
+                </div>
 
-            <div class="skill skill--hard" data-speed="0.8" data-lag="0.5">
-                <h4 class="about--title">Hard Skills</h4>
-                <ul>
-                    <li class="tag">Design UI/UX</li>
-                    <li class="tag">Création Multimédia</li>
-                    <li class="tag">Dev Web</li>
-                    <li class="tag">Dev jeux vidéo</li>
-                    <li class="tag">Dev interactif</li>
-                </ul>
-            </div>
+                <div class="window cat cursor-target" data-speed="1.4" data-lag="0.05">
+                    <div class="window__header">
+                        <p>Mon chat</p>
+                    </div>
+                    <div class="window__content">
+                        <div class="window__media" data-component="DitherVeil">
+                            <img src="assets/images/about-cat.webp" alt="Mon chat" title="Son nom c'est Rosie, on l'a depuis 8 ans maintenant." />
+                        </div>
+                    </div>
+                </div>
 
-            <div class="tool" data-speed="1.2" data-lag=".3">
-                <h4 class="about--title">Logiciels et langages que je maîtrises</h4>
-                <div class="list-icons" data-component="IconLabel">
-                    <a href="https://www.blender.org/" target="_blank" class="logo--link cursor-target" aria-label="Blender">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-blender"></use>
-                        </svg>
-                    </a>
-                    <a href="https://derivative.ca/" target="_blank" class="logo--link cursor-target" aria-label="TouchDesigner">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-touchdesigner"></use>
-                        </svg>
-                    </a>
-                    <a href="https://www.figma.com/" target="_blank" class="logo--link cursor-target" aria-label="Figma">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-figma"></use>
-                        </svg>
-                    </a>
-                    <a href="https://code.visualstudio.com/" target="_blank" class="logo--link cursor-target" aria-label="VsCode">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-vscode"></use>
-                        </svg>
-                    </a>
-                    <a href="https://wordpress.com/" target="_blank" class="logo--link cursor-target" aria-label="Wordpress">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-wordpress"></use>
-                        </svg>
-                    </a>
-                    <a href="https://unity.com/" target="_blank" class="logo--link cursor-target" aria-label="Unity">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-unity"></use>
-                        </svg>
-                    </a>
-                    <a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)" target="_blank" class="logo--link cursor-target" aria-label="Csharp">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-csharp"></use>
-                        </svg>
-                    </a>
-                    <a href="https://www.adobe.com/" target="_blank" class="logo--link cursor-target" aria-label="Suite Adobe">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-adobe"></use>
-                        </svg>
-                    </a>
-                    <a href="https://en.wikipedia.org/wiki/CSS" target="_blank" class="logo--link cursor-target" aria-label="CSS">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-css"></use>
-                        </svg>
-                    </a>
-                    <a href="https://en.wikipedia.org/wiki/HTML" target="_blank" class="logo--link cursor-target" aria-label="HTML">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-html"></use>
-                        </svg>
-                    </a>
-                    <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank" class="logo--link cursor-target" aria-label="JavaScript">
-                        <svg class="icon icon--lg logo--icon">
-                            <use xlink:href="#icon-javascript"></use>
-                        </svg>
-                    </a>
+                <div class="window artist cursor-target" data-speed="1.4" data-lag="0.05">
+                    <div class="window__header">
+                        <p>Mon artiste préféré</p>
+                    </div>
+                    <div class="window__content">
+                        <div class="window__media" data-component="DitherVeil">
+                            <img
+                                src="assets/images/about-artist.webp"
+                                alt="Mon artiste préféré"
+                                title="Don Toliver au Centre Bell de Montréal, mon 2 ème à ce jour."
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="window couple cursor-target" data-speed="1.4" data-lag="0.2">
+                    <div class="window__header">
+                        <p>Mon couple</p>
+                    </div>
+                    <div class="window__content">
+                        <div class="window__media" data-component="DitherVeil">
+                            <img src="assets/images/about-couple.webp" alt="Moi et ma copine" title="3 ans de relation avec mon amoureuse. XOXO" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="passion-camera" data-speed="1.5" data-lag="0.3">
+                    <div class="text passion">
+                        <p>
+                            Je suis passionné par
+                            <span class="accent--primary">l'esthétique rétro</span>
+                            des années 2000 et les vieux hardwares, j'aiguise mon regard dans la
+                            <span class="accent--primary">vidéo</span>
+                            le
+                            <span class="accent--primary">streetwear</span>
+                            et la
+                            <span class="accent--primary">musique.</span>
+                        </p>
+                    </div>
+
+                    <div class="window camera cursor-target">
+                        <div class="window__header">
+                            <p>Ma caméra VHS</p>
+                        </div>
+                        <div class="window__content">
+                            <div class="window__media" data-component="DitherVeil">
+                                <img src="assets/images/about-camera.webp" alt="Friends" title="Ma Sony DCR-HC26, qui m'a été offerte par un ami." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill skill--soft" data-speed="1.2" data-lag="0.5">
+                    <h4 class="about--title">Soft Skills</h4>
+                    <ul>
+                        <li class="tag">Créativité</li>
+                        <li class="tag">Curiosité</li>
+                        <li class="tag">Minutie</li>
+                        <li class="tag">Obsession du détail</li>
+                        <li class="tag">Dépassement de soi</li>
+                    </ul>
+                </div>
+
+                <div class="skill skill--hard" data-speed="0.8" data-lag="0.5">
+                    <h4 class="about--title">Hard Skills</h4>
+                    <ul>
+                        <li class="tag">Design UI/UX</li>
+                        <li class="tag">Création Multimédia</li>
+                        <li class="tag">Dev Web</li>
+                        <li class="tag">Dev jeux vidéo</li>
+                        <li class="tag">Dev interactif</li>
+                    </ul>
+                </div>
+
+                <div class="tool" data-speed="1.2" data-lag=".3">
+                    <h4 class="about--title">Logiciels et langages que je maîtrises</h4>
+                    <div class="list-icons" data-component="IconLabel">
+                        <a href="https://www.blender.org/" target="_blank" class="logo--link cursor-target" aria-label="Blender">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-blender"></use>
+                            </svg>
+                        </a>
+                        <a href="https://derivative.ca/" target="_blank" class="logo--link cursor-target" aria-label="TouchDesigner">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-touchdesigner"></use>
+                            </svg>
+                        </a>
+                        <a href="https://www.figma.com/" target="_blank" class="logo--link cursor-target" aria-label="Figma">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-figma"></use>
+                            </svg>
+                        </a>
+                        <a href="https://code.visualstudio.com/" target="_blank" class="logo--link cursor-target" aria-label="VsCode">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-vscode"></use>
+                            </svg>
+                        </a>
+                        <a href="https://wordpress.com/" target="_blank" class="logo--link cursor-target" aria-label="Wordpress">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-wordpress"></use>
+                            </svg>
+                        </a>
+                        <a href="https://unity.com/" target="_blank" class="logo--link cursor-target" aria-label="Unity">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-unity"></use>
+                            </svg>
+                        </a>
+                        <a
+                            href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)"
+                            target="_blank"
+                            class="logo--link cursor-target"
+                            aria-label="Csharp"
+                        >
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-csharp"></use>
+                            </svg>
+                        </a>
+                        <a href="https://www.adobe.com/" target="_blank" class="logo--link cursor-target" aria-label="Suite Adobe">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-adobe"></use>
+                            </svg>
+                        </a>
+                        <a href="https://en.wikipedia.org/wiki/CSS" target="_blank" class="logo--link cursor-target" aria-label="CSS">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-css"></use>
+                            </svg>
+                        </a>
+                        <a href="https://en.wikipedia.org/wiki/HTML" target="_blank" class="logo--link cursor-target" aria-label="HTML">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-html"></use>
+                            </svg>
+                        </a>
+                        <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank" class="logo--link cursor-target" aria-label="JavaScript">
+                            <svg class="icon icon--lg logo--icon">
+                                <use xlink:href="#icon-javascript"></use>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <section class="projets has-bg-grid" id="projets">
     <div class="bg-grid" style="--grid-top: 90%" data-speed="0.25" aria-hidden="true"></div>

@@ -22,3 +22,7 @@
 .dither-veil__canvas--still {
     image-rendering: pixelated;
 }
+
+[data-component='DitherVeil'].is-color-revealed .dither-veil__canvas--still {
+    opacity: 0;
+}

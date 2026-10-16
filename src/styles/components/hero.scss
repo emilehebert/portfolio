@@ -1,12 +1,30 @@
 /* ==========================================================================
-   HERO / 
+   HERO /
    ========================================================================== */
+
+.hero-story-track {
+    position: relative;
+}
+
+.hero-story-track__landing {
+    width: 588px;
+    height: 400px;
+    margin: 0 auto;
+    visibility: hidden;
+    pointer-events: none;
+
+    @media screen and (max-width: $breakpoint-sm) {
+        width: min(425px, 100%);
+        margin: 0 auto;
+    }
+}
 
 .hero {
     min-height: 750px;
     padding: var(--spacing-xl) 0 var(--spacing-lg);
     position: relative;
     overflow: visible;
+    z-index: 1;
 
     @media screen and (max-width: $breakpoint-sm) {
         padding: var(--spacing-lg) 0;
@@ -68,7 +86,7 @@
     justify-content: center;
 
     @media screen and (max-width: $breakpoint-sm) {
-        justify-content: flex-start;
+        justify-content: center;
     }
 
     .window {
@@ -77,7 +95,7 @@
         width: 588px;
         height: 400px;
         @media screen and (max-width: $breakpoint-sm) {
-            width: 425px;
+            width: min(425px, 100%);
         }
         .window__content {
             display: flex;
@@ -99,5 +117,6 @@
             265%
         );
         width: auto;
+        // Mobile : recentrage horizontal de la personne fait dans HeroPortraitScroll.js
     }
 }

@@ -1,0 +1,25 @@
+/* ==========================================================================
+   SHORT STORY / scrollytelling (ShortStory.js)
+   ========================================================================== */
+
+.short-story {
+    height: 100vh;
+
+    .wrapper {
+        height: 100%;
+        display: grid;
+        place-items: center;
+        text-align: center;
+    }
+
+    // Toutes les étapes dans la même case : elles se superposent au centre
+    .short-story__step {
+        grid-area: 1 / 1;
+    }
+
+    // Variante : les étapes en bas de l'écran (ex. sous le portrait du hero)
+    &--bottom .wrapper {
+        align-items: end;
+        padding-bottom: var(--spacing-md);
+    }
+}

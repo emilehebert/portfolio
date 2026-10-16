@@ -2,9 +2,11 @@ import Accordion from './components/Accordion.js';
 import Comparison from './components/Comparison.js';
 import DitherVeil from './components/DitherVeil.js';
 import Header from './components/Header.js';
+import HeroPortraitScroll from './components/HeroPortraitScroll.js';
 import IconLabel from './components/IconLabel.js';
 import Modal from './components/Modal.js';
 import ScrambledText from './components/ScrambledText.js';
+import ShortStory from './components/ShortStory.js';
 import TargetCursor from './components/TargetCursor.js';
 import YouTube from './components/YouTube.js';
 import RotatingText from './components/RotatingText.js';
@@ -19,9 +21,11 @@ export default class ComponentFactory {
       Comparison,
       DitherVeil,
       Header,
+      HeroPortraitScroll,
       IconLabel,
       Modal,
       ScrambledText,
+      ShortStory,
       TargetCursor,
       YouTube,
       RotatingText,

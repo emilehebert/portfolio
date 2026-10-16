@@ -1,0 +1,36 @@
+/* ==========================================================================
+   declaration / 
+   ========================================================================== */
+
+.hero--declaration {
+    padding: var(--spacing-xl) 0;
+    @media (max-width: $breakpoint-sm) {
+        padding: var(--spacing-lg) 0;
+    }
+}
+
+.declaration-section {
+    padding: var(--spacing-xl) 0;
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    .paragraphe {
+        @include panel;
+        border-color: var(--color-primary);
+        margin-top: var(--spacing-md);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    .me {
+        @include panel;
+        width: 70%;
+        margin-left: auto;
+    }
+
+    .date {
+        text-align: right;
+    }
+}

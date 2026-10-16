@@ -54,6 +54,11 @@ p {
     }
 }
 
+.tag {
+    @include panel;
+    align-self: stretch;
+}
+
 span {
     &.accent--primary {
         color: var(--color-primary);

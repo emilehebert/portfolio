@@ -2,18 +2,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
 // Smooth scroll de toute la page (sur #smooth-wrapper)
 export default class Scroller {
   constructor(element) {
     this.element = element;
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     this.options = {
-      smooth: 1, // durée du rattrapage, en secondes
-      effects: true, // active les data-speed et data-lag
-      smoothTouch: 0.1, // au doigt : léger lissage, synchronisé avec les data-lag (pas de jitter)
-      normalizeScroll: true, // normalise le défilement tactile pour limiter les à-coups mobiles
-      ease: 'expo.out',
+      hasPinItems: false,
     };
     this.arrivalDuration = 1.2; // descente à l'arrivée depuis une autre page, en secondes
     this.menuAnchorDuration = 0.8;
@@ -24,9 +19,71 @@ export default class Scroller {
 
   init() {
     this.moveFixedElements();
-    this.smoother = ScrollSmoother.create(this.options);
+    this.smoother = ScrollSmoother.create({
+      smooth: 1, // durée du rattrapage, en secondes
+      effects: true, // active les data-speed et data-lag
+      smoothTouch: 0.5, // au doigt : léger lissage, synchronisé avec les data-lag (pas de jitter)
+      normalizeScroll: true, // normalise le défilement tactile pour limiter les à-coups mobiles
+      ease: 'expo.out',
+    });
     this.initAnchors();
     this.initLoadGuard();
+    this.setOptions(); // après le smoother : les pins en ont besoin
+  }
+
+  // PIN CONTROLS
+  // Les .js-pinned restent au centre de l'écran pendant le scroll.
+  // Options en data-attributs sur l'élément :
+  //   data-pin-end="sélecteur"      se relâche quand cet élément arrive au centre
+  //   data-pin-overflow="sélecteur" centre aussi ce qui dépasse au-dessus (ex. la tête du portrait)
+  initPins() {
+    const pinnedItems = this.element.querySelectorAll('.js-pinned');
+
+    for (let i = 0; i < pinnedItems.length; i++) {
+      this.createPin(pinnedItems[i]);
+    }
+  }
+
+  createPin(pinnedItem) {
+    const settings = {
+      pin: pinnedItem,
+      trigger: pinnedItem.parentElement,
+      start: 'center center',
+      end: '80% center',
+      markers: true, // debug : à retirer avant la mise en ligne
+    };
+
+    if (pinnedItem.dataset.pinEnd) {
+      settings.endTrigger = document.querySelector(pinnedItem.dataset.pinEnd);
+      settings.end = 'center center';
+      settings.pinSpacing = false; // l'emplacement est déjà réservé dans la page
+      settings.refreshPriority = -1; // mesuré après les autres pins (ex. ShortStory), qui allongent le trajet
+    }
+
+    if (pinnedItem.dataset.pinOverflow) {
+      const overflowItem = pinnedItem.querySelector(
+        pinnedItem.dataset.pinOverflow,
+      );
+      const center = () =>
+        `${this.getVisualCenter(pinnedItem, overflowItem)} center`;
+
+      settings.start = center;
+      if (settings.endTrigger) settings.end = center;
+    }
+
+    ScrollTrigger.create(settings);
+  }
+
+  // Milieu entre le haut de ce qui dépasse et le bas de l'élément, depuis le haut du parent
+  getVisualCenter(pinnedItem, overflowItem) {
+    const parent = pinnedItem.parentElement.getBoundingClientRect();
+    const item = pinnedItem.getBoundingClientRect();
+    const overflow = overflowItem.getBoundingClientRect();
+
+    const top = Math.min(item.top, overflow.top);
+    const middle = (top + item.bottom) / 2 - parent.top;
+
+    return `top+=${Math.round(middle)}`;
   }
 
   // Au chargement (Précédent, rechargement), la page doit être directement à sa place.
@@ -179,5 +236,12 @@ export default class Scroller {
     const clean = (path) => path.replace(/index\.html$/, '');
 
     return clean(link.pathname) === clean(window.location.pathname);
+  }
+
+  setOptions() {
+    if ('pinItems' in this.element.dataset) {
+      this.options.hasPinItems = true;
+      this.initPins();
+    }
   }
 }

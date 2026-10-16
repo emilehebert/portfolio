@@ -109,11 +109,6 @@
         gap: var(--spacing-sm);
     }
 
-    .tag {
-        @include panel;
-        align-self: stretch;
-    }
-
     .description {
         padding: var(--spacing-s);
         background: var(--color-background);
