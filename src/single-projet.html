@@ -353,25 +353,149 @@
         <canvas class="halftone-marquee__canvas"></canvas>
     </div>
     <div class="wrapper">
-        <div class="photos">
-            <div class="window">
+        <div class="drag-windows" data-component="DragWindows">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="modale-image" data-x="2" data-y="4" style="--window-width: 460px">
+                <div class="window__header">
+                    <p class="small">Final-Render.webp</p>
+                </div>
                 <div class="window__content">
-                    <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                        <img src="assets/images/boucle-infinie/Blender-Viewport-Render.webp" alt="House Breach" />
+                    <div class="window__media" data-component="DitherVeil">
+                        <img
+                            src="assets/images/boucle-infinie/Final-Render-Thumbnail.webp"
+                            alt="Rendu final de la scène Lego dans la forêt d'Endor"
+                            width="1920"
+                            height="1080"
+                            loading="lazy"
+                            draggable="false"
+                        />
                     </div>
                 </div>
                 <div class="window__footer">
-                    <p class="small">Frame du viewport Blender.</p>
+                    <p class="small">1920 × 1080 px</p>
+                    <p class="small">394 Ko</p>
                 </div>
             </div>
-            <div class="window">
+            <div
+                class="window drag-windows__window js-drag-window cursor-target"
+                data-modal="modale-image"
+                data-x="42"
+                data-y="0"
+                style="--window-width: 280px"
+            >
+                <div class="window__header">
+                    <p class="small">Environment-Overview.webp</p>
+                </div>
                 <div class="window__content">
-                    <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                        <img src="assets/images/boucle-infinie/Compositing-Viewport.webp" alt="House Breach" />
+                    <div class="window__media" data-component="DitherVeil">
+                        <img
+                            src="assets/images/boucle-infinie/Environment-Overview.webp"
+                            alt="Explosion au milieu de la forêt, vue verticale"
+                            width="755"
+                            height="800"
+                            loading="lazy"
+                            draggable="false"
+                        />
                     </div>
                 </div>
                 <div class="window__footer">
-                    <p class="small">Nodes de compositing sur les sabres lasers.</p>
+                    <p class="small">755 × 800 px</p>
+                    <p class="small">168 Ko</p>
+                </div>
+            </div>
+            <div
+                class="window drag-windows__window js-drag-window cursor-target"
+                data-modal="modale-image"
+                data-x="64"
+                data-y="8"
+                style="--window-width: 400px"
+            >
+                <div class="window__header">
+                    <p class="small">Render-After.webp</p>
+                </div>
+                <div class="window__content">
+                    <div class="window__media" data-component="DitherVeil">
+                        <img
+                            src="assets/images/boucle-infinie/Render-After.webp"
+                            alt="Plan large de la piste avec les AT-ST"
+                            width="1920"
+                            height="800"
+                            loading="lazy"
+                            draggable="false"
+                        />
+                    </div>
+                </div>
+                <div class="window__footer">
+                    <p class="small">1920 × 800 px</p>
+                    <p class="small">280 Ko</p>
+                </div>
+            </div>
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="modale-image" data-x="6" data-y="52">
+                <div class="window__header">
+                    <p class="small">Lightsaber-Fight.webp</p>
+                </div>
+                <div class="window__content">
+                    <div class="window__media" data-component="DitherVeil">
+                        <img
+                            src="assets/images/boucle-infinie/Lightsaber-Fight.webp"
+                            alt="Animation du combat au sabre laser dans Blender"
+                            width="1920"
+                            height="1080"
+                            loading="lazy"
+                            draggable="false"
+                        />
+                    </div>
+                </div>
+                <div class="window__footer">
+                    <p class="small">1920 × 1080 px</p>
+                    <p class="small">266 Ko</p>
+                </div>
+            </div>
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="modale-image" data-x="36" data-y="56">
+                <div class="window__header">
+                    <p class="small">Viewport-Render.webp</p>
+                </div>
+                <div class="window__content">
+                    <div class="window__media" data-component="DitherVeil">
+                        <img
+                            src="assets/images/boucle-infinie/Blender-Viewport-Render.webp"
+                            alt="Frame du viewport Blender"
+                            width="1919"
+                            height="1008"
+                            loading="lazy"
+                            draggable="false"
+                        />
+                    </div>
+                </div>
+                <div class="window__footer">
+                    <p class="small">1919 × 1008 px</p>
+                    <p class="small">201 Ko</p>
+                </div>
+            </div>
+            <div
+                class="window drag-windows__window js-drag-window cursor-target"
+                data-modal="modale-image"
+                data-x="66"
+                data-y="48"
+                style="--window-width: 380px"
+            >
+                <div class="window__header">
+                    <p class="small">Compositing.webp</p>
+                </div>
+                <div class="window__content">
+                    <div class="window__media" data-component="DitherVeil">
+                        <img
+                            src="assets/images/boucle-infinie/Compositing-Viewport.webp"
+                            alt="Nodes de compositing sur les sabres lasers"
+                            width="1918"
+                            height="1013"
+                            loading="lazy"
+                            draggable="false"
+                        />
+                    </div>
+                </div>
+                <div class="window__footer">
+                    <p class="small">1918 × 1013 px</p>
+                    <p class="small">287 Ko</p>
                 </div>
             </div>
         </div>
@@ -442,8 +566,6 @@
     </div>
 </section>
 
-<!-- Modale vidéo présentation -->
-{% include '_partials/_modal.html' %}
 
 <!-- Footer -->
 {% include '_partials/_footer.html' %}

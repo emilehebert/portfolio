@@ -22,6 +22,7 @@ export default class Modal {
 
   open(event) {
     event.preventDefault();
+    this.showImage(event.currentTarget);
     this.element.classList.add('is-open');
     ScrollSmoother.get().paused(true);
   }
@@ -30,6 +31,20 @@ export default class Modal {
     event.preventDefault();
     this.element.classList.remove('is-open');
     ScrollSmoother.get().paused(false);
+  }
+
+  // Modale image : copie l'image cliquée et le titre de sa fenêtre dans la modale
+  showImage(link) {
+    const image = this.element.querySelector('.js-modal-image');
+    const source = link.querySelector('img');
+    if (!image || !source) return;
+
+    image.src = source.currentSrc || source.src;
+    image.alt = source.alt;
+
+    const title = this.element.querySelector('.js-modal-title');
+    const name = link.querySelector('.window__header p');
+    if (title) title.textContent = name ? name.textContent : source.alt;
   }
 
   // Ferme si on clique à côté de la fenêtre

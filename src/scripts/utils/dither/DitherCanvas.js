@@ -11,7 +11,7 @@ import {
 const MASK_SCALE = 0.5; // le masque du curseur est dessiné à demi-résolution (plus rapide)
 const HOLD = 1.6; // garde la zone révélée bien pleine avant qu'elle commence à s'effacer
 const INTRO_DURATION = 1100; // durée de l'apparition au chargement, en ms
-const FROZEN_DPR = 1.5; // résolution du dither figé (tactile)
+const FROZEN_DPR = 2; // résolution du dither figé (tactile)
 
 /*
  * DitherCanvas — le <canvas> WebGL qui affiche UNE image en dither.
@@ -100,6 +100,7 @@ export default class DitherCanvas {
         ),
         alpha: false,
         antialias: false,
+        preserveDrawingBuffer: this.options.frozen, // tactile : Safari peut rendre une copie noire sans ça
       });
     } catch {
       return false;
@@ -113,7 +114,8 @@ export default class DitherCanvas {
 
     this.canvas = this.gl.canvas;
     this.canvas.classList.add('dither-veil__canvas');
-    this.container.appendChild(this.canvas);
+    // Tactile : le canvas WebGL reste hors de la page (sinon carré noir tant que l'image n'est pas dessinée)
+    if (!this.options.frozen) this.container.appendChild(this.canvas);
 
     // Masque en haute précision si possible (traînée plus douce)
     this.hasFloatMask = !!this.renderer.getExtension('EXT_color_buffer_float');

@@ -208,14 +208,9 @@
 .galerie {
     padding: var(--spacing-xl) 0;
 
-    .photos {
-        margin-top: var(--spacing-lg);
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--grid-gap);
-        @media (max-width: $breakpoint-sm) {
-            display: flex;
-            flex-direction: column;
+    @media (max-width: $breakpoint-sm) {
+        .window__footer {
+            display: none;
         }
     }
 }

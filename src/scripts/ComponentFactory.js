@@ -1,6 +1,7 @@
 import Accordion from './components/Accordion.js';
 import Comparison from './components/Comparison.js';
 import DitherVeil from './components/DitherVeil.js';
+import DragWindows from './components/DragWindows.js';
 import Header from './components/Header.js';
 import HeroPortraitScroll from './components/HeroPortraitScroll.js';
 import IconLabel from './components/IconLabel.js';
@@ -20,6 +21,7 @@ export default class ComponentFactory {
       Accordion,
       Comparison,
       DitherVeil,
+      DragWindows,
       Header,
       HeroPortraitScroll,
       IconLabel,

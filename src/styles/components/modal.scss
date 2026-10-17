@@ -25,3 +25,22 @@
         ); // rentre aussi en hauteur
     }
 }
+
+/*
+ Modale image : l'image de la fenêtre cliquée en grand (Modal.js)
+ ========================================================================== */
+
+.modal--image {
+    .window {
+        width: auto;
+        max-width: 100%;
+    }
+
+    .window__content img {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        max-height: calc(100dvh - 150px); // place pour le header et les marges
+        object-fit: contain;
+    }
+}

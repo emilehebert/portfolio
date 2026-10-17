@@ -1,0 +1,64 @@
+/* ==========================================================================
+   DRAG WINDOWS /
+   Galerie bureau (DragWindows.js) : colonne par défaut, fenêtres posées avec .is-scattered
+   ========================================================================== */
+
+.drag-windows {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--grid-gap-mobile);
+    margin-top: var(--spacing-lg);
+
+    &.is-scattered {
+        display: block;
+        height: 780px;
+
+        @media screen and (max-width: $breakpoint-md) {
+            height: 640px;
+        }
+    }
+}
+
+.drag-windows__window {
+    --window-width: 360px; // largeur sur le bureau, changeable par fenêtre
+
+    transition: border-color 0.2s;
+
+    // Survol à la souris seulement (pas de bordure qui reste après un tap)
+    @media (hover: hover) {
+        &:hover {
+            border-color: var(--color-secondary);
+        }
+    }
+
+    .window__header,
+    .window__footer {
+        gap: var(--spacing-s);
+        border-color: inherit;
+    }
+
+    .window__media img {
+        height: auto; // garde le ratio des attributs width / height
+    }
+}
+
+// Sur le bureau : fenêtres posées en absolu (left / top en % mis par le JS)
+.is-scattered .drag-windows__window {
+    position: absolute;
+    width: var(--window-width);
+    max-width: 45%;
+    user-select: none;
+
+    @media screen and (max-width: $breakpoint-md) {
+        max-width: 40%;
+    }
+}
+
+.is-draggable .drag-windows__window {
+    cursor: grab;
+
+    &.is-dragging {
+        cursor: grabbing;
+    }
+}
