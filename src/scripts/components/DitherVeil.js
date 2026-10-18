@@ -1,4 +1,5 @@
 import DitherCanvas from "../utils/dither/DitherCanvas.js";
+import DitherStill from "../utils/dither/DitherStill.js";
 
 // Écran tactile sans survol (téléphone, tablette)
 const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
@@ -104,12 +105,14 @@ export default class DitherVeil {
             hoverTarget = this.element.closest(this.options.trigger) || this.element;
         }
 
-        this.options.frozen = isTouch;
-        // Tactile : dither en couleur (pas de survol pour la révéler) et points plus fins
+        // Tactile : dither figé, dessiné une fois en 2D (pas de WebGL), en couleur et à points fins
         if (isTouch) {
             this.options.palette = "rgb";
             this.options.pixelSize = 1;
+            this.dither = new DitherStill(this.element, this.image, this.options);
+            return;
         }
+
         this.dither = new DitherCanvas(this.element, this.image, this.options, hoverTarget);
 
         if (!this.dither.isSupported) this.dither = null;

@@ -11,7 +11,6 @@ import {
 const MASK_SCALE = 0.5; // le masque du curseur est dessiné à demi-résolution (plus rapide)
 const HOLD = 1.6; // garde la zone révélée bien pleine avant qu'elle commence à s'effacer
 const INTRO_DURATION = 1100; // durée de l'apparition au chargement, en ms
-const FROZEN_DPR = 2; // résolution du dither figé (tactile)
 
 /*
  * DitherCanvas — le <canvas> WebGL qui affiche UNE image en dither.
@@ -35,7 +34,6 @@ export default class DitherCanvas {
     this.isDestroyed = false;
     this.image = null; // la photo, une fois chargée
     this.source = null; // la photo réduite à la taille du canvas
-    this.still = null; // tactile : copie figée du dither
     this.width = 1; // taille du canvas, en px CSS
     this.height = 1;
 
@@ -68,14 +66,11 @@ export default class DitherCanvas {
     this.createShaders();
     this.loadImage();
 
-    // Au doigt, pas de survol : pas d'écouteurs
-    if (!this.options.frozen) {
-      this.hoverTarget.addEventListener('pointerenter', this.onMove);
-      this.hoverTarget.addEventListener('pointermove', this.onMove);
-      this.hoverTarget.addEventListener('pointerdown', this.onMove);
-      this.hoverTarget.addEventListener('pointerleave', this.onLeave);
-      this.hoverTarget.addEventListener('pointercancel', this.onLeave);
-    }
+    this.hoverTarget.addEventListener('pointerenter', this.onMove);
+    this.hoverTarget.addEventListener('pointermove', this.onMove);
+    this.hoverTarget.addEventListener('pointerdown', this.onMove);
+    this.hoverTarget.addEventListener('pointerleave', this.onLeave);
+    this.hoverTarget.addEventListener('pointercancel', this.onLeave);
 
     // Si le navigateur retire le contexte WebGL (trop d'images), on rend la place à l'<img>
     this.canvas.addEventListener('webglcontextlost', this.destroy);
@@ -94,13 +89,9 @@ export default class DitherCanvas {
   createRenderer() {
     try {
       this.renderer = new Renderer({
-        dpr: Math.min(
-          window.devicePixelRatio || 1,
-          this.options.frozen ? FROZEN_DPR : 2,
-        ),
+        dpr: Math.min(window.devicePixelRatio || 1, 2),
         alpha: false,
         antialias: false,
-        preserveDrawingBuffer: this.options.frozen, // tactile : Safari peut rendre une copie noire sans ça
       });
     } catch {
       return false;
@@ -114,8 +105,7 @@ export default class DitherCanvas {
 
     this.canvas = this.gl.canvas;
     this.canvas.classList.add('dither-veil__canvas');
-    // Tactile : le canvas WebGL reste hors de la page (sinon carré noir tant que l'image n'est pas dessinée)
-    if (!this.options.frozen) this.container.appendChild(this.canvas);
+    this.container.appendChild(this.canvas);
 
     // Masque en haute précision si possible (traînée plus douce)
     this.hasFloatMask = !!this.renderer.getExtension('EXT_color_buffer_float');
@@ -254,12 +244,6 @@ export default class DitherCanvas {
   onImageLoad() {
     this.image = this.domImage;
     this.updateSource();
-
-    if (this.options.frozen) {
-      this.freeze();
-      return;
-    }
-
     this.introStart = performance.now();
     this.start();
   }
@@ -294,22 +278,6 @@ export default class DitherCanvas {
 
     this.imageTexture.image = this.source;
     this.diffusedSize = ''; // Floyd / Atkinson à refaire
-  }
-
-  // Tactile : dessine le dither UNE fois, le copie dans un canvas 2D,
-  // puis libère le WebGL. Le scroll n'a plus rien à calculer.
-  freeze() {
-    this.introStart = -INTRO_DURATION; // pas d'apparition
-    this.drawDither(performance.now());
-
-    this.still = document.createElement('canvas');
-    this.still.className = 'dither-veil__canvas dither-veil__canvas--still';
-    this.still.width = this.canvas.width;
-    this.still.height = this.canvas.height;
-    this.still.getContext('2d').drawImage(this.canvas, 0, 0); // tout de suite après le dessin
-    this.container.appendChild(this.still);
-
-    this.releaseWebGL();
   }
 
   onMove(event) {
@@ -569,11 +537,6 @@ export default class DitherCanvas {
     if (!this.isSupported || this.isDestroyed) return;
     this.isDestroyed = true;
 
-    if (this.still) this.still.remove();
-    else this.releaseWebGL();
-  }
-
-  releaseWebGL() {
     cancelAnimationFrame(this.raf);
     this.resizeObserver.disconnect();
 
