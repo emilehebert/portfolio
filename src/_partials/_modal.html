@@ -1,13 +1,18 @@
-<div class="modal js-fixed" id="modale-presentation" data-component="Modal">
+<!-- Modale unique (Modal.js). Le lien qui l'ouvre choisit le contenu affiché
+     data-modal="video" affiche la vidéo YouTube, data-modal="image" affiche l'image cliquée -->
+<div class="modal js-fixed" id="modale" data-component="Modal">
     <div class="window">
         <div class="window__header">
-            <p>Ma vidéo de présentation</p>
+            <p class="js-modal-title"></p>
             <a href="#" class="button button--secondary js-close cursor-target" data-component="ScrambledText">X</a>
         </div>
         <div class="window__content">
-            <div class="window__media" data-component="YouTube" data-video-id="hrI-5WyZWZY">
+            <!-- Contenu vidéo, visible seulement avec data-modal="video" -->
+            <div class="window__media modal__video" data-component="YouTube" data-video-id="hrI-5WyZWZY">
                 <div class="js-video"></div>
             </div>
+            <!-- Contenu image, visible seulement avec data-modal="image" -->
+            <img class="modal__image js-modal-image" alt="" />
         </div>
     </div>
 </div>

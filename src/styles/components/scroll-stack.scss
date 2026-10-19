@@ -1,0 +1,14 @@
+/* ==========================================================================
+   SCROLL STACK / images empilées des étapes (ScrollStack.js)
+   ========================================================================== */
+
+.etapes[data-component='ScrollStack'] .etape__media {
+    display: grid;
+
+    // Toutes les images dans la même case : elles s'empilent
+    > .window {
+        grid-area: 1 / 1;
+        background: var(--color-background);
+        will-change: transform;
+    }
+}

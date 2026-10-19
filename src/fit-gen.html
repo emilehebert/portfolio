@@ -4,7 +4,7 @@
     <div class="bg-grid" style="--grid-top: 5%" data-speed="0.25" aria-hidden="true"></div>
     <div class="wrapper">
         <div class="info">
-            <div class="info__left">
+            <div class="info__left" data-speed="1.5">
                 <div class="hero__title">
                     <h2>Développement web d'un générateur de tenues</h2>
                     <h4>Projet personnel / 2024</h4>
@@ -17,7 +17,7 @@
                     <span class="accent--primary">Lego Star Wars</span>
                     sur Endor entre les deux personnages les plus iconiques de la saga.
                 </p>
-                <div class="accordion accordion--stacked" data-component="Accordion" data-single-open>
+                <div class="accordion accordion--stacked" data-component="Accordion" data-single-open data-speed="1.1" data-lag="0.05">
                     <div class="accordion-item">
                         <div class="accordion-title cursor-target">
                             <svg class="icon icon--xs">
@@ -66,7 +66,7 @@
                                 title="Moi, Charles et Mathieu durant notre voyage en Nouvelle-Écosse, on se connait depuis le secondaire."
                             />
                         </div>
-                        <div class="list-icons" data-component="IconLabel">
+                        <div class="list-icons" data-component="IconLabel" data-lag="0.05">
                             <a href="https://www.adobe.com/" target="_blank" class="logo--link cursor-target" aria-label="Suite Adobe">
                                 <svg class="icon icon--lg logo--icon">
                                     <use xlink:href="#icon-adobe"></use>
@@ -111,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <a href="index.html#projets" class="button cursor-target" data-component="ScrambledText">
+            <a href="index.html#projets" class="button cursor-target" data-component="ScrambledText" data-lag="0.1">
                 Revenir aux projets
                 <svg class="icon">
                     <use href="#icon-arrow"></use>
@@ -140,7 +140,7 @@
         <canvas class="halftone-marquee__canvas"></canvas>
     </div>
     <div class="wrapper">
-        <div class="etapes">
+        <div class="etapes" data-component="ScrollStack">
             <div class="etape">
                 <div class="etape__content">
                     <div class="title">
@@ -155,7 +155,7 @@
                     </p>
                 </div>
                 <div class="etape__media">
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Mecabricks-Import.webp" alt="House Breach" />
@@ -165,7 +165,7 @@
                             <p class="small">Recherche vigoureux d’assets sur le site Mecabricks.</p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Character-Figurine.webp" alt="House Breach" />
@@ -175,7 +175,7 @@
                             <p class="small">Création des personnnages principaux dans Mecabricks.</p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Darth-Vader-Import.webp" alt="House Breach" />
@@ -202,7 +202,7 @@
                     </p>
                 </div>
                 <div class="etape__media">
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Base-Track.webp" alt="House Breach" />
@@ -212,7 +212,7 @@
                             <p class="small">Importation du gabarit de circuit dans Blender.</p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Viewport-Set-Design.webp" alt="House Breach" />
@@ -222,7 +222,7 @@
                             <p class="small">Recouvrage du circuit de base par des briques Lego ainsi que d’autre décorations.</p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Alternate-Track-Angle.webp" alt="House Breach" />
@@ -251,7 +251,7 @@
                     </p>
                 </div>
                 <div class="etape__media">
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Lightsaber-Fight.webp" alt="House Breach" />
@@ -261,7 +261,7 @@
                             <p class="small">Animation du combat entre Luke et Darth Vader avec l’ajout d’éclair pour plus d’effets visuels,</p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/At-At-Rigging.webp" alt="House Breach" />
@@ -271,7 +271,7 @@
                             <p class="small">Rigging d’un AT-AT pour imiter un vrai combat sur Endor.</p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Han-Solo-Construction.webp" alt="House Breach" />
@@ -302,7 +302,7 @@
                     </p>
                 </div>
                 <div class="etape__media">
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Volumetric-Light.webp" alt="House Breach" />
@@ -314,7 +314,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Custom-Shader.webp" alt="House Breach" />
@@ -324,7 +324,7 @@
                             <p class="small">Animation de pièce électrique avec un shader personnaliser exactement comme ceux dans Lego Movie.</p>
                         </div>
                     </div>
-                    <div class="window cursor-target" data-modal="modale-image">
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
                                 <img src="assets/images/boucle-infinie/Compositing.webp" alt="House Breach" />
@@ -374,7 +374,7 @@
     </div>
     <div class="wrapper">
         <div class="drag-windows" data-component="DragWindows">
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="modale-image" data-x="2" data-y="4" style="--window-width: 460px">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="2" data-y="4" style="--window-width: 460px">
                 <div class="window__header">
                     <p class="small">Final-Render.webp</p>
                 </div>
@@ -395,13 +395,7 @@
                     <p class="small">394 Ko</p>
                 </div>
             </div>
-            <div
-                class="window drag-windows__window js-drag-window cursor-target"
-                data-modal="modale-image"
-                data-x="42"
-                data-y="0"
-                style="--window-width: 280px"
-            >
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="42" data-y="0" style="--window-width: 280px">
                 <div class="window__header">
                     <p class="small">Environment-Overview.webp</p>
                 </div>
@@ -422,13 +416,7 @@
                     <p class="small">168 Ko</p>
                 </div>
             </div>
-            <div
-                class="window drag-windows__window js-drag-window cursor-target"
-                data-modal="modale-image"
-                data-x="64"
-                data-y="8"
-                style="--window-width: 400px"
-            >
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="64" data-y="8" style="--window-width: 400px">
                 <div class="window__header">
                     <p class="small">Render-After.webp</p>
                 </div>
@@ -449,7 +437,7 @@
                     <p class="small">280 Ko</p>
                 </div>
             </div>
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="modale-image" data-x="6" data-y="52">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="6" data-y="52">
                 <div class="window__header">
                     <p class="small">Lightsaber-Fight.webp</p>
                 </div>
@@ -470,7 +458,7 @@
                     <p class="small">266 Ko</p>
                 </div>
             </div>
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="modale-image" data-x="36" data-y="56">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="36" data-y="56">
                 <div class="window__header">
                     <p class="small">Viewport-Render.webp</p>
                 </div>
@@ -491,13 +479,7 @@
                     <p class="small">201 Ko</p>
                 </div>
             </div>
-            <div
-                class="window drag-windows__window js-drag-window cursor-target"
-                data-modal="modale-image"
-                data-x="66"
-                data-y="48"
-                style="--window-width: 380px"
-            >
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="66" data-y="48" style="--window-width: 380px">
                 <div class="window__header">
                     <p class="small">Compositing.webp</p>
                 </div>
@@ -528,7 +510,7 @@
         <canvas class="halftone-marquee__canvas"></canvas>
     </div>
     <div class="wrapper">
-        <div class="accordion" data-component="Accordion" data-single-open data-force-open>
+        <div class="accordion" data-component="Accordion" data-single-open data-force-open data-lag="0.2">
             <div class="accordion-item">
                 <div class="accordion-title is-open cursor-target">
                     <svg class="icon icon--xs">
@@ -582,7 +564,7 @@
                 </div>
             </div>
         </div>
-        <a href="index.html#projets" class="button cursor-target" data-component="ScrambledText">Revenir aux projets →</a>
+        <a href="index.html#projets" class="button cursor-target" data-component="ScrambledText" data-lag="0.1">Revenir aux projets →</a>
     </div>
 </section>
 

@@ -1,10 +1,5 @@
 import { Renderer, Program, Mesh, Triangle, Texture } from 'ogl';
-import { hexToRgb } from '../utils/dither/algorithms.js';
-
-// Mouvement réduit demandé dans les réglages de l'appareil : le texte reste immobile
-const reducedMotion = window.matchMedia(
-  '(prefers-reduced-motion: reduce)',
-).matches;
+import { getColor } from '../utils/dither/algorithms.js';
 
 // SHADERS
 // Triangle qui couvre tout le canvas
@@ -214,8 +209,8 @@ export default class HalftoneMarquee {
       uRotation: { value: [cos, -sin, sin, cos] },
       uTint: { value: options.tint },
       uScroll: { value: 0 },
-      uInk: { value: hexToRgb(this.getColor(options.inkColor)) },
-      uPaper: { value: hexToRgb(this.getColor(options.paperColor)) },
+      uInk: { value: getColor(options.inkColor) },
+      uPaper: { value: getColor(options.paperColor) },
     };
 
     const geometry = new Triangle(gl);
@@ -246,11 +241,8 @@ export default class HalftoneMarquee {
   }
 
   play() {
-    if (!this.renderer) return;
-
-    if (reducedMotion)
-      this.render(); // une seule image, sans mouvement
-    else if (!this.raf) this.raf = window.requestAnimationFrame(this.animate);
+    if (!this.renderer || this.raf) return;
+    this.raf = window.requestAnimationFrame(this.animate);
   }
 
   pause() {
@@ -314,14 +306,6 @@ export default class HalftoneMarquee {
   }
 
   // OPTIONS
-  // '--color-primary' → la couleur de cette variable CSS | un hex reste tel quel
-  getColor(color) {
-    if (!color.startsWith('--')) return color;
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue(color)
-      .trim();
-  }
-
   setOptions() {
     if (this.element.dataset.text) {
       this.options.text = this.element.dataset.text;

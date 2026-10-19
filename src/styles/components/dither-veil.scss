@@ -1,7 +1,8 @@
 /* ==========================================================================
    DITHER VEIL /
-   Canvas WebGL ajouté par DitherVeil.js par-dessus l'<img> d'un .window__media.
-   Si WebGL n'est pas disponible, aucun canvas n'est ajouté et l'<img> reste visible.
+   Canvas ajouté par DitherVeil.js par-dessus l'<img> d'un .window__media
+   (WebGL sur ordinateur, 2D figé sur tactile).
+   Si le canvas n'est pas créé, l'<img> reste visible.
    ========================================================================== */
 
 [data-component='DitherVeil'] {
@@ -18,11 +19,7 @@
     height: 100%;
 }
 
-// Tactile : copie figée du dither (points gardés nets)
+// Tactile : 1 pixel du canvas = 1 point, gardé net quand il est agrandi
 .dither-veil__canvas--still {
     image-rendering: pixelated;
-}
-
-[data-component='DitherVeil'].is-color-revealed .dither-veil__canvas--still {
-    opacity: 0;
 }

@@ -12,14 +12,12 @@
             // C'est nouveau ça, ça va permettre au php dans WordPress de retrouver le fichier icons.svg
             var iconsPath = "<?php bloginfo('template_url') ?>/dist/";
         </script> -->
-        <script src="assets/debug/debug-ios.js"></script><!-- DEBUG TEMPORAIRE iPhone, à retirer -->
         <script src="scripts/main.js" defer></script>
     </head>
 
     <body data-component="TargetCursor">
-        <!-- Modales : vidéo de présentation (bouton du header) et image en grand (data-modal="modale-image") -->
+        <!-- Modale unique : vidéo de présentation (data-modal="video") et image en grand (data-modal="image") -->
         {% include '_modal.html' %}
-        {% include '_modal-image.html' %}
 
         <!-- Zone header -->
             <header class="header" data-component="Header">
@@ -39,7 +37,7 @@
                             <li><a class="cursor-target" href="index.html#about" data-component="ScrambledText">À propos</a></li>
                             <li><a class="cursor-target" href="index.html#projets" data-component="ScrambledText">Projets</a></li>
                             <li><a class="cursor-target" href="contact.html" data-component="ScrambledText">Contact</a></li>
-                            <li class="header__video"><a href="#" class="button cursor-target" data-component="ScrambledText" data-modal="modale-presentation">Vidéo de présentation</a></li>
+                            <li class="header__video"><a href="#" class="button cursor-target" data-component="ScrambledText" data-modal="video" data-title="Ma vidéo de présentation">Vidéo de présentation</a></li>
                         </ul>
                         <div class="window__footer header__socials list-icons" data-component="IconLabel">
                             <a href="https://github.com/emilehebert" target="_blank" class="logo--link cursor-target" aria-label="GitHub">

@@ -1,12 +1,14 @@
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-// Modale : s'ouvre avec les liens data-modal="id-de-la-modale"
+// Modale unique : s'ouvre avec les liens data-modal="video" ou data-modal="image"
+// La valeur de data-modal choisit le contenu affiché (classe modal--video ou modal--image)
 export default class Modal {
   constructor(element) {
     this.element = element;
 
-    this.links = document.querySelectorAll(`[data-modal="${this.element.id}"]`);
+    this.links = document.querySelectorAll('[data-modal]');
     this.closeLink = this.element.querySelector('.js-close');
+    this.title = this.element.querySelector('.js-modal-title');
 
     this.init();
   }
@@ -22,7 +24,19 @@ export default class Modal {
 
   open(event) {
     event.preventDefault();
-    this.showImage(event.currentTarget);
+    const link = event.currentTarget;
+    const type = link.dataset.modal; // "video" ou "image"
+
+    // Affiche le bon contenu, le CSS cache l'autre
+    this.element.classList.toggle('modal--video', type === 'video');
+    this.element.classList.toggle('modal--image', type === 'image');
+
+    if (type === 'image') {
+      this.showImage(link);
+    } else {
+      this.title.textContent = link.dataset.title || '';
+    }
+
     this.element.classList.add('is-open');
     ScrollSmoother.get().paused(true);
   }
@@ -42,9 +56,8 @@ export default class Modal {
     image.src = source.currentSrc || source.src;
     image.alt = source.alt;
 
-    const title = this.element.querySelector('.js-modal-title');
     const name = link.querySelector('.window__header p');
-    if (title) title.textContent = name ? name.textContent : source.alt;
+    this.title.textContent = name ? name.textContent : source.alt;
   }
 
   // Ferme si on clique à côté de la fenêtre

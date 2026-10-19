@@ -27,6 +27,15 @@
 }
 
 /*
+ Contenu affiché selon le lien cliqué (Modal.js ajoute modal--video ou modal--image)
+ ========================================================================== */
+
+.modal--video .modal__image,
+.modal--image .modal__video {
+    display: none;
+}
+
+/*
  Modale image : l'image de la fenêtre cliquée en grand (Modal.js)
  ========================================================================== */
 

@@ -13,6 +13,7 @@ import YouTube from './components/YouTube.js';
 import RotatingText from './components/RotatingText.js';
 import HalftoneMarquee from './components/HalftoneMarquee.js';
 import Scroller from './components/Scroller.js';
+import ScrollStack from './components/ScrollStack.js';
 
 export default class ComponentFactory {
   constructor() {
@@ -33,6 +34,7 @@ export default class ComponentFactory {
       RotatingText,
       HalftoneMarquee,
       Scroller,
+      ScrollStack,
     };
     this.init();
   }

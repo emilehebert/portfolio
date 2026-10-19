@@ -61,21 +61,14 @@ precision highp int;
 
 uniform sampler2D tImage;     // la photo
 uniform sampler2D tMask;      // la zone révélée (dessinée par MASK_FRAGMENT)
-uniform sampler2D tDiffused;  // le dither Floyd / Atkinson, calculé en JS
 uniform vec2 uResolution;     // taille du canvas, en pixels réels
-uniform vec2 uCover;          // cadrage de l'image ('cover' ou 'contain')
+uniform vec2 uCover;          // cadrage de la photo (comme object-fit: cover)
 uniform float uLod;           // niveau de flou de la photo, selon la taille des points
 uniform float uCell;          // taille d'un point de dither, en pixels réels
-uniform int uPattern;         // 0 = bayer 8×8, 1 = bayer 4×4, 2 = lignes, 3 = Floyd / Atkinson
-uniform int uPalette;         // 0 = duotone, 1 = rgb
 uniform float uLevels;        // nombre de tons
+uniform float uContrast;
 uniform vec3 uInk;            // couleur des tons sombres
 uniform vec3 uPaper;          // couleur des tons clairs
-uniform vec3 uRimColor;       // couleur de la bordure de la zone révélée
-uniform float uRim;           // épaisseur de cette bordure
-uniform float uContrast;
-uniform float uBrightness;
-uniform float uReverse;       // 1 = inverse : la photo est en couleur, le curseur la dither
 uniform float uIntro;         // 0 → 1 : animation d'apparition
 uniform float uHold;
 
@@ -98,40 +91,23 @@ float bayer4(vec2 cell) {
   return (float(m) + 0.5) / 16.0;
 }
 
-// Seuil en lignes diagonales (effet gravure)
-float engraving(vec2 cell) {
-  float period = 6.0;
-  float f = (mod(cell.x + cell.y, period) + 0.5) / period;
-  return clamp(abs(f * 2.0 - 1.0) + (bayer(cell) - 0.5) * (2.0 / period), 0.0, 1.0);
-}
-
 // Position dans le canvas → position dans la photo (selon le cadrage)
 vec2 imageUv(vec2 uv) {
   return (uv - 0.5) * uCover + 0.5;
 }
 
-// 1 si la position est dans la photo, 0 si elle est en dehors
-float within(vec2 p) {
-  vec2 s = step(vec2(0.0), p) * step(p, vec2(1.0));
-  return s.x * s.y;
-}
-
-// Contraste et luminosité, avant le dither
-vec3 grade(vec3 c) {
-  return pow(clamp((c - 0.5) * uContrast + 0.5 + uBrightness, 0.0, 1.0), vec3(1.6));
-}
-
-// Duotone : on garde seulement la luminosité. RGB : on garde les 3 couleurs.
-vec3 toned(vec3 c) {
-  return uPalette == 1 ? grade(c) : grade(vec3(dot(c, vec3(0.2126, 0.7152, 0.0722))));
+// Luminosité de la couleur, avec le contraste appliqué (0 = noir, 1 = blanc)
+float tone(vec3 c) {
+  float gray = dot(c, vec3(0.2126, 0.7152, 0.0722));
+  return pow(clamp((gray - 0.5) * uContrast + 0.5, 0.0, 1.0), 1.6);
 }
 
 // Arrondit le ton au niveau inférieur ou supérieur selon le seuil t
-vec3 quantize(vec3 v, float t) {
-  float steps = max(uLevels - 1.0, 1.0);
-  vec3 s = v * steps;
-  vec3 base = floor(s);
-  return min(base + step(vec3(t), s - base), vec3(steps)) / steps;
+float quantize(float v, float t) {
+  float steps = uLevels - 1.0;
+  float s = v * steps;
+  float base = floor(s);
+  return min(base + step(t, s - base), steps) / steps;
 }
 
 void main() {
@@ -141,31 +117,18 @@ void main() {
   vec2 center = (cell + 0.5) * uCell;
   vec2 cellUv = vec2(center.x / uResolution.x, 1.0 - center.y / uResolution.y);
 
-  // 2. Calculer le ton de la case (0 = encre, 1 = papier)
-  vec2 sampleUv = imageUv(cellUv);
-  vec3 level;
-  if (uPattern == 3) {
-    level = texelFetch(tDiffused, ivec2(cell), 0).rgb;
-  } else {
-    vec3 c = textureLod(tImage, sampleUv, uLod).rgb;
-    float t = uPattern == 1 ? bayer4(cell) : (uPattern == 2 ? engraving(cell) : bayer(cell));
-    level = quantize(toned(c), t);
-  }
-  vec3 color = mix(uInk, mix(uInk, uPaper, level), within(sampleUv));
+  // 2. Le ton de la case (0 = encre, 1 = papier), arrondi avec la matrice de Bayer 4×4
+  vec3 c = textureLod(tImage, imageUv(cellUv), uLod).rgb;
+  float level = quantize(tone(c), bayer4(cell));
+  vec3 color = mix(uInk, uPaper, level);
 
-  // 3. La photo en couleur, telle quelle
-  vec2 photoUv = imageUv(vUv);
-  vec3 photo = mix(uInk, texture(tImage, photoUv).rgb, within(photoUv));
-
-  // 4. Là où le masque est allumé, on remplace le dither par la photo.
+  // 3. Là où le masque est allumé, on remplace le dither par la photo en couleur.
   //    Le seuil de Bayer fait apparaître la photo case par case (effet de dissolution).
+  vec3 photo = texture(tImage, imageUv(vUv)).rgb;
   float mask = clamp(texture(tMask, cellUv).r * uHold, 0.0, 1.0);
-  float shown = mix(mask, 1.0 - mask, uReverse);
-  float low = bayer(cell.yx) * (1.0 - uRim);
-  color = mix(color, uRimColor, step(low, shown) * step(0.001, uRim));
-  color = mix(color, photo, step(low + uRim, shown));
+  color = mix(color, photo, step(bayer(cell.yx), mask));
 
-  // 5. Animation d'apparition : les cases apparaissent du centre vers les bords
+  // 4. Animation d'apparition : les cases apparaissent du centre vers les bords
   vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
   float spread = length((cellUv - 0.5) * aspect) / length(aspect * 0.5);
   float appear = step(spread * 0.72 + bayer(cell + vec2(3.0, 5.0)) * 0.28, uIntro * 1.001);
