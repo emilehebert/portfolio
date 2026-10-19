@@ -1,10 +1,10 @@
 {% include '_partials/_header.html' %}
 
 <section class="contact has-bg-grid">
-    <div class="bg-grid" style="--grid-top: 3%"></div>
-    <div class="bg-grid" style="--grid-top: 80%"></div>
+    <div class="bg-grid" style="--grid-top: 5%"></div>
+    <div class="bg-grid" style="--grid-top: 75%"></div>
     <div class="wrapper">
-        <h2>On contruit quelque chose qui sort du lot?</h2>
+        <h2 data-component="ScrambledText" data-duration="2" data-intro>On contruit quelque chose qui sort du lot?</h2>
 
         <div class="contact__grid">
             <div class="window contact__form">
@@ -14,27 +14,27 @@
                 <div class="window__content">
                     <form class="fields">
                         <div class="field field--prenom">
-                            <label for="prenom">Prénom*</label>
+                            <label for="prenom" data-component="ScrambledText">Prénom*</label>
                             <input type="text" id="prenom" name="prenom" placeholder="Ex.: Émile" class="cursor-target" required />
                         </div>
 
                         <div class="field field--nom">
-                            <label for="nom">Nom*</label>
+                            <label for="nom" data-component="ScrambledText">Nom*</label>
                             <input type="text" id="nom" name="nom" placeholder="Ex.: Hébert" class="cursor-target" required />
                         </div>
 
                         <div class="field field--courriel">
-                            <label for="courriel">Courriel*</label>
+                            <label for="courriel" data-component="ScrambledText">Courriel*</label>
                             <input type="email" id="courriel" name="courriel" placeholder="Ex.: hebert.emile96@gmail.com" class="cursor-target" required />
                         </div>
 
                         <div class="field field--telephone">
-                            <label for="telephone">Téléphone</label>
+                            <label for="telephone" data-component="ScrambledText">Téléphone</label>
                             <input type="tel" id="telephone" name="telephone" placeholder="Ex.: (438)-123-4567" class="cursor-target" />
                         </div>
 
                         <div class="field field--message">
-                            <label for="message">Message*</label>
+                            <label for="message" data-component="ScrambledText">Message*</label>
                             <textarea id="message" name="message" placeholder="Écrivez votre message ici" class="cursor-target" required></textarea>
                         </div>
                     </form>
@@ -47,9 +47,9 @@
 
             <div class="contact__side">
                 <h4 class="title">Coordonnées</h4>
-                <a href="tel:+14385048922" class="cursor-target">(438)-504-8922</a>
-                <a href="mailto:hebert.emile96@gmail.com" class="cursor-target">hebert.emile96@gmail.com</a>
-                <a href="#" class="cursor-target">Curriculum Vitæ</a>
+                <a href="tel:+14385048922" class="cursor-target" data-component="ScrambledText">(438)-504-8922</a>
+                <a href="mailto:hebert.emile96@gmail.com" class="cursor-target" data-component="ScrambledText">hebert.emile96@gmail.com</a>
+                <a href="#" class="cursor-target" data-component="ScrambledText">Curriculum Vitæ</a>
 
                 <h4 class="title">Réseaux sociaux</h4>
                 <div class="list-icons" data-component="IconLabel">
@@ -91,7 +91,7 @@
                 </div>
                 <div class="legal">
                     <p class="small">Tous droits réservés © 2026 Émile Hébert</p>
-                    <p class="small"><a href="declaration-ia.html" class="cursor-target">[Utilisation de l'IA]</a></p>
+                    <p class="small"><a href="declaration-ia.html" class="cursor-target" data-component="ScrambledText">[Utilisation de l'IA]</a></p>
                 </div>
             </div>
         </div>

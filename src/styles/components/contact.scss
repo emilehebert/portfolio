@@ -37,6 +37,7 @@
         font-size: var(--font-size-h4);
         letter-spacing: 3%;
         font-weight: bold;
+        cursor: none; // le navigateur met cursor: default sur les labels
     }
 
     input,
@@ -94,4 +95,45 @@
 .legal {
     margin: auto auto 0 auto;
     text-align: center;
+}
+
+/*
+ Page pile à la hauteur de l'écran (pas de scroll), sauf sur mobile
+ ========================================================================== */
+
+@media (min-width: $breakpoint-sm) {
+    .contact {
+        min-height: calc(100vh - var(--header-height));
+        min-height: calc(100dvh - var(--header-height));
+
+        // Écran bas (portable) : moins de marge pour que tout tienne
+        @media (max-height: 800px) {
+            padding: var(--spacing-lg) 0;
+        }
+
+        // Chaque niveau prend la place qui reste jusqu'au champ message
+        &,
+        .wrapper,
+        .contact__form .window__content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper,
+        .contact__grid,
+        .fields {
+            flex: 1;
+        }
+
+        .fields {
+            grid-template-rows: auto auto 1fr;
+        }
+
+        // Le message s'étire pour remplir l'écran (scroll seulement si l'écran est vraiment trop bas)
+        .field--message textarea {
+            flex: 1 1 0;
+            min-height: 100px;
+            resize: none;
+        }
+    }
 }
