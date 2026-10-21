@@ -118,21 +118,29 @@ void main() {
   vec2 cellUv = vec2(center.x / uResolution.x, 1.0 - center.y / uResolution.y);
 
   // 2. Le ton de la case (0 = encre, 1 = papier), arrondi avec la matrice de Bayer 4×4
-  vec3 c = textureLod(tImage, imageUv(cellUv), uLod).rgb;
-  float level = quantize(tone(c), bayer4(cell));
+  //    La texture a sa couleur multipliée par sa transparence (.a), on la divise pour retrouver la vraie couleur
+  vec4 c = textureLod(tImage, imageUv(cellUv), uLod);
+  float level = quantize(tone(c.rgb / max(c.a, 0.001)), bayer4(cell));
   vec3 color = mix(uInk, uPaper, level);
+  float alpha = c.a;
 
   // 3. Là où le masque est allumé, on remplace le dither par la photo en couleur.
   //    Le seuil de Bayer fait apparaître la photo case par case (effet de dissolution).
-  vec3 photo = texture(tImage, imageUv(vUv)).rgb;
+  vec4 photo = texture(tImage, imageUv(vUv));
   float mask = clamp(texture(tMask, cellUv).r * uHold, 0.0, 1.0);
-  color = mix(color, photo, step(bayer(cell.yx), mask));
+  float showPhoto = step(bayer(cell.yx), mask);
+  color = mix(color, photo.rgb / max(photo.a, 0.001), showPhoto);
+  alpha = mix(alpha, photo.a, showPhoto);
 
   // 4. Animation d'apparition : les cases apparaissent du centre vers les bords
   vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
   float spread = length((cellUv - 0.5) * aspect) / length(aspect * 0.5);
   float appear = step(spread * 0.72 + bayer(cell + vec2(3.0, 5.0)) * 0.28, uIntro * 1.001);
 
-  fragColor = vec4(mix(uInk, color, appear), 1.0);
+  color = mix(uInk, color, appear);
+  alpha = mix(1.0, alpha, appear);
+
+  // Le canvas attend la couleur multipliée par la transparence (premultipliedAlpha)
+  fragColor = vec4(color * alpha, alpha);
 }
 `;

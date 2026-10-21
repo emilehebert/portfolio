@@ -86,7 +86,8 @@ export default class DitherCanvas {
         try {
             this.renderer = new Renderer({
                 dpr: Math.min(window.devicePixelRatio || 1, 2),
-                alpha: false,
+                alpha: true, // les PNG transparents laissent voir le fond de la fenêtre
+                premultipliedAlpha: true,
                 antialias: false,
             });
         } catch {
@@ -118,6 +119,7 @@ export default class DitherCanvas {
         this.imageTexture = new Texture(gl, {
             minFilter: gl.LINEAR_MIPMAP_LINEAR,
             magFilter: gl.LINEAR,
+            premultiplyAlpha: true, // évite un contour noir autour des zones transparentes
         });
 
         // Deux masques : on lit le précédent et on dessine le nouveau, puis on les échange

@@ -1,12 +1,12 @@
 /* ========================================================================== 
-   PLAY BUTTON / 
+   ICON BUTTON / 
    ========================================================================== */
 
 :root {
-    --play-button-size: 60px;
+    --icon-button-size: 60px;
 }
 
-.play-button {
+.icon-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -14,13 +14,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--play-button-size);
-    height: var(--play-button-size);
+    width: var(--icon-button-size);
+    height: var(--icon-button-size);
     padding: var(--spacing-sm);
     border-radius: 50%;
     overflow: visible;
     pointer-events: none;
-    background: var(--gradient-play);
+    background: var(--gradient-icon-button);
     color: var(--color-white);
     transform: translate(-50%, -50%);
     transition:

@@ -66,7 +66,7 @@ export default class DitherStill {
 
                     pixels[p + c] = Math.round((inkColor[c] + (paperColor[c] - inkColor[c]) * level) * 255);
                 }
-                pixels[p + 3] = 255;
+                // pixels[p + 3] (la transparence) reste celle de l'image : un PNG transparent le reste
             }
         }
 
