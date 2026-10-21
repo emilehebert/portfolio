@@ -7,15 +7,11 @@
             <div class="info__left" data-speed="1.5">
                 <div class="hero__title">
                     <h2>Développement web d'un générateur de tenues</h2>
-                    <h4>Projet personnel / 2024</h4>
+                    <h4>Projet personnel / 2024 à aujourd'hui (en développement)</h4>
                 </div>
                 <h4 class="tag">Animation 3D / Création Environnement</h4>
                 <p class="description">
-                    Réalisé en solo au Cégep Édouard-Montpetit, ce projet est une
-                    <span class="accent--primary">animation 3D</span>
-                    relevant le défi technique d'un circuit en boucle infinie sur Blender. Le projet met en scène une bataille
-                    <span class="accent--primary">Lego Star Wars</span>
-                    sur Endor entre les deux personnages les plus iconiques de la saga.
+                    FitGen est une page web personnelle qui génère des <span class="accent--primary">tenues aléatoires</span> à partir de mes propres vêtements. <span class="accent--primary">Inspiré d'une application vue sur TikTok</span>, ce projet est pensé pour mon usage personnel, avec une touche d'humour grâce à ses <span class="accent--primary">visages dessinés à la main</span>.
                 </p>
                 <div class="accordion accordion--stacked" data-component="Accordion" data-single-open data-speed="1.1" data-lag="0.05">
                     <div class="accordion-item">
@@ -26,7 +22,7 @@
                             <p>Crédits</p>
                         </div>
                         <div class="accordion-content">
-                            <p>Projet créatif non officiel. Les marques, modèles et droits appartiennent au Groupe LEGO et à Lucasfilm Ltd.</p>
+                            <p>Projet réalisé <span class="accent--primary">en solo</span>.</p>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -37,7 +33,7 @@
                             <p>Rôle</p>
                         </div>
                         <div class="accordion-content">
-                            <p>Mise en scène, animation figurines éclairage et rendu final.</p>
+                            <p>Idée, photographie et <span class="accent--primary">détourage des vêtements</span>, dessin des croquis, design et <span class="accent--primary">programmation</span>.</p>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -48,7 +44,7 @@
                             <p>Usage d'IA</p>
                         </div>
                         <div class="accordion-content">
-                            <p>Le projet a été réalisé sans IA. J'ai utilisé Claude pour reformuler et structurer les textes de cette fiche.</p>
+                            <p><span class="accent--primary">Aucune IA générative</span> n'a été utilisée pour réaliser ce projet. J'ai utilisé <span class="accent--primary">Claude</span> uniquement pour structurer et reformuler les textes de cette fiche.</p>
                         </div>
                     </div>
                 </div>
@@ -145,44 +141,39 @@
                 <div class="etape__content">
                     <div class="title">
                         <h3>01</h3>
-                        <h4>Sélection et importation des assets</h4>
+                        <h4>Idée et inspiration</h4>
                     </div>
-                    <p>
-                        Reconstruire chaque pièce Lego à la main aurait pris un
-                        <span class="accent--primary">temps fou</span>, alors j'ai cherché des ensembles et figurines existants sur
-                        <span class="accent--primary">Mecabricks</span>
-                        pour les importer directement dans Blender.
-                    </p>
+                    <p>L'idée vient d'une application vue sur TikTok, mais je voulais la recréer avec <span class="accent--primary">mes propres vêtements</span> pour qu'elle me serve vraiment <span class="accent--primary">au quotidien</span>.</p>
                 </div>
                 <div class="etape__media">
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Mecabricks-Import.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Mecabricks-Import.webp" alt="Inspiration du concept" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Recherche vigoureux d’assets sur le site Mecabricks.</p>
+                            <p class="small">Inspiration du concept.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Character-Figurine.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Character-Figurine.webp" alt="Premières idées de l&#x27;interface" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Création des personnnages principaux dans Mecabricks.</p>
+                            <p class="small">Premières idées de l'interface.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Darth-Vader-Import.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Darth-Vader-Import.webp" alt="Aperçu du générateur au départ" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Importations avec l’addon Mecabricks Lite sur Blender.</p>
+                            <p class="small">Aperçu du générateur au départ.</p>
                         </div>
                     </div>
                 </div>
@@ -191,45 +182,39 @@
                 <div class="etape__content">
                     <div class="title">
                         <h3>02</h3>
-                        <h4>Conception de l'environnement</h4>
+                        <h4>Préparation des vêtements</h4>
                     </div>
-                    <p>
-                        J'ai choisi une forêt inspirée
-                        <span class="accent--primary">d'Endor</span>
-                        parce que le décor naturel créait un bon
-                        <span class="accent--primary">contraste</span>
-                        avec les lignes rigides du circuit, et j'ai placé les éléments Lego le long du tracé pour que l'œil suive la boucle naturellement.
-                    </p>
+                    <p>J'ai photographié mes vêtements, puis je les ai <span class="accent--primary">détourés dans Photoshop</span> avec un <span class="accent--primary">fond transparent</span> pour qu'ils se superposent proprement. J'en ai préparé <span class="accent--primary">plus de 20 chandails</span>, 10 pantalons et 3 paires de souliers.</p>
                 </div>
                 <div class="etape__media">
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Base-Track.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Base-Track.webp" alt="Photo originale d&#x27;un vêtement" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Importation du gabarit de circuit dans Blender.</p>
+                            <p class="small">Photo originale d'un vêtement.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Viewport-Set-Design.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Viewport-Set-Design.webp" alt="Détourage dans Photoshop" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Recouvrage du circuit de base par des briques Lego ainsi que d’autre décorations.</p>
+                            <p class="small">Détourage dans Photoshop.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Alternate-Track-Angle.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Alternate-Track-Angle.webp" alt="Vêtements prêts à intégrer" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Point de vue différent pour montrer les autres assets importés depuis Mecabricks sur la scène.</p>
+                            <p class="small">Vêtements prêts à intégrer.</p>
                         </div>
                     </div>
                 </div>
@@ -238,49 +223,39 @@
                 <div class="etape__content">
                     <div class="title">
                         <h3>03</h3>
-                        <h4>Animation des personnages</h4>
+                        <h4>Dessin des croquis</h4>
                     </div>
-                    <p>
-                        Animation d’un
-                        <span class="accent--primary">duel</span>
-                        entre
-                        <span class="accent--primary">Luke</span>
-                        et
-                        <span class="accent--primary">Darth Vader</span>, avec des échanges de mouvements qui donnent vie à la scène plutôt qu'un simple
-                        face-à-face figé.
-                    </p>
+                    <p>J'ai dessiné <span class="accent--primary">dans Paint.NET</span> une silhouette en <span class="accent--primary">croquis</span> pour chaque pièce, plus une quinzaine de <span class="accent--primary">visages rigolos en noir</span> sur transparent, pour garder une touche d'humour quand aucun vêtement n'est choisi.</p>
                 </div>
                 <div class="etape__media">
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Lightsaber-Fight.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Lightsaber-Fight.webp" alt="Croquis des pièces de vêtements" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Animation du combat entre Luke et Darth Vader avec l’ajout d’éclair pour plus d’effets visuels,</p>
+                            <p class="small">Croquis des pièces de vêtements.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/At-At-Rigging.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/At-At-Rigging.webp" alt="Quelques visages rigolos" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Rigging d’un AT-AT pour imiter un vrai combat sur Endor.</p>
+                            <p class="small">Quelques visages rigolos.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Han-Solo-Construction.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Han-Solo-Construction.webp" alt="Silhouette complète en croquis" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">
-                                Animation d’un personnage exactement comme dans les jeux, qui construit la porte qui mène à la fin de l’animation.
-                            </p>
+                            <p class="small">Silhouette complète en croquis.</p>
                         </div>
                     </div>
                 </div>
@@ -289,49 +264,39 @@
                 <div class="etape__content">
                     <div class="title">
                         <h3>04</h3>
-                        <h4>Travail d'éclairage et compositing visuel</h4>
+                        <h4>Génération aléatoire</h4>
                     </div>
-                    <p>
-                        Développement de
-                        <span class="accent--primary">shaders personnalisés</span>
-                        pour les sources lumineuses, intégration de
-                        <span class="accent--primary">rayons volumétriques</span>
-                        et
-                        <span class="accent--primary">effets de compositing</span>
-                        sur les sabres laser.
-                    </p>
+                    <p>J'ai <span class="accent--primary">programmé en JavaScript</span> une <span class="accent--primary">randomisation</span> qui change une pièce quand on clique dessus, ou toute la tenue d'un coup avec <span class="accent--primary">l'icône du dé</span>.</p>
                 </div>
                 <div class="etape__media">
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Volumetric-Light.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Volumetric-Light.webp" alt="Tenue générée aléatoirement" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">
-                                Ajout de “God Rays” pour ajouter un effet de lumière qui imite le soleil qui passe dans les feuilles des arbres.
-                            </p>
+                            <p class="small">Tenue générée aléatoirement.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Custom-Shader.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Custom-Shader.webp" alt="Bouton du dé pour tout randomiser" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Animation de pièce électrique avec un shader personnaliser exactement comme ceux dans Lego Movie.</p>
+                            <p class="small">Bouton du dé pour tout randomiser.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Compositing.webp" alt="House Breach" />
+                                <img src="assets/images/boucle-infinie/Compositing.webp" alt="Extrait du code de randomisation" />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Compositing des sabres lasers pour leurs donner leurs effet de glow.</p>
+                            <p class="small">Extrait du code de randomisation.</p>
                         </div>
                     </div>
                 </div>
@@ -340,28 +305,41 @@
                 <div class="etape__content">
                     <div class="title">
                         <h3>05</h3>
-                        <h4>Montage sonore et finalisation</h4>
+                        <h4>Navigation et sélection</h4>
                     </div>
-                    <p>
-                        Finalisation du rendu final de la vidéo, j’intègre enfin des
-                        <span class="accent--primary">effets sonores</span>
-                        originaux des films Star Wars et même des sons Lego des jeux vidéos du même thème pour compléter ce projet complexe.
-                    </p>
+                    <p>J'ai ajouté <span class="accent--primary">des flèches</span> pour parcourir les vêtements un par un, une <span class="accent--primary">fenêtre modale</span> pour voir toutes les pièces d'une catégorie, et un bouton pour supprimer un vêtement et <span class="accent--primary">revenir au croquis</span>.</p>
                 </div>
                 <div class="etape__media">
-                    <a href="https://youtube.com" target="_blank" class="window cursor-target">
-                        <div class="window__header">
-                            <p>Montage sonore et finalisation.étape</p>
-                        </div>
+                    <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Final-Render-Thumbnail.webp" alt="House Breach" />
-                                <svg class="play-button icon icon--md" aria-label="Lire la vidéo" role="img">
-                                    <use href="#icon-play"></use>
-                                </svg>
+                                <img src="assets/images/fitgen/thumbnail.webp" alt="Flèches de navigation à côté d&#x27;une pièce" />
                             </div>
                         </div>
-                    </a>
+                        <div class="window__footer">
+                            <p class="small">Flèches de navigation à côté d'une pièce.</p>
+                        </div>
+                    </div>
+                    <div class="window cursor-target" data-modal="image">
+                        <div class="window__content">
+                            <div class="window__media" data-component="DitherVeil" data-reveal="full">
+                                <img src="assets/images/fitgen/thumbnail.webp" alt="Fenêtre modale des chandails" />
+                            </div>
+                        </div>
+                        <div class="window__footer">
+                            <p class="small">Fenêtre modale des chandails.</p>
+                        </div>
+                    </div>
+                    <div class="window cursor-target" data-modal="image">
+                        <div class="window__content">
+                            <div class="window__media" data-component="DitherVeil" data-reveal="full">
+                                <img src="assets/images/fitgen/thumbnail.webp" alt="Pièce supprimée qui revient au croquis" />
+                            </div>
+                        </div>
+                        <div class="window__footer">
+                            <p class="small">Pièce supprimée qui revient au croquis.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -520,16 +498,7 @@
                 </div>
                 <div class="accordion-content">
                     <p>
-                        J'ai eu un
-                        <span class="accent--primary">problème d'éclairage</span>
-                        après avoir réduit l'échelle des briques Lego à l'importation, certaines
-                        <span class="accent--primary">pièces</span>
-                        paraissaient
-                        <span class="accent--primary">trop sombres</span>
-                        ou
-                        <span class="accent--primary">trop claires</span>. J'ai été chercher de l'aide sur un <span class="accent--primary">forum</span>,
-                        quelqu'un m'a donné une commande pour redimensionner les assets correctement, ce qui a nettement
-                        <span class="accent--primary">amélioré mon rendu</span>.
+                        Au départ, je codais comme je le pensais, sans savoir quelle était la bonne façon de <span class="accent--primary">structurer mon code</span>. En apprenant les <span class="accent--primary">composantes réutilisables</span> dans mes cours, j'ai réalisé que mon site pouvait être beaucoup plus simple à maintenir, et j'ai demandé conseil à mes <span class="accent--primary">professeurs de web</span> pour le refaire correctement. Ce projet m'a appris les <span class="accent--primary">bases de JavaScript</span>, et comme c'est un projet personnel, il m'a donné la liberté d'<span class="accent--primary">explorer ma créativité</span> sans contraintes.
                     </p>
                     <div class="comparison cursor-target" data-component="Comparison" data-position="50">
                         <div class="comparison__after">
@@ -555,11 +524,7 @@
                 </div>
                 <div class="accordion-content">
                     <p>
-                        Refaire le rendu de ma vidéo en
-                        <span class="accent--primary">meilleure qualité</span>, avec un travail plus poussé sur l'éclairage et les textures pour un résultat
-                        plus
-                        <span class="accent--primary">l'audio</span>
-                        pour que le montage suive mieux le rythme de l'animation.
+                        Restructurer le code en <span class="accent--primary">composantes</span> pour le simplifier, puis permettre d'ajouter ses propres vêtements depuis sa galerie, avec un algorithme qui <span class="accent--primary">les détoure automatiquement</span>. Le but final est d'en faire une <span class="accent--primary">application sur mon téléphone</span> pour l'utiliser au quotidien. J'aimerais aussi retravailler son <span class="accent--primary">style graphique</span>, que je trouve encore simple.
                     </p>
                 </div>
             </div>

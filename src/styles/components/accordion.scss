@@ -5,7 +5,7 @@
 .accordion {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    column-gap: var(--spacing-sm); // l'espace sous les titres est le margin-top du contenu
     width: 100%;
 
     .accordion-item {
@@ -15,11 +15,11 @@
     // Variante : items empilés (contenu sous son titre), même sur desktop
     &--stacked {
         flex-direction: column;
+        row-gap: var(--spacing-sm);
 
         .accordion-item {
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-sm);
             width: 100%;
         }
 
@@ -33,6 +33,12 @@
 
     @media (max-width: $breakpoint-md) {
         flex-direction: column;
+        row-gap: var(--spacing-sm);
+
+        // Sur mobile, le contenu colle à son titre
+        &:not(.accordion--stacked) .accordion-content {
+            margin-top: 0;
+        }
 
         .accordion-item {
             display: flex;
@@ -65,10 +71,12 @@
 .accordion-content {
     order: 2; // tous les contenus après les titres
     flex-basis: 100%; // le contenu prend toute la largeur, donc passe sous les titres
+    margin-top: var(--spacing-sm); // espace sous le titre (Accordion.js l'anime à 0)
     display: none;
 }
 
-.accordion-title.is-open + .accordion-content {
+.accordion-title.is-open + .accordion-content,
+.accordion-content.is-closing { // is-closing : visible pendant l'animation de fermeture
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
