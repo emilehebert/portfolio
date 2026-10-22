@@ -17,6 +17,15 @@
     display: block;
     width: 100%;
     height: 100%;
+    transition: opacity 0.6s ease;
+    pointer-events: none; // le survol passe à l'<img> en dessous (son title s'affiche), le dither écoute son parent
+
+    // Toggle « Couleurs » du header (ordinateur seulement) : le dither disparaît, la photo en couleur reste
+    @media #{$media-dither-desktop} {
+        .colors-on & {
+            opacity: 0;
+        }
+    }
 }
 
 // Tactile : 1 pixel du canvas = 1 point, gardé net quand il est agrandi

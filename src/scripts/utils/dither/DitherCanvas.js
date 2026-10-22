@@ -1,6 +1,6 @@
 import { Renderer, Program, Mesh, Triangle, Texture, RenderTarget } from "ogl";
 import { VERTEX, MASK_FRAGMENT, VIEW_FRAGMENT } from "./shaders.js";
-import { coverScale } from "./algorithms.js";
+import { coverScale, objectPosition } from "./algorithms.js";
 
 const REVEAL_RADIUS = 300; // rayon de la zone révélée autour du curseur, en px
 const SOFTNESS = 0.4; // largeur du bord adouci de la zone révélée (0 → 1)
@@ -195,6 +195,7 @@ export default class DitherCanvas {
             tMask: { value: this.masks[0].texture },
             uResolution: { value: [1, 1] },
             uCover: { value: [1, 1] },
+            uAlign: { value: [0.5, 0.5] },
             uLod: { value: 0 },
             // Réglages de l'image : remplis dans attach()
             uCell: { value: 1 },
@@ -423,6 +424,9 @@ export default class DitherCanvas {
         if (this.image) {
             // Cadrage de la photo dans le canvas (comme object-fit: cover)
             this.viewUniforms.uCover.value = coverScale(this.canvas.width, this.canvas.height, this.source.width, this.source.height);
+            // Partie gardée au recadrage (object-position). La texture est à l'envers en y, d'où le 1 - y
+            const [alignX, alignY] = objectPosition(this.image);
+            this.viewUniforms.uAlign.value = [alignX, 1 - alignY];
 
             // Légère réduction de la photo selon la taille des points (évite le scintillement)
             const texelsPerPixel = (this.viewUniforms.uCover.value[0] * this.source.width) / this.canvas.width;

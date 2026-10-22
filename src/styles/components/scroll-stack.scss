@@ -13,8 +13,26 @@
     }
 
     // Même hauteur pour toutes les images, sinon une image verticale (ex. croquis du monstre) étire toute l'étape.
-    // L'image est recadrée au centre, elle reste entière quand on l'ouvre en grand.
+    // L'image est recadrée en gardant le haut, elle reste entière quand on l'ouvre en grand.
     .window__media {
         aspect-ratio: 16 / 11;
+
+        img {
+            object-position: top; // le dither suit (DitherVeil lit l'object-position)
+        }
+    }
+
+    // Comparatif avant/après : remplit toute la fenêtre comme les images (en grand il garde son format)
+    .comparison {
+        height: 100%;
+
+        .comparison__after,
+        img {
+            height: 100%;
+        }
+
+        img {
+            object-fit: cover;
+        }
     }
 }

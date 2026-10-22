@@ -24,7 +24,11 @@
     padding: var(--spacing-xl) 0 var(--spacing-lg);
     position: relative;
     overflow: visible;
-    z-index: 1;
+
+    // Passe au-dessus des sections suivantes seulement quand le portrait descend (scrollytelling)
+    &:has(.js-pinned) {
+        z-index: 1;
+    }
 
     @media screen and (max-width: $breakpoint-sm) {
         padding: var(--spacing-lg) 0;

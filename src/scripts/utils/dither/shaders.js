@@ -63,6 +63,7 @@ uniform sampler2D tImage;     // la photo
 uniform sampler2D tMask;      // la zone révélée (dessinée par MASK_FRAGMENT)
 uniform vec2 uResolution;     // taille du canvas, en pixels réels
 uniform vec2 uCover;          // cadrage de la photo (comme object-fit: cover)
+uniform vec2 uAlign;          // partie gardée au recadrage (comme object-position, 0.5 = centre)
 uniform float uLod;           // niveau de flou de la photo, selon la taille des points
 uniform float uCell;          // taille d'un point de dither, en pixels réels
 uniform float uLevels;        // nombre de tons
@@ -93,7 +94,7 @@ float bayer4(vec2 cell) {
 
 // Position dans le canvas → position dans la photo (selon le cadrage)
 vec2 imageUv(vec2 uv) {
-  return (uv - 0.5) * uCover + 0.5;
+  return uv * uCover + (1.0 - uCover) * uAlign;
 }
 
 // Luminosité de la couleur, avec le contraste appliqué (0 = noir, 1 = blanc)

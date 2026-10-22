@@ -20,6 +20,14 @@
 
         img {
             opacity: 0.1;
+            transition: opacity 0.6s ease;
+
+            // Toggle « Couleurs » du header (ordinateur seulement) : la photo est affichée sans le dither
+            @media #{$media-dither-desktop} {
+                .colors-on & {
+                    opacity: 1;
+                }
+            }
         }
     }
 

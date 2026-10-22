@@ -242,3 +242,72 @@
 .header-spacer {
     height: var(--header-height);
 }
+
+/*
+ Toggle « Couleurs » (Header.js) : images en couleur ou en dither
+ ========================================================================== */
+
+// Logo et toggle « Couleurs » côte à côte
+.header__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.color-toggle {
+    display: none; // mobile : les images sont déjà en couleur, le toggle ne sert à rien
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-s);
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font: inherit;
+    font-weight: 700;
+    cursor: none; // le curseur du site (TargetCursor) le remplace
+
+    @media #{$media-dither-desktop} {
+        display: flex;
+    }
+}
+
+// La vraie case est cachée, .color-toggle__box la dessine (case à cocher Windows XP)
+.color-toggle__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.color-toggle__box {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background: var(--gradient-secondary);
+    border: 1px solid var(--color-secondary);
+    border-radius: 2px;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.6), inset -1px -1px 0 rgba(0, 0, 0, 0.3); // relief XP
+
+    // Crochet, dessiné avec deux bordures tournées
+    &::after {
+        content: '';
+        position: absolute;
+        top: 1px;
+        left: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid var(--color-black);
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+        display: none;
+    }
+
+    .color-toggle__input:checked + &::after {
+        display: block;
+    }
+
+    .color-toggle__input:focus-visible + & {
+        outline: 1px dotted var(--color-white);
+        outline-offset: 2px;
+    }
+}

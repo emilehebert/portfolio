@@ -20,3 +20,9 @@ export function coverScale(width, height, imageWidth, imageHeight) {
     const ratio = width / height / (imageWidth / imageHeight);
     return ratio > 1 ? [1, 1 / ratio] : [ratio, 1];
 }
+
+// object-position de l'<img> (ex. 'top' → [0.5, 0]) : quelle partie de la photo on garde quand elle est recadrée
+export function objectPosition(image) {
+    const [x, y] = getComputedStyle(image).objectPosition.split(" ").map(parseFloat);
+    return [Number.isNaN(x) ? 0.5 : x / 100, Number.isNaN(y) ? 0.5 : y / 100];
+}

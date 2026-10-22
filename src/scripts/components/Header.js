@@ -11,6 +11,7 @@ export default class Header {
 
     this.init();
     this.initNavMobile();
+    this.initColorToggle();
   }
 
   init() {
@@ -75,6 +76,32 @@ export default class Header {
     for (let i = 0; i < links.length; i++) {
       links[i].addEventListener('click', this.closeNav.bind(this));
     }
+  }
+
+  // Toggle « Couleurs » : affiche les images en couleur au lieu du dither.
+  // Le choix est gardé d'une page à l'autre (localStorage)
+  initColorToggle() {
+    this.colorToggle = this.element.querySelector('.js-color-toggle');
+    if (!this.colorToggle) return;
+
+    let isOn = false;
+    try {
+      isOn = localStorage.getItem('colors-on') === '1';
+    } catch (error) {} // stockage bloqué (navigation privée) : couleurs désactivées
+
+    this.setColors(isOn);
+    this.colorToggle.addEventListener('change', () => {
+      this.setColors(this.colorToggle.checked);
+    });
+  }
+
+  setColors(isOn) {
+    this.html.classList.toggle('colors-on', isOn);
+    this.colorToggle.checked = isOn;
+
+    try {
+      localStorage.setItem('colors-on', isOn ? '1' : '0');
+    } catch (error) {}
   }
 
   onToggleNav() {

@@ -11,6 +11,9 @@ $breakpoint-lg: 1200px;
 $breakpoint-xl: 1440px;
 $breakpoint-xxl: 1920px;
 
+// Format ordinateur du dither : fenêtre large ET pas un écran tactile sans survol (l'inverse de DitherVeil.js)
+$media-dither-desktop: 'screen and (min-width: #{$breakpoint-sm + 1px}) and (hover: hover), screen and (min-width: #{$breakpoint-sm + 1px}) and (pointer: fine)';
+
 :root {
     --header-height: 76px;
     --spacing-xs: 5px;

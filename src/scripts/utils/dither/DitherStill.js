@@ -1,10 +1,10 @@
-import { coverScale } from "./algorithms.js";
+import { coverScale, objectPosition } from "./algorithms.js";
 
 // Seuils de la matrice de Bayer 4×4 (mêmes valeurs que bayer4() dans shaders.js)
 const BAYER4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 
 /*
- * DitherStill — le dither FIGÉ des écrans tactiles, dessiné une seule fois en canvas 2D.
+ * DitherStill — le dither FIGÉ des écrans tactiles, dessiné en canvas 2D (redessiné seulement si la taille change).
  * Pas de WebGL : sur iPhone, un canvas WebGL par image donnait des images noires
  * et faisait perdre le WebGL du bandeau du footer (Safari limite le nombre de contextes WebGL).
  *
@@ -15,10 +15,20 @@ export default class DitherStill {
         this.container = container; // le .window__media
         this.image = image; // l'<img> de la page
         this.options = options;
+        this.canvas = null;
 
         this.image
             .decode()
-            .then(() => this.draw())
+            .then(() => {
+                if (this.isReleased) return; // retiré avant la fin du chargement
+                this.draw();
+                // Redessine quand l'image change de taille (rotation, fenêtre redimensionnée), sinon le canvas est étiré
+                this.resizeObserver = new ResizeObserver(() => {
+                    clearTimeout(this.resizeTimer);
+                    this.resizeTimer = setTimeout(() => this.draw(), 150);
+                });
+                this.resizeObserver.observe(this.container);
+            })
             .catch(() => {}); // image brisée : on garde l'<img>
     }
 
@@ -27,6 +37,9 @@ export default class DitherStill {
         const width = this.container.clientWidth;
         const height = this.container.clientHeight;
         if (!width || !height) return;
+        if (width === this.width && height === this.height) return; // même taille, rien à refaire
+        this.width = width;
+        this.height = height;
 
         // Nombre de points sur la largeur et la hauteur
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -34,18 +47,24 @@ export default class DitherStill {
         const cols = Math.ceil((width * dpr) / cell);
         const rows = Math.ceil((height * dpr) / cell);
 
-        const canvas = document.createElement("canvas");
-        canvas.className = "dither-veil__canvas dither-veil__canvas--still";
+        // Un seul canvas par image, réutilisé quand on redessine
+        if (!this.canvas) {
+            this.canvas = document.createElement("canvas");
+            this.canvas.className = "dither-veil__canvas dither-veil__canvas--still";
+            this.container.appendChild(this.canvas);
+        }
+        const canvas = this.canvas;
         canvas.width = cols;
         canvas.height = rows;
         const context = canvas.getContext("2d", { willReadFrequently: true });
 
-        // 1. La photo réduite à 1 pixel par point, cadrée comme object-fit: cover
+        // 1. La photo réduite à 1 pixel par point, cadrée comme object-fit: cover (et son object-position)
         const [coverX, coverY] = coverScale(cols, rows, this.image.naturalWidth, this.image.naturalHeight);
         const drawWidth = cols / coverX;
         const drawHeight = rows / coverY;
         context.imageSmoothingQuality = "high";
-        context.drawImage(this.image, (cols - drawWidth) / 2, (rows - drawHeight) / 2, drawWidth, drawHeight);
+        const [alignX, alignY] = objectPosition(this.image);
+        context.drawImage(this.image, (cols - drawWidth) * alignX, (rows - drawHeight) * alignY, drawWidth, drawHeight);
 
         // 2. Chaque canal de chaque point est arrondi à un des `levels` tons, vers le haut ou le bas
         //    selon sa case dans la matrice de Bayer. Puis le ton devient une couleur entre l'encre et le papier.
@@ -71,6 +90,13 @@ export default class DitherStill {
         }
 
         context.putImageData(imageData, 0, 0);
-        this.container.appendChild(canvas);
+    }
+
+    // Retire le canvas (ex. la fenêtre repasse en format ordinateur)
+    release() {
+        this.isReleased = true;
+        clearTimeout(this.resizeTimer);
+        if (this.resizeObserver) this.resizeObserver.disconnect();
+        if (this.canvas) this.canvas.remove();
     }
 }

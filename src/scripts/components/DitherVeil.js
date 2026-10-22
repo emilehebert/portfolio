@@ -2,8 +2,10 @@ import DitherCanvas from "../utils/dither/DitherCanvas.js";
 import DitherStill from "../utils/dither/DitherStill.js";
 import { getColor } from "../utils/dither/algorithms.js";
 
-// Écran tactile sans survol (téléphone, tablette)
-const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+// Format mobile : écran tactile sans survol (téléphone, tablette) ou fenêtre étroite ($breakpoint-sm).
+// Suivi en direct, pour que le mode responsive passe du dither ordinateur au dither mobile (voir switchMode)
+const mobileQuery = window.matchMedia("(hover: none) and (pointer: coarse), (max-width: 768px)");
+let isTouch = mobileQuery.matches;
 
 // Fiches de projet seulement : l'image passe en couleur quand elle est au milieu de l'écran
 const isProjectPage = !!document.querySelector(".hero--projet");
@@ -50,6 +52,7 @@ export default class DitherVeil {
         };
         this.dither = null;
         this.isActive = false; // le centre de l'image est au milieu de l'écran
+        this.isNear = false; // l'image est proche de l'écran (watchNear)
 
         if (!this.image) return;
 
@@ -65,6 +68,7 @@ export default class DitherVeil {
             centerObserver = new IntersectionObserver(watchCenter, {
                 rootMargin: `${CENTER_MARGIN} 0px ${CENTER_MARGIN} 0px`,
             });
+            mobileQuery.addEventListener("change", onMobileChange);
         }
 
         veils.set(this.element, this);
@@ -109,6 +113,14 @@ export default class DitherVeil {
         this.options.intro = false;
     }
 
+    // On passe de mobile à ordinateur (ou l'inverse) : on refait le dither avec le bon mode
+    switchMode() {
+        this.removeDither();
+        this.options.pixelSize = isTouch ? 1 : 2;
+        this.options.intro = false; // pas d'animation d'apparition, l'image était déjà là
+        if (this.isNear) this.createDither();
+    }
+
     removeDither() {
         if (!this.dither) return;
         this.dither.release(); // le canvas WebGL est gardé pour la prochaine image (ordinateur seulement)
@@ -135,6 +147,7 @@ function watchNear(entries) {
         const entry = entries[i];
         const veil = veils.get(entry.target);
         const index = queue.indexOf(veil);
+        veil.isNear = entry.isIntersecting;
 
         if (entry.isIntersecting) {
             if (index < 0) queue.push(veil);
@@ -148,6 +161,12 @@ function watchNear(entries) {
         isQueueRunning = true;
         requestAnimationFrame(nextInQueue);
     }
+}
+
+// La fenêtre change de format (mobile ↔ ordinateur) : chaque image change de dither
+function onMobileChange() {
+    isTouch = mobileQuery.matches;
+    new Set(veils.values()).forEach((veil) => veil.switchMode()); // Set : une image peut être dans veils deux fois (avec sa ligne du centre)
 }
 
 // Centre de l'image dans la bande du milieu : en couleur

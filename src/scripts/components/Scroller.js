@@ -30,6 +30,7 @@ export default class Scroller {
         });
         this.initAnchors();
         this.initLoadGuard();
+        this.initNavLock();
         this.setOptions(); // après le smoother : les pins en ont besoin
     }
 
@@ -112,6 +113,22 @@ export default class Scroller {
 
     stopLoadGuard() {
         gsap.ticker.remove(this.keepInPlace);
+    }
+
+    // Menu mobile ouvert : la page ne scrolle plus derrière.
+    // On suit la classe nav-is-active, peu importe qui l'ajoute ou l'enlève.
+    initNavLock() {
+        const html = document.documentElement;
+
+        const observer = new MutationObserver(() => {
+            const isOpen = html.classList.contains("nav-is-active");
+
+            if (this.smoother.paused() !== isOpen) {
+                this.smoother.paused(isOpen);
+            }
+        });
+
+        observer.observe(html, { attributes: true, attributeFilter: ["class"] });
     }
 
     // Les éléments fixed doivent être hors du wrapper pour rester fixes

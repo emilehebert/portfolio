@@ -22,11 +22,19 @@
         <!-- Zone header -->
             <header class="header" data-component="Header">
             <div class="wrapper">
-                <a class="logo cursor-target" href="index.html">
-                  <svg class="icon icon--lg">
-                    <use xlink:href="#icon-logo"></use>
-                  </svg>
-                </a>
+                <div class="header__brand">
+                    <a class="logo cursor-target" href="index.html">
+                      <svg class="icon icon--lg">
+                        <use xlink:href="#icon-logo"></use>
+                      </svg>
+                    </a>
+                    <!-- Toggle : images en couleur ou en dither (Header.js ajoute colors-on sur <html>) -->
+                    <label class="color-toggle cursor-target">
+                        <input type="checkbox" class="color-toggle__input js-color-toggle" />
+                        <span class="color-toggle__box"></span>
+                        <span data-component="ScrambledText">Couleurs</span>
+                    </label>
+                </div>
                 <nav class="header__nav">
                     <div class="window header__window">
                         <div class="window__header header__window-bar">

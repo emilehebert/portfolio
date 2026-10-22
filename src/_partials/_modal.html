@@ -1,5 +1,6 @@
 <!-- Modale unique (Modal.js). Le lien qui l'ouvre choisit le contenu affiché
-     data-modal="video" affiche la vidéo YouTube, data-modal="image" affiche l'image cliquée -->
+     data-modal="video" affiche la vidéo YouTube, data-modal="image" affiche l'image cliquée,
+     data-modal="comparison" affiche en grand le comparatif avant/après de la même fenêtre -->
 <div class="modal js-fixed" id="modale" data-component="Modal">
     <div class="window">
         <div class="window__header">
@@ -13,6 +14,8 @@
             </div>
             <!-- Contenu image, visible seulement avec data-modal="image" -->
             <img class="modal__image js-modal-image" alt="" />
+            <!-- Contenu comparatif, visible seulement avec data-modal="comparison" -->
+            <div class="modal__comparison js-modal-comparison"></div>
         </div>
     </div>
 </div>

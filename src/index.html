@@ -9,8 +9,7 @@
                     <span class="rotating-text accent--primary" data-component="RotatingText" data-words="Designer|Intégrateur|Animateur|Créateur">
                         Designer
                     </span>
-                    <span class="rotating-text" data-component="RotatingText" data-words="Déterminé|Ambitieux|Motivé|Débrouillard"> Déterminé </span>
-                    .
+                    <span class="rotating-text" data-component="RotatingText" data-words="Déterminé|Ambitieux|Motivé|Débrouillard"> Déterminé </span>.
                 </h3>
                 <div class="nom" data-lag=".00001">
                     <h1 data-component="ScrambledText" data-chars="EMILEX.:;=" data-duration="2" data-intro>Emile</h1>
@@ -18,7 +17,8 @@
                 </div>
             </div>
             <div class="hero__media">
-                <div class="window js-pinned" data-pin-overflow="img" data-pin-end=".hero-story-track__landing">
+                <!-- SCROLLYTELLING (désactivé) : remettre la classe js-pinned sur .window pour que le portrait descende -->
+                <div class="window" data-pin-overflow="img" data-pin-end=".hero-story-track__landing">
                     <div class="window__content"><img src="assets/images/Portfolio_portrait_web.webp" alt="Portrait" /></div>
                     <div class="window__footer">
                         <p class="small">Photo : Loïc Blanchette Favela</p>
@@ -60,6 +60,7 @@
         </div>
     </section>
 
+    <!-- SCROLLYTELLING (désactivé) : enlever ce commentaire pour remettre l'histoire
     <section class="short-story short-story--bottom" data-component="ShortStory">
         <div class="wrapper">
             <h2 class="short-story__step js-story-step">Designer.</h2>
@@ -67,11 +68,14 @@
             <h2 class="short-story__step js-story-step">Animateur.</h2>
         </div>
     </section>
+    -->
 
     <section class="about has-bg-grid">
+        <!-- SCROLLYTELLING (désactivé) : place d'arrivée du portrait
         <div class="wrapper">
             <div class="hero-story-track__landing" aria-hidden="true"></div>
         </div>
+        -->
         <div class="bg-grid" style="--grid-top: 25%" data-speed="0.25"></div>
         <div class="bg-grid" style="--grid-top: 115%" data-speed="0.25"></div>
         <div id="about" class="halftone-marquee" data-component="HalftoneMarquee" data-text="A propos \">

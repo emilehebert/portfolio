@@ -10,7 +10,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-md);
+    padding: var(--spacing-md) calc(var(--spacing-md) / 2); // même marge sur les côtés que le .wrapper
     background: rgba(0, 0, 0, 0.8);
 
     &.is-open {
@@ -19,19 +19,20 @@
 
     .window {
         width: 100%;
-        max-width: min(
-            1000px,
-            (100vh - 150px) * 16 / 9
-        ); // rentre aussi en hauteur
+        max-width: min(2000px, (100dvh - 150px) * 16 / 9); // rentre aussi en hauteur (dvh : hauteur visible, sans les barres du navigateur mobile)
     }
 }
 
 /*
- Contenu affiché selon le lien cliqué (Modal.js ajoute modal--video ou modal--image)
+ Contenu affiché selon le lien cliqué (Modal.js ajoute modal--video, modal--image ou modal--comparison)
  ========================================================================== */
 
 .modal--video .modal__image,
-.modal--image .modal__video {
+.modal--video .modal__comparison,
+.modal--image .modal__video,
+.modal--image .modal__comparison,
+.modal--comparison .modal__video,
+.modal--comparison .modal__image {
     display: none;
 }
 
@@ -52,4 +53,13 @@
         max-height: calc(100dvh - 150px); // place pour le header et les marges
         object-fit: contain;
     }
+}
+
+/*
+ Modale comparatif : le comparatif avant/après en grand (Modal.js)
+ ========================================================================== */
+
+.modal--comparison .comparison img {
+    max-height: calc(100dvh - 150px); // place pour le header et les marges
+    object-fit: cover;
 }
