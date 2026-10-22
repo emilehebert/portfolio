@@ -2,7 +2,7 @@
    SCROLL STACK / images empilées des étapes (ScrollStack.js)
    ========================================================================== */
 
-.etapes[data-component='ScrollStack'] .etape__media {
+.etapes[data-component="ScrollStack"] .etape__media {
     display: grid;
 
     // Toutes les images dans la même case : elles s'empilent
@@ -10,5 +10,11 @@
         grid-area: 1 / 1;
         background: var(--color-background);
         will-change: transform;
+    }
+
+    // Même hauteur pour toutes les images, sinon une image verticale (ex. croquis du monstre) étire toute l'étape.
+    // L'image est recadrée au centre, elle reste entière quand on l'ouvre en grand.
+    .window__media {
+        aspect-ratio: 16 / 11;
     }
 }

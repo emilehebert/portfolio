@@ -23,7 +23,9 @@ export default class Scroller {
             smooth: 1, // durée du rattrapage, en secondes
             effects: true, // active les data-speed et data-lag
             smoothTouch: 0.5, // au doigt : léger lissage, synchronisé avec les data-lag (pas de jitter)
-            normalizeScroll: true, // normalise le défilement tactile pour limiter les à-coups mobiles
+            // Mobile seulement (isTouch 1 = écran tactile sans souris) : limite les à-coups au doigt.
+            // Avec true, GSAP l'active aussi à l'ordinateur et la molette passe par JavaScript.
+            normalizeScroll: ScrollTrigger.isTouch === 1,
             ease: "expo.out",
         });
         this.initAnchors();

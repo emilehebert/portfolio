@@ -8,27 +8,64 @@ const LINGER = 1; // temps que met la traînée à s'effacer, en secondes
 const HOLD = 1.6; // garde la zone révélée bien pleine avant qu'elle commence à s'effacer
 const MASK_SCALE = 0.5; // le masque du curseur est dessiné à demi-résolution (plus rapide)
 const INTRO_DURATION = 1100; // durée de l'apparition au chargement, en ms
+const POOL_SIZE = 6; // nombre de canvas gardés de côté pour être réutilisés (Chrome en permet 16 en tout)
+
+// Canvas qui ne sont plus à l'écran, prêts à servir pour la prochaine image.
+// Créer un canvas WebGL (contexte + shaders) fige le scroll un instant : on les recycle au lieu d'en recréer.
+const pool = [];
 
 /*
  * DitherCanvas — le <canvas> WebGL qui affiche UNE image en dither (ordinateur seulement).
- * Il est créé et retiré par le composant DitherVeil.
+ * DitherVeil le prend avec DitherCanvas.get() et le rend avec release().
  *
- *   init()     crée le canvas, les textures et les shaders, puis charge la photo
+ *   get()      réutilise un canvas libre (ou en crée un), puis l'attache à l'image
  *   render()   boucle d'animation : bouge le pinceau, dessine le masque, puis l'image
+ *   release()  détache le canvas et le garde pour la prochaine image
  *   destroy()  retire le canvas et libère la carte graphique
  *
  * Le « masque » est une image invisible qui retient où le curseur est passé.
  * Là où il est allumé, on montre la photo en couleur au lieu du dither.
  */
 export default class DitherCanvas {
-    constructor(container, image, options, hoverTarget) {
+    static get(container, image, options, hoverTarget) {
+        const dither = pool.pop() || new DitherCanvas();
+        if (dither.isSupported) dither.attach(container, image, options, hoverTarget);
+        return dither;
+    }
+
+    constructor() {
+        this.isSupported = false; // reste false si le navigateur n'a pas WebGL2
+        this.isDestroyed = false;
+        this.isAttached = false;
+
+        // Liées à this une seule fois, pour pouvoir retirer les écouteurs dans release()
+        this.onMove = this.onMove.bind(this);
+        this.onLeave = this.onLeave.bind(this);
+        this.onResize = this.onResize.bind(this);
+        this.render = this.render.bind(this);
+        this.destroy = this.destroy.bind(this);
+
+        // Création une seule fois par canvas : contexte, textures, shaders
+        if (!this.createRenderer()) return;
+        this.isSupported = true;
+
+        this.createTextures();
+        this.createShaders();
+
+        // Si le navigateur retire le contexte WebGL (trop d'images), on rend la place à l'<img>
+        this.canvas.addEventListener("webglcontextlost", this.destroy);
+        this.resizeObserver = new ResizeObserver(this.onResize);
+    }
+
+    // Attache le canvas à une image (nouvelle ou recyclée)
+    attach(container, image, options, hoverTarget) {
         this.container = container; // le .window__media
         this.domImage = image; // l'<img> de la page
         this.options = options;
+        this.playIntro = options.intro !== false; // lu tout de suite : DitherVeil le remet à false juste après
         this.hoverTarget = hoverTarget; // l'élément qui réagit au survol
+        this.isAttached = true;
 
-        this.isSupported = false; // reste false si le navigateur n'a pas WebGL2
-        this.isDestroyed = false;
         this.image = null; // la photo, une fois chargée
         this.source = null; // la photo réduite à la taille du canvas
         this.width = 1; // taille du canvas, en px CSS
@@ -44,22 +81,20 @@ export default class DitherCanvas {
         this.pointer = { x: 0, y: 0, isInside: false };
         this.brush = { x: 0, y: 0, prevX: 0, prevY: 0 };
         this.presence = 0; // 0 → 1 : à quel point le curseur est « dedans »
+        this.isRevealed = false; // true : toute l'image en couleur sans survol (voir setRevealed)
 
-        // Liées à this une seule fois, pour pouvoir retirer les écouteurs dans destroy()
-        this.onMove = this.onMove.bind(this);
-        this.onLeave = this.onLeave.bind(this);
-        this.render = this.render.bind(this);
-        this.destroy = this.destroy.bind(this);
+        // Taille d'un point de dither, en pixels réels de l'écran, et réglages des tons
+        this.cell = Math.max(1, Math.round(options.pixelSize * this.renderer.dpr));
+        this.viewUniforms.uCell.value = this.cell;
+        this.viewUniforms.uLevels.value = options.levels;
+        this.viewUniforms.uContrast.value = options.contrast;
+        this.viewUniforms.uInk.value = options.inkColor;
+        this.viewUniforms.uPaper.value = options.paperColor;
 
-        this.init();
-    }
+        // Efface la traînée de l'image précédente à la 1re image dessinée (voir drawMask)
+        this.clearMask = true;
 
-    init() {
-        if (!this.createRenderer()) return;
-        this.isSupported = true;
-
-        this.createTextures();
-        this.createShaders();
+        this.container.appendChild(this.canvas);
         this.loadImage();
 
         this.hoverTarget.addEventListener("pointerenter", this.onMove);
@@ -68,11 +103,7 @@ export default class DitherCanvas {
         this.hoverTarget.addEventListener("pointerleave", this.onLeave);
         this.hoverTarget.addEventListener("pointercancel", this.onLeave);
 
-        // Si le navigateur retire le contexte WebGL (trop d'images), on rend la place à l'<img>
-        this.canvas.addEventListener("webglcontextlost", this.destroy);
-
         // Recalcule la taille du canvas quand la fenêtre change de taille
-        this.resizeObserver = new ResizeObserver(this.onResize.bind(this));
         this.resizeObserver.observe(this.container);
         this.onResize();
     }
@@ -102,12 +133,9 @@ export default class DitherCanvas {
 
         this.canvas = this.gl.canvas;
         this.canvas.classList.add("dither-veil__canvas");
-        this.container.appendChild(this.canvas);
 
         // Masque en haute précision si possible (traînée plus douce)
         this.hasFloatMask = !!this.renderer.getExtension("EXT_color_buffer_float");
-        // Taille d'un point de dither, en pixels réels de l'écran
-        this.cell = Math.max(1, Math.round(this.options.pixelSize * this.renderer.dpr));
 
         return true;
     }
@@ -168,11 +196,12 @@ export default class DitherCanvas {
             uResolution: { value: [1, 1] },
             uCover: { value: [1, 1] },
             uLod: { value: 0 },
-            uCell: { value: this.cell },
-            uLevels: { value: this.options.levels },
-            uContrast: { value: this.options.contrast },
-            uInk: { value: this.options.inkColor },
-            uPaper: { value: this.options.paperColor },
+            // Réglages de l'image : remplis dans attach()
+            uCell: { value: 1 },
+            uLevels: { value: 2 },
+            uContrast: { value: 1 },
+            uInk: { value: [0, 0, 0] },
+            uPaper: { value: [1, 1, 1] },
             uIntro: { value: 0 },
             uHold: { value: HOLD },
         };
@@ -199,10 +228,12 @@ export default class DitherCanvas {
 
     // On réutilise l'<img> de la page : pas de 2e téléchargement
     loadImage() {
-        this.domImage
+        const image = this.domImage;
+        image
             .decode()
             .then(() => {
-                if (!this.isDestroyed) this.onImageLoad();
+                // Encore attaché à cette image ? (le canvas a pu être recyclé entre-temps)
+                if (this.isAttached && this.domImage === image) this.onImageLoad();
             })
             .catch(() => {}); // image brisée : on garde l'<img>
     }
@@ -214,7 +245,8 @@ export default class DitherCanvas {
     onImageLoad() {
         this.image = this.domImage;
         this.updateSource();
-        this.introStart = performance.now();
+        // Sans intro (déjà jouée) : on fait comme si elle était finie
+        this.introStart = this.playIntro ? performance.now() : -INTRO_DURATION;
         this.start();
     }
 
@@ -271,10 +303,23 @@ export default class DitherCanvas {
         this.start();
     }
 
+    // Appelé par DitherVeil quand l'image arrive au milieu de l'écran (ou en repart)
+    setRevealed(isRevealed) {
+        this.isRevealed = isRevealed;
+        this.start();
+    }
+
     onResize() {
-        this.width = Math.max(1, this.container.clientWidth);
-        this.height = Math.max(1, this.container.clientHeight);
-        this.renderer.setSize(this.width, this.height);
+        const width = Math.max(1, this.container.clientWidth);
+        const height = Math.max(1, this.container.clientHeight);
+
+        // Changer la taille d'un canvas le vide et le réalloue : seulement si elle change vraiment
+        // (un canvas recyclé a souvent déjà la bonne taille)
+        if (width !== this.renderer.width || height !== this.renderer.height) {
+            this.renderer.setSize(width, height);
+        }
+        this.width = width;
+        this.height = height;
         if (this.image) this.updateSource();
 
         this.viewUniforms.uResolution.value = [this.canvas.width, this.canvas.height];
@@ -299,7 +344,7 @@ export default class DitherCanvas {
 
     // Lance la boucle d'animation, si elle n'est pas déjà en cours
     start() {
-        if (this.raf || this.isDestroyed) return;
+        if (this.raf || this.isDestroyed || !this.isAttached) return;
         this.lastTime = performance.now();
         this.raf = requestAnimationFrame(this.render);
     }
@@ -317,15 +362,27 @@ export default class DitherCanvas {
 
         // La boucle continue tant qu'il se passe quelque chose, sinon elle s'arrête d'elle-même
         const isIntroPlaying = this.image && now - this.introStart < INTRO_DURATION;
-        const isBusy = this.pointer.isInside || this.presence > 0.002 || now < this.trailEnd || isIntroPlaying;
+
+        // Toute l'image est en couleur et rien ne bouge : inutile de la redessiner à chaque image
+        // (le canvas garde la dernière image affichée, la boucle repart au prochain mouvement)
+        const isFullyRevealed = this.isRevealed || (this.pointer.isInside && this.options.reveal === "full");
+        const isSteady = isFullyRevealed && this.presence > 0.995 && !isIntroPlaying;
+
+        const isBusy = !isSteady && (this.pointer.isInside || this.isRevealed || this.presence > 0.002 || now < this.trailEnd || isIntroPlaying);
 
         if (isBusy) this.raf = requestAnimationFrame(this.render);
     }
 
     updateBrush(dt) {
         // presence glisse doucement vers 1 quand le curseur est dedans, vers 0 quand il sort
-        const target = this.pointer.isInside ? 1 : 0;
+        const target = this.pointer.isInside || this.isRevealed ? 1 : 0;
         this.presence += (target - this.presence) * (1 - Math.exp(-dt / 0.16));
+
+        // Révélée sans curseur : le pinceau part du centre de l'image
+        if (this.isRevealed && !this.pointer.isInside) {
+            this.pointer.x = this.width / 2;
+            this.pointer.y = this.height / 2;
+        }
 
         // Le pinceau rattrape le curseur avec un petit retard (mouvement plus doux)
         const follow = 1 - Math.exp(-dt / 0.035);
@@ -339,7 +396,7 @@ export default class DitherCanvas {
 
         // Rayon de la zone révélée. reveal 'full' : assez grand pour couvrir toute l'image.
         let radius = REVEAL_RADIUS;
-        if (this.options.reveal === "full") {
+        if (this.options.reveal === "full" || this.isRevealed) {
             radius = Math.hypot(this.width, this.height) / (1 - SOFTNESS) + 2;
         }
 
@@ -351,7 +408,8 @@ export default class DitherCanvas {
         this.maskUniforms.uTo.value = [this.brush.x, this.brush.y];
         this.maskUniforms.uRadius.value = radius * (0.45 + 0.55 * this.presence);
         this.maskUniforms.uStrength.value = this.presence;
-        this.maskUniforms.uFade.value = Math.max(dt / LINGER, minFade);
+        this.maskUniforms.uFade.value = this.clearMask ? 1 : Math.max(dt / LINGER, minFade);
+        this.clearMask = false;
 
         // On dessine le nouveau masque, puis il devient « le précédent » pour la prochaine image
         this.renderer.render({ scene: this.maskMesh, target: this.masks[1] });
@@ -383,11 +441,13 @@ export default class DitherCanvas {
      Nettoyage
      ========================================================================== */
 
-    destroy() {
-        if (!this.isSupported || this.isDestroyed) return;
-        this.isDestroyed = true;
+    // Détache le canvas de son image et le garde pour la prochaine (ou le détruit si la réserve est pleine)
+    release() {
+        if (!this.isSupported || this.isDestroyed || !this.isAttached) return;
+        this.isAttached = false;
 
         cancelAnimationFrame(this.raf);
+        this.raf = 0;
         this.resizeObserver.disconnect();
 
         this.hoverTarget.removeEventListener("pointerenter", this.onMove);
@@ -395,6 +455,21 @@ export default class DitherCanvas {
         this.hoverTarget.removeEventListener("pointerdown", this.onMove);
         this.hoverTarget.removeEventListener("pointerleave", this.onLeave);
         this.hoverTarget.removeEventListener("pointercancel", this.onLeave);
+        this.canvas.remove();
+
+        if (pool.length < POOL_SIZE) pool.push(this);
+        else this.destroy();
+    }
+
+    destroy() {
+        if (!this.isSupported || this.isDestroyed) return;
+        if (this.isAttached) this.release(); // retire les écouteurs (peut le mettre dans la réserve)
+        this.isDestroyed = true;
+
+        const index = pool.indexOf(this);
+        if (index >= 0) pool.splice(index, 1);
+
+        this.resizeObserver.disconnect();
         this.canvas.removeEventListener("webglcontextlost", this.destroy);
 
         // Libère la carte graphique et retire le canvas WebGL
