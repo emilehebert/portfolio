@@ -1,0 +1,38 @@
+/* ==========================================================================
+   ERREUR 404 /
+   ========================================================================== */
+
+// Page pile à la hauteur de l'écran (pas de scroll), fenêtre centrée
+.error-404 {
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100dvh - var(--header-height));
+    padding: var(--spacing-xl) 0;
+    @media (max-width: $breakpoint-sm) {
+        padding: var(--spacing-lg) 0;
+    }
+}
+
+.error-404__window {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.error-404__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+    @media (max-width: $breakpoint-sm) {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+}
+
+// Le gros 404 en rouge
+.error-404__code {
+    font-size: clamp(6rem, 20vw, 12rem);
+    color: var(--color-primary);
+}

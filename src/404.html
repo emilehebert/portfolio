@@ -1,0 +1,26 @@
+{% include '_partials/_header.html' %}
+
+<section class="error-404 has-bg-grid">
+    <div class="bg-grid" style="--grid-top: 5%"></div>
+    <div class="bg-grid" style="--grid-top: 75%"></div>
+    <div class="wrapper">
+        <div class="window error-404__window">
+            <div class="window__header">
+                <p>erreur_404.exe</p>
+                <p class="small">[Fichier introuvable]</p>
+            </div>
+            <div class="window__content error-404__content">
+                <h1 class="error-404__code" data-component="ScrambledText" data-chars="0123456789X.=" data-duration="2" data-intro>404</h1>
+                <h2 data-component="ScrambledText" data-duration="2" data-intro>Page <span class="accent--primary">introuvable</span></h2>
+                <p>
+                    La page que vous cherchez n'existe pas ou a été <span class="accent--primary">déplacée</span>. Revenez à l'accueil pour continuer
+                    la visite.
+                </p>
+            </div>
+            <div class="window__footer">
+                <p class="small">[Erreur 404]</p>
+                <a href="index.html" class="button button--secondary cursor-target" data-component="ScrambledText">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+</section>
