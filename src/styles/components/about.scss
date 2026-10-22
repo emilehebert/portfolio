@@ -14,6 +14,7 @@
         grid-auto-rows: 40px;
         gap: var(--grid-gap);
         margin-top: var(--spacing-lg);
+        isolation: isolate; // les skills (z-index: -1) passent sous les fenêtres, mais restent dans la grille, sinon la grille les recouvre et bloque le survol
         @media screen and (max-width: $breakpoint-md) {
             gap: var(--grid-gap-mobile);
         }
