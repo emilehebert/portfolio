@@ -19,16 +19,13 @@ export default class Scroller {
 
     init() {
         this.moveFixedElements();
-
-        // Au doigt (isTouch 1 = écran tactile sans souris) : scroll natif du téléphone, fluide (120 fps)
-        // et sans normalizeScroll. Les data-speed et data-lag sont coupés au doigt, parce que ce sont
-        // eux qui sautillaient (jitter) pendant le scroll natif.
-        const isTouch = ScrollTrigger.isTouch === 1;
-
         this.smoother = ScrollSmoother.create({
-            smooth: 1, // durée du rattrapage à la souris, en secondes
-            effects: !isTouch, // active les data-speed et data-lag (ordinateur seulement)
-            smoothTouch: false, // au doigt : pas de lissage, scroll natif
+            smooth: 1, // durée du rattrapage, en secondes
+            effects: true, // active les data-speed et data-lag
+            smoothTouch: 0.5, // au doigt : léger lissage, synchronisé avec les data-lag (pas de jitter)
+            // Mobile seulement (isTouch 1 = écran tactile sans souris) : limite les à-coups au doigt.
+            // Avec true, GSAP l'active aussi à l'ordinateur et la molette passe par JavaScript.
+            normalizeScroll: ScrollTrigger.isTouch === 1,
             ease: "expo.out",
         });
         this.initAnchors();
