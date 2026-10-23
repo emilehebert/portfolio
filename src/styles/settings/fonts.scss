@@ -1,6 +1,56 @@
 /* ==========================================================================
    FONTS / SETTINGS
    ========================================================================== */
+// Polices hébergées sur le site (avant : Google Fonts), préchargées dans _partials/_header.html
+// pour que le texte ne change pas de taille au chargement (CLS dans Lighthouse)
+@font-face {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/anton-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Archivo Black';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/archivo-black-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/space-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/space-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/space-mono-400-italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/space-mono-700-italic.woff2') format('woff2');
+}
+
 // Font family
 :root {
     --font-primary: 'Space Mono', monospace;

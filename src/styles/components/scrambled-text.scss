@@ -3,8 +3,20 @@
    Lettres créées par ScrambledText.js (une <span> par lettre).
    ========================================================================== */
 
+// Un mot ne se coupe jamais : le texte passe à la ligne entre les mots
+.scrambled-text__word {
+    display: inline-block;
+}
+
 .scrambled-text__char {
     display: inline-block;
+
+    // Pendant l'intro la lettre garde sa largeur (ScrambledText.js),
+    // le caractère brouillé est centré dans sa case
+    &.is-scrambling {
+        display: inline-flex;
+        justify-content: center;
+    }
 }
 
 #smooth-content {

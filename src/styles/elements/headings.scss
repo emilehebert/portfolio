@@ -36,6 +36,16 @@ h4 {
     font-weight: bold;
 }
 
+// Look d'un h4 sur une autre balise, pour garder l'ordre des titres h2 > h3 > h4 (accessibilité)
+.h4 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-h4);
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    font-weight: bold;
+    text-transform: none;
+}
+
 p {
     margin: 0;
     &.small {

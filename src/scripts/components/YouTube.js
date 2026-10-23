@@ -22,7 +22,13 @@ export default class YouTube {
     YouTube.instances.push(this);
 
     if (this.videoId) {
-      YouTube.loadScript();
+      // Charge YouTube seulement quand la vidéo apparaît (modale ouverte), pas au chargement de la page
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        YouTube.loadScript();
+      });
+      observer.observe(this.element);
     } else {
       console.error('Vous devez spécifier un id');
     }

@@ -52,8 +52,18 @@
     .nom {
         display: flex;
         justify-content: space-between;
+
+        // HEBERT est collé à droite : pendant l'intro du brouillage, il s'élargit vers la gauche (ScrambledText.js)
+        h1:last-child {
+            --scramble-anchor: right;
+        }
+
         @media screen and (max-width: $breakpoint-sm) {
             flex-direction: column;
+
+            h1:last-child {
+                --scramble-anchor: left;
+            }
         }
     }
 }

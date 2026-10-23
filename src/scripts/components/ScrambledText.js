@@ -40,11 +40,16 @@ export default class ScrambledText {
   init() {
     this.setOptions();
 
-    // Coupe le texte en une <span class="scrambled-text__char"> par lettre
+    // Coupe le texte en une <span class="scrambled-text__char"> par lettre,
+    // rangées dans un <span> par mot pour que le texte passe à la ligne entre les mots, pas au milieu
+    // aria-label est interdit sur un span ou un label (accessibilité) : on laisse alors les lettres lisibles
+    const canHaveLabel = !['SPAN', 'LABEL', 'P', 'DIV'].includes(this.element.tagName);
     const split = SplitText.create(this.element, {
-      type: 'chars',
+      type: 'words, chars',
+      wordsClass: 'scrambled-text__word',
       charsClass: 'scrambled-text__char',
       tag: 'span',
+      aria: canHaveLabel ? 'auto' : 'none',
     });
     this.letters = split.chars;
 
@@ -67,20 +72,81 @@ export default class ScrambledText {
   }
 
   // Intro : attend que le texte soit à l'écran (sinon le brouillage se joue sans qu'on le voie)
+  // et que les polices soient chargées (sinon la largeur figée des lettres serait la mauvaise)
   playIntro() {
     const observer = new IntersectionObserver((entries) => {
       if (!entries[0].isIntersecting) return;
       observer.disconnect(); // une seule fois
-      this.scrambleAll();
+      document.fonts.ready.then(() => this.scrambleAll(true));
     });
     observer.observe(this.element);
   }
 
   // Brouille toutes les lettres d'un coup
-  scrambleAll() {
+  scrambleAll(lockWidth) {
     for (let i = 0; i < this.letters.length; i++) {
-      this.scramble(this.letters[i], 0);
+      this.scramble(this.letters[i], 0, lockWidth);
     }
+
+    if (lockWidth) this.followWidth();
+  }
+
+  // Intro : les lettres gardent leur case (pas de CLS), mais on les décale avec translate
+  // pour imiter le texte qui s'élargit et rétrécit selon les caractères brouillés
+  // (un translate ne compte pas dans le CLS de Lighthouse)
+  followWidth() {
+    // Bord qui reste fixe quand le texte change de largeur : --scramble-anchor en CSS, sinon text-align
+    const style = getComputedStyle(this.element);
+    const anchor = style.getPropertyValue('--scramble-anchor').trim() || style.textAlign;
+
+    // Span invisible qui mesure la largeur d'un caractère dans la police du texte
+    const ruler = document.createElement('span');
+    ruler.style.cssText = 'position: absolute; visibility: hidden; white-space: pre;';
+    this.element.appendChild(ruler);
+    const widths = {};
+
+    // Lettres rangées par ligne (le texte peut prendre plusieurs lignes)
+    const lines = {};
+    for (let i = 0; i < this.letters.length; i++) {
+      const top = this.letters[i].offsetTop;
+      (lines[top] = lines[top] || []).push(this.letters[i]);
+    }
+
+    const update = () => {
+      Object.values(lines).forEach((letters) => {
+        // Écart entre la largeur du caractère affiché et la case figée de chaque lettre
+        const gaps = letters.map((letter) => {
+          const box = parseFloat(letter.style.width);
+          if (!box) return 0; // brouillage fini
+          const char = letter.textContent;
+          if (widths[char] === undefined) {
+            ruler.textContent = char;
+            widths[char] = ruler.getBoundingClientRect().width;
+          }
+          return widths[char] - box;
+        });
+        const total = gaps.reduce((sum, gap) => sum + gap, 0);
+
+        // Collé à gauche : le texte s'élargit vers la droite, à droite : vers la gauche, centré : des deux côtés
+        let x = 0;
+        if (anchor === 'right' || anchor === 'end') x = -total;
+        if (anchor.includes('center')) x = -total / 2;
+
+        for (let i = 0; i < letters.length; i++) {
+          letters[i].style.translate = `${x + gaps[i] / 2}px`; // le caractère est centré dans sa case
+          x += gaps[i];
+        }
+      });
+    };
+
+    gsap.ticker.add(update);
+    gsap.delayedCall(this.options.duration + 0.1, () => {
+      gsap.ticker.remove(update);
+      ruler.remove();
+      for (let i = 0; i < this.letters.length; i++) {
+        this.letters[i].style.translate = '';
+      }
+    });
   }
 
   onMove(event) {
@@ -104,9 +170,24 @@ export default class ScrambledText {
   }
 
   // Brouille la lettre : plus elle est proche du curseur, plus le brouillage dure
-  scramble(letter, distance) {
+  // lockWidth (intro seulement) : la lettre garde sa case, sinon le titre bouge au chargement (CLS dans Lighthouse).
+  // followWidth imite alors le changement de largeur. Au survol, la largeur change vraiment
+  // (Lighthouse ne bouge pas la souris, ça ne compte pas dans le score)
+  scramble(letter, distance, lockWidth) {
+    if (lockWidth) {
+      letter.style.width = letter.getBoundingClientRect().width + 'px';
+      letter.classList.add('is-scrambling'); // centre le caractère dans sa case (voir scrambled-text.scss)
+    } else {
+      letter.style.width = '';
+      letter.classList.remove('is-scrambling');
+    }
+
     gsap.to(letter, {
       overwrite: true,
+      onComplete: () => {
+        letter.style.width = '';
+        letter.classList.remove('is-scrambling');
+      },
       duration: this.options.duration * (1 - distance / this.options.radius),
       scrambleText: {
         text: letter.dataset.content,
