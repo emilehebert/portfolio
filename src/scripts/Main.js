@@ -20,4 +20,11 @@ class Main {
     Icons.load();
   }
 }
-new Main();
+// Safari (iPhone) peut lancer le JS avant que main.css soit chargé : les couleurs (--color-...) seraient vides,
+// et le dither des images et les bandeaux halftone sortiraient tout noirs. On attend donc le CSS avant de démarrer.
+const css = document.querySelector('link[href*="main.css"]');
+if (css && !css.sheet) {
+  const start = () => new Main();
+  css.addEventListener('load', start, { once: true });
+  css.addEventListener('error', start, { once: true }); // CSS introuvable : on démarre quand même (sinon les images ne chargent jamais)
+} else new Main();
