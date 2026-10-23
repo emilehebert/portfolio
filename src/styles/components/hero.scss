@@ -122,5 +122,14 @@
         );
         width: auto;
         // Mobile : recentrage horizontal de la personne fait dans HeroPortraitScroll.js
+
+        // Photo en couleur affichée en noir et blanc, la couleur revient avec le toggle « Couleurs »
+        // (même durée que le fondu du dither, voir dither-veil.scss)
+        filter: grayscale(1);
+        transition: filter 0.6s ease;
+
+        .colors-on & {
+            filter: grayscale(0);
+        }
     }
 }
