@@ -19,7 +19,7 @@
             <div class="hero__media">
                 <!-- SCROLLYTELLING (désactivé) : remettre la classe js-pinned sur .window pour que le portrait descende -->
                 <div class="window" data-pin-overflow="img" data-pin-end=".hero-story-track__landing">
-                    <div class="window__content"><img src="assets/images/Portfolio_portrait_colors_web.webp" alt="Portrait" fetchpriority="high" /></div>
+                    <div class="window__content"><img src="assets/images/Portfolio_portrait_colors_web.webp" width="683" height="1794" alt="Portrait" fetchpriority="high" /></div>
                     <div class="window__footer">
                         <p class="small">Photo : Loïc Blanchette Favela</p>
                     </div>
@@ -86,7 +86,12 @@
                     <div class="window__content">
                         <div class="window__media" data-component="DitherVeil">
                             <img
-                                src="assets/images/about-friends.webp"
+                                data-src="assets/images/about-friends.webp"
+                                width="1200"
+                                height="1600"
+                                data-srcset="assets/images/about-friends-Small.webp 800w, assets/images/about-friends.webp 1200w"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                loading="lazy"
                                 alt="Mes amis et moi"
                                 title="Moi et mes amis durant notre voyage en Nouvelle-Écosse, on se connait depuis le secondaire."
                             />
@@ -112,7 +117,7 @@
                     </div>
                     <div class="window__content">
                         <div class="window__media" data-component="DitherVeil">
-                            <img src="assets/images/about-cat.webp" alt="Mon chat" title="Son nom c'est Rosie, on l'a depuis 8 ans maintenant." />
+                            <img data-src="assets/images/about-cat.webp" width="512" height="384" loading="lazy" alt="Mon chat" title="Son nom c'est Rosie, on l'a depuis 8 ans maintenant." />
                         </div>
                     </div>
                 </div>
@@ -124,7 +129,10 @@
                     <div class="window__content">
                         <div class="window__media" data-component="DitherVeil">
                             <img
-                                src="assets/images/about-artist.webp"
+                                data-src="assets/images/about-artist.webp"
+                                width="512"
+                                height="683"
+                                loading="lazy"
                                 alt="Mon artiste préféré"
                                 title="Don Toliver au Centre Bell de Montréal, mon 2 ème à ce jour."
                             />
@@ -138,7 +146,7 @@
                     </div>
                     <div class="window__content">
                         <div class="window__media" data-component="DitherVeil">
-                            <img src="assets/images/about-couple.webp" alt="Moi et ma copine" title="3 ans de relation avec mon amoureuse. XOXO" />
+                            <img data-src="assets/images/about-couple.webp" width="512" height="384" loading="lazy" alt="Moi et ma copine" title="3 ans de relation avec mon amoureuse. XOXO" />
                         </div>
                     </div>
                 </div>
@@ -163,7 +171,7 @@
                         </div>
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil">
-                                <img src="assets/images/about-camera.webp" alt="Friends" title="Ma Sony DCR-HC26, qui m'a été offerte par un ami." />
+                                <img data-src="assets/images/about-camera.webp" width="512" height="384" loading="lazy" alt="Friends" title="Ma Sony DCR-HC26, qui m'a été offerte par un ami." />
                             </div>
                         </div>
                     </div>
@@ -276,7 +284,7 @@
                         </div>
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-trigger=".card" data-reveal="full">
-                                <img src="assets/images/house-breach/Main-Menu-Thumbnail.webp" alt="Thumbnail" />
+                                <img data-src="assets/images/house-breach/Main-Menu-Thumbnail.webp" width="1600" height="900" data-srcset="assets/images/house-breach/Main-Menu-Thumbnail-Small.webp 800w, assets/images/house-breach/Main-Menu-Thumbnail.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Thumbnail" />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -351,7 +359,7 @@
                         </div>
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-trigger=".card" data-reveal="full">
-                                <img src="assets/images/camera-securitee/Library-Camera-Idle.webp" alt="Thumbnail" />
+                                <img data-src="assets/images/camera-securitee/Library-Camera-Idle.webp" width="1600" height="900" data-srcset="assets/images/camera-securitee/Library-Camera-Idle-Small.webp 800w, assets/images/camera-securitee/Library-Camera-Idle.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Thumbnail" />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -421,7 +429,7 @@
                         </div>
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-trigger=".card" data-reveal="full">
-                                <img src="assets/images/boucle-infinie/Final-Render-Thumbnail.webp" alt="Thumbnail" />
+                                <img data-src="assets/images/boucle-infinie/Final-Render-Thumbnail.webp" width="1600" height="900" data-srcset="assets/images/boucle-infinie/Final-Render-Thumbnail-Small.webp 800w, assets/images/boucle-infinie/Final-Render-Thumbnail.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Thumbnail" />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -469,7 +477,7 @@
                         </div>
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-trigger=".card" data-reveal="full">
-                                <img src="assets/images/projectx/thumbnail.webp" alt="Thumbnail" />
+                                <img data-src="assets/images/projectx/thumbnail.webp" width="670" height="383" loading="lazy" alt="Thumbnail" />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -523,7 +531,7 @@
                         </div>
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-trigger=".card" data-reveal="full">
-                                <img src="assets/images/fitgen/thumbnail.webp" alt="Thumbnail" />
+                                <img data-src="assets/images/fitgen/thumbnail.webp" width="670" height="383" loading="lazy" alt="Thumbnail" />
                             </div>
                         </div>
                         <div class="window__footer">

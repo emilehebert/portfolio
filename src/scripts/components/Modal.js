@@ -84,7 +84,7 @@ export default class Modal {
         const source = link.querySelector("img");
         if (!image || !source) return;
 
-        image.src = source.currentSrc || source.src;
+        image.src = source.src; // la grande version (src), pas la petite du srcset qu'affiche la page sur mobile
         image.alt = source.alt;
 
         const name = link.querySelector(".window__header p");
