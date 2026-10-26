@@ -1,5 +1,4 @@
-{% set title = "Caméra de surveillance Kinect, Expérience interactive | Émile Hébert" %}
-{% include '_partials/_header.html' %}
+{% set title = "Caméra de surveillance Kinect, Expérience interactive | Émile Hébert" %} {% include '_partials/_header.html' %}
 
 <section class="hero--projet has-bg-grid">
     <div class="bg-grid" style="--grid-top: 5%" data-speed="0.25" aria-hidden="true"></div>
@@ -73,11 +72,13 @@
                                 src="assets/images/camera-securitee/Library-Camera-Idle.webp"
                                 width="1600"
                                 height="900"
-                                srcset="assets/images/camera-securitee/Library-Camera-Idle-Small.webp 800w, assets/images/camera-securitee/Library-Camera-Idle.webp 1600w"
+                                srcset="
+                                    assets/images/camera-securitee/Library-Camera-Idle-Small.webp  800w,
+                                    assets/images/camera-securitee/Library-Camera-Idle.webp       1600w
+                                "
                                 sizes="(max-width: 768px) 100vw, 50vw"
                                 fetchpriority="high"
                                 alt="Mes amis et moi"
-                                title="Moi, Charles et Mathieu durant notre voyage en Nouvelle-Écosse, on se connait depuis le secondaire."
                             />
                         </div>
                         <div class="list-icons" data-component="IconLabel" data-lag="0.05">
@@ -138,7 +139,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Surveillance-Moodboard.webp" width="1397" height="1024" data-srcset="assets/images/camera-securitee/Surveillance-Moodboard-Small.webp 800w, assets/images/camera-securitee/Surveillance-Moodboard.webp 1397w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Moodboard de l&#x27;esthétique de surveillance" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Surveillance-Moodboard.webp"
+                                    width="1397"
+                                    height="1024"
+                                    data-srcset="assets/images/camera-securitee/Surveillance-Moodboard-Small.webp 800w, assets/images/camera-securitee/Surveillance-Moodboard.webp 1397w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Moodboard de l&#x27;esthétique de surveillance"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -148,7 +157,13 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Security-Camera-Reference.webp" width="580" height="580" loading="lazy" alt="Images de référence de caméras de sécurité" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Security-Camera-Reference.webp"
+                                    width="580"
+                                    height="580"
+                                    loading="lazy"
+                                    alt="Images de référence de caméras de sécurité"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -173,7 +188,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Kinect-Network-Overview.webp" width="1600" height="824" data-srcset="assets/images/camera-securitee/Kinect-Network-Overview-Small.webp 800w, assets/images/camera-securitee/Kinect-Network-Overview.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Nodes du flux Kinect dans TouchDesigner" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Kinect-Network-Overview.webp"
+                                    width="1600"
+                                    height="824"
+                                    data-srcset="assets/images/camera-securitee/Kinect-Network-Overview-Small.webp 800w, assets/images/camera-securitee/Kinect-Network-Overview.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Nodes du flux Kinect dans TouchDesigner"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -183,7 +206,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Player-Blob-Tracking-Nodes.webp" width="1528" height="1032" data-srcset="assets/images/camera-securitee/Player-Blob-Tracking-Nodes-Small.webp 800w, assets/images/camera-securitee/Player-Blob-Tracking-Nodes.webp 1528w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Réglages du suivi de position" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Player-Blob-Tracking-Nodes.webp"
+                                    width="1528"
+                                    height="1032"
+                                    data-srcset="assets/images/camera-securitee/Player-Blob-Tracking-Nodes-Small.webp 800w, assets/images/camera-securitee/Player-Blob-Tracking-Nodes.webp 1528w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Réglages du suivi de position"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -227,7 +258,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Datamosh-Shader-Nodes.webp" width="1436" height="902" data-srcset="assets/images/camera-securitee/Datamosh-Shader-Nodes-Small.webp 800w, assets/images/camera-securitee/Datamosh-Shader-Nodes.webp 1436w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Nodes de l&#x27;effet de datamoshing" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Datamosh-Shader-Nodes.webp"
+                                    width="1436"
+                                    height="902"
+                                    data-srcset="assets/images/camera-securitee/Datamosh-Shader-Nodes-Small.webp 800w, assets/images/camera-securitee/Datamosh-Shader-Nodes.webp 1436w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Nodes de l&#x27;effet de datamoshing"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -251,7 +290,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Player-Detection-Interface.webp" width="1307" height="776" data-srcset="assets/images/camera-securitee/Player-Detection-Interface-Small.webp 800w, assets/images/camera-securitee/Player-Detection-Interface.webp 1307w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Interface complète de l&#x27;expérience" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Player-Detection-Interface.webp"
+                                    width="1307"
+                                    height="776"
+                                    data-srcset="assets/images/camera-securitee/Player-Detection-Interface-Small.webp 800w, assets/images/camera-securitee/Player-Detection-Interface.webp 1307w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Interface complète de l&#x27;expérience"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -261,7 +308,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/VHS-Audio-Nodes.webp" width="1420" height="968" data-srcset="assets/images/camera-securitee/VHS-Audio-Nodes-Small.webp 800w, assets/images/camera-securitee/VHS-Audio-Nodes.webp 1420w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Réglages de l&#x27;ambiance sonore" />
+                                <img
+                                    data-src="assets/images/camera-securitee/VHS-Audio-Nodes.webp"
+                                    width="1420"
+                                    height="968"
+                                    data-srcset="assets/images/camera-securitee/VHS-Audio-Nodes-Small.webp 800w, assets/images/camera-securitee/VHS-Audio-Nodes.webp 1420w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Réglages de l&#x27;ambiance sonore"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -286,7 +341,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Projection-Calibration.webp" width="1600" height="900" data-srcset="assets/images/camera-securitee/Projection-Calibration-Small.webp 800w, assets/images/camera-securitee/Projection-Calibration.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Calibrage de la projection sur place" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Projection-Calibration.webp"
+                                    width="1600"
+                                    height="900"
+                                    data-srcset="assets/images/camera-securitee/Projection-Calibration-Small.webp 800w, assets/images/camera-securitee/Projection-Calibration.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Calibrage de la projection sur place"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -296,7 +359,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Library-Camera-Idle.webp" width="1600" height="900" data-srcset="assets/images/camera-securitee/Library-Camera-Idle-Small.webp 800w, assets/images/camera-securitee/Library-Camera-Idle.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Rendu final projeté devant la bibliothèque" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Library-Camera-Idle.webp"
+                                    width="1600"
+                                    height="900"
+                                    data-srcset="assets/images/camera-securitee/Library-Camera-Idle-Small.webp 800w, assets/images/camera-securitee/Library-Camera-Idle.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Rendu final projeté devant la bibliothèque"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -306,7 +377,15 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/camera-securitee/Passerby-Detection.webp" width="1600" height="900" data-srcset="assets/images/camera-securitee/Passerby-Detection-Small.webp 800w, assets/images/camera-securitee/Passerby-Detection.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Passants qui interagissent avec l&#x27;expérience" />
+                                <img
+                                    data-src="assets/images/camera-securitee/Passerby-Detection.webp"
+                                    width="1600"
+                                    height="900"
+                                    data-srcset="assets/images/camera-securitee/Passerby-Detection-Small.webp 800w, assets/images/camera-securitee/Passerby-Detection.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Passants qui interagissent avec l&#x27;expérience"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">

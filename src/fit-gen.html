@@ -1,5 +1,4 @@
-{% set title = "FitGen, Développement web | Émile Hébert" %}
-{% include '_partials/_header.html' %}
+{% set title = "FitGen, Développement web | Émile Hébert" %} {% include '_partials/_header.html' %}
 
 <section class="hero--projet has-bg-grid">
     <div class="bg-grid" style="--grid-top: 5%" data-speed="0.25" aria-hidden="true"></div>
@@ -25,7 +24,10 @@
                             <p>Crédits</p>
                         </div>
                         <div class="accordion-content">
-                            <p>Projet réalisé <span class="accent--primary">en solo</span>. Le produit a été finalisé avec l'aide de <span class="accent--primary">Claude</span>.</p>
+                            <p>
+                                Projet réalisé <span class="accent--primary">en solo</span>. Le produit a été finalisé avec l'aide de
+                                <span class="accent--primary">Claude</span>.
+                            </p>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -51,8 +53,9 @@
                         </div>
                         <div class="accordion-content">
                             <p>
-                                Le design, les photos, les croquis et la première version du code sont de moi. J'ai utilisé <span class="accent--primary">Claude</span>
-                                pour <span class="accent--primary">finaliser le code</span> ainsi que pour structurer et reformuler les textes de cette fiche.
+                                Le design, les photos, les croquis et la première version du code sont de moi. J'ai utilisé
+                                <span class="accent--primary">Claude</span> pour <span class="accent--primary">finaliser le code</span> ainsi que pour
+                                structurer et reformuler les textes de cette fiche.
                             </p>
                         </div>
                     </div>
@@ -66,12 +69,11 @@
                     <div class="window__content">
                         <div class="window__media" data-component="DitherVeil" data-reveal="full">
                             <img
-                                src="assets/images/boucle-infinie/Environment-Overview.webp"
+                                src="assets/images/fitgen/Generated-Outfit-Thumbnail.webp"
                                 width="755"
                                 height="800"
                                 fetchpriority="high"
                                 alt="Mes amis et moi"
-                                title="Moi, Charles et Mathieu durant notre voyage en Nouvelle-Écosse, on se connait depuis le secondaire."
                             />
                         </div>
                         <div class="list-icons" data-component="IconLabel" data-lag="0.05">
@@ -127,16 +129,23 @@
             </a>
         </div>
     </div>
-    <a href="https://youtube.com" target="_blank" class="video cursor-target js-fixed">
+    <!-- TODO: remplacer par l'URL GitHub Pages de FitGen -->
+    <a href="#" target="_blank" class="video cursor-target js-fixed">
         <div class="window">
             <div class="window__content">
                 <div class="window__media" data-component="DitherVeil">
-                    <img data-src="assets/images/boucle-infinie/Final-Render-Thumbnail.webp" width="1600" height="900" data-srcset="assets/images/boucle-infinie/Final-Render-Thumbnail-Small.webp 800w, assets/images/boucle-infinie/Final-Render-Thumbnail.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Thumbnail" />
+                    <img
+                        data-src="assets/images/fitgen/Three-Outfits-Thumbnail.webp"
+                        width="661"
+                        height="387"
+                        loading="lazy"
+                        alt="Trois tenues générées par FitGen côte à côte"
+                    />
                 </div>
             </div>
         </div>
-        <svg class="icon-button icon icon--md" aria-label="Lire la vidéo" role="img">
-            <use href="#icon-play"></use>
+        <svg class="icon-button icon icon--md" aria-label="Visiter le site web final" role="img">
+            <use href="#icon-external-link"></use>
         </svg>
     </a>
 </section>
@@ -165,31 +174,49 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Concept-Inspiration.webp" width="512" height="836" loading="lazy" alt="Inspiration du concept" />
+                                <img
+                                    data-src="assets/images/fitgen/Concept-Inspiration.webp"
+                                    width="512"
+                                    height="836"
+                                    loading="lazy"
+                                    alt="Générateur de tenues vu sur TikTok"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Inspiration du concept.</p>
+                            <p class="small">Générateur de tenues vu sur TikTok.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Interface-Sketch.webp" width="611" height="830" loading="lazy" alt="Premières idées de l&#x27;interface" />
+                                <img
+                                    data-src="assets/images/fitgen/Interface-Sketch.webp"
+                                    width="611"
+                                    height="830"
+                                    loading="lazy"
+                                    alt="Premier croquis de l&#x27;interface dans Figma"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Premières idées de l'interface.</p>
+                            <p class="small">Premier croquis de l'interface dans Figma.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Early-Generator-Preview.webp" width="799" height="996" loading="lazy" alt="Aperçu du générateur au départ" />
+                                <img
+                                    data-src="assets/images/fitgen/Early-Generator-Preview.webp"
+                                    width="799"
+                                    height="996"
+                                    loading="lazy"
+                                    alt="Première version du générateur dans le navigateur"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Aperçu du générateur au départ.</p>
+                            <p class="small">Première version du générateur.</p>
                         </div>
                     </div>
                 </div>
@@ -201,24 +228,42 @@
                         <h4>Préparation des vêtements</h4>
                     </div>
                     <p>
-                        J'ai photographié mes vêtements, puis je les ai <span class="accent--primary">détourés dans Photoshop</span> avec un <span class="accent--primary">fond transparent</span>. J'en ai préparé <span class="accent--primary">plus de 20 chandails</span>, 10 pantalons et 3 paires de souliers.
+                        J'ai photographié mes vêtements, puis je les ai <span class="accent--primary">détourés dans Photoshop</span> avec un
+                        <span class="accent--primary">fond transparent</span>. J'en ai préparé <span class="accent--primary">plus de 20 chandails</span>, 10
+                        pantalons et 3 paires de souliers.
                     </p>
                 </div>
                 <div class="etape__media">
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Original-Shirt-Photo.webp" width="1200" height="1200" data-srcset="assets/images/fitgen/Original-Shirt-Photo-Small.webp 800w, assets/images/fitgen/Original-Shirt-Photo.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Photo originale d&#x27;un vêtement" />
+                                <img
+                                    data-src="assets/images/fitgen/Original-Shirt-Photo.webp"
+                                    width="1200"
+                                    height="1200"
+                                    data-srcset="assets/images/fitgen/Original-Shirt-Photo-Small.webp 800w, assets/images/fitgen/Original-Shirt-Photo.webp 1200w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Photo originale d&#x27;un t-shirt noir"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Photo originale d'un vêtement.</p>
+                            <p class="small">Photo originale d'un t-shirt.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Photoshop-Cutout.webp" width="1600" height="1162" data-srcset="assets/images/fitgen/Photoshop-Cutout-Small.webp 800w, assets/images/fitgen/Photoshop-Cutout.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Détourage dans Photoshop" />
+                                <img
+                                    data-src="assets/images/fitgen/Photoshop-Cutout.webp"
+                                    width="1600"
+                                    height="1162"
+                                    data-srcset="assets/images/fitgen/Photoshop-Cutout-Small.webp 800w, assets/images/fitgen/Photoshop-Cutout.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Détourage dans Photoshop"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -228,11 +273,19 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Cutout-Shirt-Ready.webp" width="1600" height="1162" data-srcset="assets/images/fitgen/Cutout-Shirt-Ready-Small.webp 800w, assets/images/fitgen/Cutout-Shirt-Ready.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Vêtements prêts à intégrer" />
+                                <img
+                                    data-src="assets/images/fitgen/Cutout-Shirt-Ready.webp"
+                                    width="1600"
+                                    height="1162"
+                                    data-srcset="assets/images/fitgen/Cutout-Shirt-Ready-Small.webp 800w, assets/images/fitgen/Cutout-Shirt-Ready.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="T-shirt détouré sur fond transparent"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Vêtements prêts à intégrer.</p>
+                            <p class="small">T-shirt détouré sur fond transparent.</p>
                         </div>
                     </div>
                 </div>
@@ -244,34 +297,57 @@
                         <h4>Dessin des croquis</h4>
                     </div>
                     <p>
-                        J'ai dessiné <span class="accent--primary">dans Paint.NET</span> une silhouette en <span class="accent--primary">croquis</span> pour chaque pièce, plus une quinzaine de <span class="accent--primary">visages rigolos en noir</span> sur transparent.
+                        J'ai dessiné <span class="accent--primary">dans Paint.NET</span> une silhouette en <span class="accent--primary">croquis</span> pour
+                        chaque pièce, plus une quinzaine de <span class="accent--primary">visages rigolos en noir</span> sur transparent.
                     </p>
                 </div>
                 <div class="etape__media">
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Notebook-Face-Doodles.webp" width="1600" height="724" data-srcset="assets/images/fitgen/Notebook-Face-Doodles-Small.webp 800w, assets/images/fitgen/Notebook-Face-Doodles.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Croquis des pièces de vêtements" />
+                                <img
+                                    data-src="assets/images/fitgen/Notebook-Face-Doodles.webp"
+                                    width="1600"
+                                    height="724"
+                                    data-srcset="assets/images/fitgen/Notebook-Face-Doodles-Small.webp 800w, assets/images/fitgen/Notebook-Face-Doodles.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Premiers visages dessinés dans un cahier"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Croquis de quelques têtes.</p>
+                            <p class="small">Premiers visages dessinés dans un cahier.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Funny-Face-Set.webp" width="1600" height="1080" data-srcset="assets/images/fitgen/Funny-Face-Set-Small.webp 800w, assets/images/fitgen/Funny-Face-Set.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Quelques visages rigolos" />
+                                <img
+                                    data-src="assets/images/fitgen/Funny-Face-Set.webp"
+                                    width="1600"
+                                    height="1080"
+                                    data-srcset="assets/images/fitgen/Funny-Face-Set-Small.webp 800w, assets/images/fitgen/Funny-Face-Set.webp 1600w"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    loading="lazy"
+                                    alt="Ensemble des visages rigolos dessinés dans Paint.NET"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Quelques visages rigolos.</p>
+                            <p class="small">Les visages rigolos finaux.</p>
                         </div>
                     </div>
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Full-Sketch-Silhouette.webp" width="799" height="996" loading="lazy" alt="Silhouette complète en croquis" />
+                                <img
+                                    data-src="assets/images/fitgen/Full-Sketch-Silhouette.webp"
+                                    width="799"
+                                    height="996"
+                                    loading="lazy"
+                                    alt="Silhouette complète en croquis"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -287,14 +363,16 @@
                         <h4>Génération aléatoire</h4>
                     </div>
                     <p>
-                        J'ai <span class="accent--primary">programmé en JavaScript</span> une <span class="accent--primary">randomisation</span> qui change une pièce au clic, ou toute la tenue avec <span class="accent--primary">l'icône du dé</span>. Mon premier code était trop compliqué, alors <span class="accent--primary">Claude</span> m'a aidé à le finaliser.
+                        J'ai <span class="accent--primary">programmé en JavaScript</span> une <span class="accent--primary">randomisation</span> qui change une
+                        pièce au clic, ou toute la tenue avec <span class="accent--primary">l'icône du dé</span>. Mon premier code était trop compliqué, alors
+                        <span class="accent--primary">Claude</span> m'a aidé à le finaliser.
                     </p>
                 </div>
                 <div class="etape__media">
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/boucle-infinie/Volumetric-Light.webp" width="1600" height="839" data-srcset="assets/images/boucle-infinie/Volumetric-Light-Small.webp 800w, assets/images/boucle-infinie/Volumetric-Light.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Tenue générée aléatoirement" />
+                                <img data-src="assets/images/fitgen/Dizzy-Face-Jeans-Outfit.webp" width="587" height="874" loading="lazy" alt="Tenue générée" />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -304,11 +382,17 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/boucle-infinie/Custom-Shader.webp" width="1600" height="843" data-srcset="assets/images/boucle-infinie/Custom-Shader-Small.webp 800w, assets/images/boucle-infinie/Custom-Shader.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="Bouton du dé pour tout randomiser" />
+                                <img
+                                    data-src="assets/images/fitgen/Cowboy-Hat-Sweater-Outfit.webp"
+                                    width="587"
+                                    height="874"
+                                    loading="lazy"
+                                    alt="Autre tenue générée"
+                                />
                             </div>
                         </div>
                         <div class="window__footer">
-                            <p class="small">Bouton du dé pour tout randomiser.</p>
+                            <p class="small">Une autre combinaison générée.</p>
                         </div>
                     </div>
                 </div>
@@ -320,40 +404,32 @@
                         <h4>Navigation et sélection</h4>
                     </div>
                     <p>
-                        J'ai ajouté <span class="accent--primary">des flèches</span> pour parcourir les vêtements, une <span class="accent--primary">fenêtre modale</span> pour voir toute une catégorie, et un bouton pour <span class="accent--primary">revenir au croquis</span>.
+                        J'ai ajouté <span class="accent--primary">des flèches</span> pour parcourir les vêtements, une
+                        <span class="accent--primary">fenêtre modale</span> pour voir toute une catégorie, et un bouton pour
+                        <span class="accent--primary">revenir au croquis</span>.
                     </p>
                 </div>
                 <div class="etape__media">
-                    <div class="window cursor-target" data-modal="image">
+                    <!-- TODO: remplacer par l'URL GitHub Pages de FitGen -->
+                    <a href="#" target="_blank" class="window cursor-target">
+                        <div class="window__header">
+                            <p>Version finale du site.</p>
+                        </div>
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/thumbnail.webp" width="670" height="383" loading="lazy" alt="Flèches de navigation à côté d&#x27;une pièce" />
+                                <img
+                                    data-src="assets/images/fitgen/Generated-Outfit-Thumbnail.webp"
+                                    width="668"
+                                    height="671"
+                                    loading="lazy"
+                                    alt="Version finale de FitGen : tenue avec un t-shirt noir et un jeans, flèches et bouton du dé"
+                                />
+                                <svg class="icon-button icon icon--md" aria-label="Visiter le site web final" role="img">
+                                    <use href="#icon-external-link"></use>
+                                </svg>
                             </div>
                         </div>
-                        <div class="window__footer">
-                            <p class="small">Flèches de navigation à côté d'une pièce.</p>
-                        </div>
-                    </div>
-                    <div class="window cursor-target" data-modal="image">
-                        <div class="window__content">
-                            <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/thumbnail.webp" width="670" height="383" loading="lazy" alt="Fenêtre modale des chandails" />
-                            </div>
-                        </div>
-                        <div class="window__footer">
-                            <p class="small">Fenêtre modale des chandails.</p>
-                        </div>
-                    </div>
-                    <div class="window cursor-target" data-modal="image">
-                        <div class="window__content">
-                            <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/thumbnail.webp" width="670" height="383" loading="lazy" alt="Pièce supprimée qui revient au croquis" />
-                            </div>
-                        </div>
-                        <div class="window__footer">
-                            <p class="small">Pièce supprimée qui revient au croquis.</p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -366,7 +442,7 @@
     </div>
     <div class="wrapper">
         <div class="drag-windows" data-component="DragWindows">
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="2" data-y="4" style="--window-width: 460px">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="0" data-y="15" style="--window-width: 260px">
                 <div class="window__header">
                     <p class="small">Funny-Face-Black-Tee-Outfit.webp</p>
                 </div>
@@ -387,7 +463,7 @@
                     <p class="small">19 Ko</p>
                 </div>
             </div>
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="42" data-y="0" style="--window-width: 280px">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="15.7" data-y="23" style="--window-width: 260px">
                 <div class="window__header">
                     <p class="small">Box-Head-Brown-Tee-Outfit.webp</p>
                 </div>
@@ -408,7 +484,7 @@
                     <p class="small">24 Ko</p>
                 </div>
             </div>
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="64" data-y="8" style="--window-width: 400px">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="31.3" data-y="15" style="--window-width: 260px">
                 <div class="window__header">
                     <p class="small">Angry-Face-White-Tee-Outfit.webp</p>
                 </div>
@@ -429,7 +505,7 @@
                     <p class="small">19 Ko</p>
                 </div>
             </div>
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="6" data-y="52">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="47" data-y="23" style="--window-width: 260px">
                 <div class="window__header">
                     <p class="small">Dizzy-Face-Jeans-Outfit.webp</p>
                 </div>
@@ -450,7 +526,7 @@
                     <p class="small">27 Ko</p>
                 </div>
             </div>
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="36" data-y="56">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="62.7" data-y="15" style="--window-width: 260px">
                 <div class="window__header">
                     <p class="small">Cowboy-Hat-Sweater-Outfit.webp</p>
                 </div>
@@ -471,7 +547,7 @@
                     <p class="small">24 Ko</p>
                 </div>
             </div>
-            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="66" data-y="48" style="--window-width: 380px">
+            <div class="window drag-windows__window js-drag-window cursor-target" data-modal="image" data-x="78.3" data-y="23" style="--window-width: 260px">
                 <div class="window__header">
                     <p class="small">Blob-Head-Purple-Tee-Outfit.webp</p>
                 </div>

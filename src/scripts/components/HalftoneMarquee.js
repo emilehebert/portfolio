@@ -89,11 +89,14 @@ export default class HalftoneMarquee {
 
     this.renderer = null; // null = pas de WebGL (non supporté ou contexte perdu)
     this.isVisible = false;
+    this.isLost = false; // contexte WebGL retiré par le navigateur
     this.raf = 0; // id du requestAnimationFrame en cours (0 = animation arrêtée)
     this.startTime = performance.now();
 
     // bind une seule fois, sinon une nouvelle fonction est créée à chaque image
     this.animate = this.animate.bind(this);
+    this.contextLost = this.contextLost.bind(this);
+    this.contextRestored = this.contextRestored.bind(this);
 
     this.init();
   }
@@ -103,14 +106,7 @@ export default class HalftoneMarquee {
     this.setOptions();
 
     window.addEventListener('resize', this.resize.bind(this));
-    this.canvas.addEventListener(
-      'webglcontextlost',
-      this.contextLost.bind(this),
-    );
-    this.canvas.addEventListener(
-      'webglcontextrestored',
-      this.contextRestored.bind(this),
-    );
+    this.listenContext();
 
     // Le canvas 2D ne passe pas par le CSS : on attend la police avant d'écrire le texte
     await document.fonts.load(
@@ -236,7 +232,8 @@ export default class HalftoneMarquee {
   watch(entries) {
     this.isVisible = entries[0].isIntersecting;
 
-    if (this.isVisible) this.play();
+    if (this.isVisible && this.isLost) this.replaceCanvas();
+    else if (this.isVisible) this.play();
     else this.pause();
   }
 
@@ -291,18 +288,37 @@ export default class HalftoneMarquee {
   }
 
   // CONTEXTE PERDU
-  // Le navigateur peut retirer le WebGL (app en arrière-plan, trop de canvas sur la page)
+  // Le navigateur peut retirer le WebGL (app en arrière-plan, trop de canvas dans les onglets ouverts).
+  // Chrome ne rend souvent jamais le contexte, et un canvas perdu s'affiche tout BLANC.
+  listenContext() {
+    this.canvas.addEventListener('webglcontextlost', this.contextLost);
+    this.canvas.addEventListener('webglcontextrestored', this.contextRestored);
+  }
+
   contextLost(event) {
     event.preventDefault(); // demande au navigateur de le rendre plus tard
     this.pause();
     this.renderer = null;
+    this.isLost = true;
+    this.canvas.style.visibility = 'hidden'; // en attendant : le fond rouge du bandeau au lieu du blanc
   }
 
   // Le WebGL est revenu : on recrée tout sur le même canvas
   contextRestored() {
+    this.isLost = false;
     if (!this.createRenderer()) return;
+    this.canvas.style.visibility = '';
     this.createObjects();
     if (this.isVisible) this.play();
+  }
+
+  // Le contexte n'est pas revenu : quand le bandeau réapparaît, on le recrée sur un canvas neuf
+  replaceCanvas() {
+    const canvas = this.canvas.cloneNode(); // nouveau canvas = nouveau contexte WebGL
+    this.canvas.replaceWith(canvas);
+    this.canvas = canvas;
+    this.listenContext();
+    this.contextRestored();
   }
 
   // OPTIONS
