@@ -10,6 +10,14 @@
     h2 {
         margin-bottom: var(--spacing-md);
     }
+
+    // Mobile : le formulaire (opaque) prend presque toute la page.
+    // La 1re grille remonte derrière le titre, sinon le parallax la cache sous le formulaire.
+    @media (max-width: $breakpoint-sm) {
+        .bg-grid:first-of-type {
+            top: 0;
+        }
+    }
 }
 
 /*

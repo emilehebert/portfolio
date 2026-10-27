@@ -28,10 +28,26 @@ export default class Scroller {
             normalizeScroll: ScrollTrigger.isTouch === 1,
             ease: "expo.out",
         });
+        this.initMobileSpeeds();
         this.initAnchors();
         this.initLoadGuard();
         this.initNavLock();
         this.setOptions(); // après le smoother : les pins en ont besoin
+    }
+
+    // PARALLAX MOBILE
+    // data-speed-mobile="0.25" : comme data-speed, mais seulement sur mobile ($breakpoint-sm).
+    // Ex. page contact : à l'ordinateur, la page tient dans l'écran et les grilles restent fixes.
+    // gsap.matchMedia retire l'effet tout seul si la fenêtre repasse en format ordinateur.
+    initMobileSpeeds() {
+        const items = this.element.querySelectorAll("[data-speed-mobile]");
+        if (!items.length) return;
+
+        gsap.matchMedia().add("(max-width: 768px)", () => {
+            for (let i = 0; i < items.length; i++) {
+                this.smoother.effects(items[i], { speed: Number(items[i].dataset.speedMobile) });
+            }
+        });
     }
 
     // PIN CONTROLS
