@@ -1,5 +1,6 @@
 import Accordion from "./components/Accordion.js";
 import Comparison from "./components/Comparison.js";
+import ContactForm from "./components/ContactForm.js";
 import DitherVeil from "./components/DitherVeil.js";
 import DragWindows from "./components/DragWindows.js";
 import Header from "./components/Header.js";
@@ -21,6 +22,7 @@ export default class ComponentFactory {
         this.componentList = {
             Accordion,
             Comparison,
+            ContactForm,
             DitherVeil,
             DragWindows,
             Header,

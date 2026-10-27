@@ -57,6 +57,60 @@
     }
 }
 
+// Erreur sous le champ (rouge pâle pour garder un bon contraste sur le fond foncé)
+.field__error {
+    color: var(--color-error);
+
+    &:empty {
+        display: none;
+    }
+}
+
+.field [aria-invalid="true"] {
+    border-color: var(--color-error);
+}
+
+// Honeypot anti-spam, jamais affiché
+.contact__honeypot {
+    display: none;
+}
+
+/*
+ Envoi : message d'état et bouton
+ ========================================================================== */
+
+.contact {
+    --color-error: #ff8a8f;
+}
+
+.contact__status {
+    &.is-success {
+        color: var(--color-white);
+    }
+
+    &.is-error {
+        color: var(--color-error);
+    }
+}
+
+.contact__form button.button {
+    // Même look que les liens .button du site
+    font: inherit;
+    font-size: var(--font-size-button);
+    font-weight: 600;
+    line-height: 1.28;
+    flex-shrink: 0;
+
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.contact__form .window__footer {
+    gap: var(--spacing-sm);
+}
+
 .field--message {
     grid-column: 1 / -1;
 
