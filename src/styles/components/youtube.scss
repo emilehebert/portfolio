@@ -50,10 +50,11 @@
     pointer-events: none;
     transition: opacity 0.3s $ease-out-cubic;
 
-    // :focus-within : au clavier (Tab), les contrôles restent visibles avec le bouton focus
+    // :focus-visible : au clavier (Tab) seulement, les contrôles restent visibles avec le bouton focus.
+    // (:focus-within les gardait aussi après un clic de souris, jusqu'à cliquer ailleurs)
     .is-controls-visible &,
     .is-paused &,
-    &:focus-within {
+    &:has(:focus-visible) {
         opacity: 1;
         pointer-events: auto;
     }
@@ -73,6 +74,15 @@
 
 .youtube__mute {
     width: 4ch;
+}
+
+// Time code : chiffres de même largeur, le texte ne pousse pas la barre de progression à chaque seconde
+.youtube__time {
+    flex-shrink: 0;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--color-white);
 }
 
 // Barre de progression : cliquer dessus avance ou recule la vidéo
@@ -96,7 +106,7 @@
     flex-shrink: 0;
 
     &:hover,
-    &:focus-within {
+    &:has(:focus-visible) {
         .youtube__volume-panel {
             opacity: 1;
             pointer-events: auto;

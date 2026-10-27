@@ -4,10 +4,14 @@
 
 .etapes[data-component="ScrollStack"] .etape__media {
     display: grid;
+    // minmax(0, 1fr) : la case ne dépasse jamais l'étape (sur iPhone, Safari l'élargissait selon la taille réelle de l'image)
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
 
     // Toutes les images dans la même case : elles s'empilent
     > .window {
         grid-area: 1 / 1;
+        min-width: 0;
         background: var(--color-background);
         will-change: transform;
     }

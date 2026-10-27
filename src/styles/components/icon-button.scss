@@ -16,7 +16,6 @@
     justify-content: center;
     width: var(--icon-button-size);
     height: var(--icon-button-size);
-    padding: var(--spacing-sm);
     border-radius: 50%;
     overflow: visible;
     pointer-events: none;
@@ -26,4 +25,12 @@
     transition:
         transform 0.25s linear,
         box-shadow 0.25s linear;
+
+    // Icône réduite de moitié au centre du rond, au lieu d'un padding :
+    // Safari (iPhone) ne réduit pas l'icône avec le padding d'un <svg> et la coupait
+    use {
+        transform: scale(0.5);
+        transform-origin: 50% 50%;
+        transform-box: view-box;
+    }
 }

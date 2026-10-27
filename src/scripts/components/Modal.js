@@ -52,8 +52,13 @@ export default class Modal {
     }
 
     open(event) {
-        event.preventDefault();
         const link = event.currentTarget;
+
+        // Un lien dans la fenêtre (ex: site WebJam) s'ouvre normalement, sans la modale
+        const innerLink = event.target.closest("a");
+        if (innerLink && innerLink !== link) return;
+
+        event.preventDefault();
         const type = link.dataset.modal; // "video", "image" ou "comparison"
 
         // Affiche le bon contenu, le CSS cache les autres

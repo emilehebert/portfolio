@@ -124,6 +124,7 @@ export default class YouTube {
         this.muteButton = this.controls.querySelector(".js-youtube-mute");
         this.progress = this.controls.querySelector(".js-youtube-progress");
         this.bar = this.controls.querySelector(".js-youtube-bar");
+        this.time = this.controls.querySelector(".js-youtube-time");
         const shield = this.element.querySelector(".js-youtube-shield");
 
         shield.addEventListener("click", this.togglePlay.bind(this));
@@ -132,6 +133,8 @@ export default class YouTube {
         this.muteButton.addEventListener("click", this.toggleMute.bind(this));
         this.volume = this.controls.querySelector(".js-youtube-volume");
         this.volume.addEventListener("input", this.changeVolume.bind(this));
+        // Relâché à la souris : on retire le focus, sinon le panneau du volume reste ouvert (:focus-visible)
+        this.volume.addEventListener("pointerup", () => this.volume.blur());
         this.controls.querySelector(".js-youtube-fullscreen").addEventListener("click", this.toggleFullscreen.bind(this));
         this.progress.addEventListener("click", this.seek.bind(this));
         this.element.addEventListener("mousemove", this.showControls.bind(this));
@@ -219,8 +222,10 @@ export default class YouTube {
     seek(event) {
         const rect = this.progress.getBoundingClientRect();
         const ratio = (event.clientX - rect.left) / rect.width;
-        this.player.seekTo(ratio * this.player.getDuration(), true);
+        const duration = this.player.getDuration();
+        this.player.seekTo(ratio * duration, true);
         this.bar.style.transform = `scaleX(${ratio})`;
+        this.updateTime(ratio * duration, duration);
     }
 
     updateProgress() {
@@ -228,9 +233,22 @@ export default class YouTube {
         if (duration) {
             const time = this.player.getCurrentTime();
             this.bar.style.transform = `scaleX(${time / duration})`;
+            this.updateTime(time, duration);
             // Écran de fin YouTube (20 s max) : on retire la couche pour pouvoir cliquer la vidéo suggérée et le profil
             this.element.classList.toggle("is-ending", duration - time < this.endScreenDuration);
         }
+    }
+
+    // Time code : « 0:12 / 1:45 »
+    updateTime(time, duration) {
+        this.time.textContent = `${this.formatTime(time)} / ${this.formatTime(duration)}`;
+    }
+
+    // 75 → « 1:15 »
+    formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const rest = Math.floor(seconds % 60);
+        return `${minutes}:${String(rest).padStart(2, "0")}`;
     }
 
     watch(entries) {

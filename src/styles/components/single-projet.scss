@@ -102,11 +102,17 @@
         text-align: center;
     }
 
-    .window__content .list-icons {
+    // Logiciels : par-dessus l'image, en haut à droite, juste sous la barre de la fenêtre
+    .info__right {
+        position: relative;
+    }
+
+    .info__right > .list-icons {
         margin: var(--spacing-sm);
         position: absolute;
-        top: 0;
-        right: 0;
+        top: calc(1lh + 2 * var(--spacing-s) + 2px); // hauteur de la barre (1 ligne + padding + bordures)
+        right: 1px; // bordure de la fenêtre
+        z-index: 1;
     }
 
     /*
@@ -180,6 +186,14 @@
     .hero--projet .info {
         display: flex;
         flex-direction: column;
+    }
+    // Logiciels au-dessus de la fenêtre de l'image, avec un espace clair sous l'accordéon
+    .hero--projet .info__right {
+        margin-top: var(--spacing-lg);
+    }
+    .hero--projet .info__right > .list-icons {
+        position: static;
+        margin: 0 0 var(--spacing-sm);
     }
     .conception .etapes .etape {
         display: flex;
