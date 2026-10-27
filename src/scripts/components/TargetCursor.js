@@ -247,6 +247,14 @@ export default class TargetCursor {
     window.addEventListener('resize', this.onResize.bind(this));
     window.addEventListener('mousedown', this.onMouseDown.bind(this));
     window.addEventListener('mouseup', this.onMouseUp.bind(this));
+    document.addEventListener('fullscreenchange', this.onFullscreenChange.bind(this));
+  }
+
+  // En plein écran, le navigateur n'affiche que l'élément en plein écran (ex: la vidéo) :
+  // on y déplace le curseur, puis on le remet dans le body à la sortie
+  onFullscreenChange() {
+    (document.fullscreenElement || document.body).appendChild(this.cursor);
+    this.containingBlock = this.getContainingBlock(this.cursor);
   }
 
   onMouseMove(e) {

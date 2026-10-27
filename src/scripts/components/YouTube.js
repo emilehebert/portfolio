@@ -18,6 +18,13 @@ export default class YouTube {
         this.videoId = this.element.dataset.videoId;
         this.player = null;
 
+        // Contrôles maison (optionnels), cachés après 3 s sans bouger la souris
+        this.controls = this.element.querySelector(".js-youtube-controls");
+        this.hideDelay = 3000;
+        this.hideTimeout = null;
+        this.progressInterval = null;
+        this.endScreenDuration = 20; // secondes, durée max de l'écran de fin YouTube
+
         this.setOptions();
         YouTube.instances.push(this);
 
@@ -90,6 +97,10 @@ export default class YouTube {
                         this.player.mute();
                     }
 
+                    if (this.controls) {
+                        this.initControls();
+                    }
+
                     const observer = new IntersectionObserver(this.watch.bind(this));
                     observer.observe(this.element);
                 },
@@ -97,9 +108,129 @@ export default class YouTube {
                     if (event.data === YT.PlayerState.ENDED && this.options.loop) {
                         this.player.seekTo(0);
                     }
+
+                    if (this.controls) {
+                        this.updateControls(event.data);
+                    }
                 },
             },
         });
+    }
+
+    // La couche .js-youtube-shield cache la souris à YouTube : son overlay (titre, barre) disparaît seul.
+    // On affiche nos contrôles à la place, 3 s après chaque mouvement de souris.
+    initControls() {
+        this.playButton = this.controls.querySelector(".js-youtube-play");
+        this.muteButton = this.controls.querySelector(".js-youtube-mute");
+        this.progress = this.controls.querySelector(".js-youtube-progress");
+        this.bar = this.controls.querySelector(".js-youtube-bar");
+        const shield = this.element.querySelector(".js-youtube-shield");
+
+        shield.addEventListener("click", this.togglePlay.bind(this));
+        shield.addEventListener("dblclick", this.toggleFullscreen.bind(this));
+        this.playButton.addEventListener("click", this.togglePlay.bind(this));
+        this.muteButton.addEventListener("click", this.toggleMute.bind(this));
+        this.volume = this.controls.querySelector(".js-youtube-volume");
+        this.volume.addEventListener("input", this.changeVolume.bind(this));
+        this.controls.querySelector(".js-youtube-fullscreen").addEventListener("click", this.toggleFullscreen.bind(this));
+        this.progress.addEventListener("click", this.seek.bind(this));
+        this.element.addEventListener("mousemove", this.showControls.bind(this));
+        this.element.addEventListener("mouseleave", this.hideControls.bind(this));
+
+        this.updateVolume(this.player.isMuted() ? 0 : this.player.getVolume());
+    }
+
+    updateControls(state) {
+        const isPaused = state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED;
+        this.playButton.textContent = isPaused ? "Lecture" : "Pause";
+        this.element.classList.toggle("is-paused", isPaused); // en pause, les contrôles restent visibles
+
+        clearInterval(this.progressInterval);
+        if (state === YT.PlayerState.PLAYING) {
+            this.progressInterval = setInterval(this.updateProgress.bind(this), 100);
+            this.showControls(); // visibles 3 s au lancement
+        }
+    }
+
+    showControls() {
+        this.element.classList.add("is-controls-visible");
+        clearTimeout(this.hideTimeout);
+        // Restent affichés tant que la souris est sur les contrôles (ex: slider du volume)
+        this.hideTimeout = setTimeout(() => {
+            if (!this.controls.matches(":hover")) this.hideControls();
+        }, this.hideDelay);
+    }
+
+    hideControls() {
+        clearTimeout(this.hideTimeout);
+        this.element.classList.remove("is-controls-visible");
+    }
+
+    togglePlay() {
+        if (this.player.getPlayerState() === YT.PlayerState.PLAYING) {
+            this.player.pauseVideo();
+        } else {
+            this.player.playVideo();
+        }
+    }
+
+    // Le bouton coupe le son, puis le remet au volume d'avant
+    toggleMute() {
+        if (Number(this.volume.value) === 0) {
+            const volume = this.player.getVolume() || 100; // volume d'avant, ou 100 s'il était à 0
+            this.player.setVolume(volume);
+            this.player.unMute();
+            this.updateVolume(volume);
+        } else {
+            this.player.mute();
+            this.updateVolume(0);
+        }
+    }
+
+    // Glisser le slider : 0 coupe le son, le reste règle le volume
+    changeVolume() {
+        const volume = Number(this.volume.value);
+
+        if (volume === 0) {
+            this.player.mute();
+        } else {
+            this.player.setVolume(volume);
+            this.player.unMute();
+        }
+
+        this.updateVolume(volume);
+    }
+
+    updateVolume(volume) {
+        this.volume.value = volume;
+        this.volume.style.setProperty("--volume", `${volume}%`);
+        this.muteButton.textContent = volume === 0 ? "Muet" : "Son";
+    }
+
+    toggleFullscreen() {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            this.element.requestFullscreen(); // le bloc entier, pour garder nos contrôles en plein écran
+        }
+    }
+
+    // Avance au point cliqué sur la barre
+    seek(event) {
+        const rect = this.progress.getBoundingClientRect();
+        const ratio = (event.clientX - rect.left) / rect.width;
+        this.player.seekTo(ratio * this.player.getDuration(), true);
+        this.bar.style.transform = `scaleX(${ratio})`;
+    }
+
+    updateProgress() {
+        const duration = this.player.getDuration();
+        if (duration) {
+            const time = this.player.getCurrentTime();
+            this.bar.style.transform = `scaleX(${time / duration})`;
+            // Écran de fin YouTube (20 s max) : on retire la couche pour pouvoir cliquer la vidéo suggérée et le profil
+            this.element.classList.toggle("is-ending", duration - time < this.endScreenDuration);
+        }
     }
 
     watch(entries) {

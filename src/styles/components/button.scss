@@ -9,6 +9,10 @@
     background: var(--gradient-primary);
     border: 1px solid var(--color-primary);
     cursor: none;
+    // Même texte que les liens (links.scss), aussi pour les <button> qui n'héritent pas de la police
+    font: inherit;
+    font-weight: 600;
+    color: var(--color-white);
 
     &:hover {
         background: var(--gradient-secondary);

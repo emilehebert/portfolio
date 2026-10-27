@@ -16,6 +16,7 @@
         pointer-events: none;
         display: block;
         width: 100%;
+        height: auto; // garde le ratio de l'image (width/height du HTML) quand la largeur change
     }
 
     /*

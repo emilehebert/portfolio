@@ -102,11 +102,6 @@
 }
 
 .contact__form button.button {
-    // Même look que les liens .button du site
-    font: inherit;
-    font-size: var(--font-size-button);
-    font-weight: 600;
-    line-height: 1.28;
     flex-shrink: 0;
 
     &:disabled {

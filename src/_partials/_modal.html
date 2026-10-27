@@ -9,28 +9,45 @@
         </div>
         <div class="window__content">
             <!-- Contenu vidéo, visible seulement avec data-modal="video" -->
-            <div class="window__media modal__video" data-component="YouTube" data-video-id="9r9vmKvIosQ">
+            <!-- data-controls="false" : pas la barre de YouTube, on affiche nos propres contrôles (.js-youtube-controls) -->
+            <div class="window__media modal__video" data-component="YouTube" data-video-id="9r9vmKvIosQ" data-controls="false">
                 <div class="js-video"></div>
+                <!-- Couche par-dessus l'iframe : YouTube ne voit pas la souris, donc son overlay ne reste pas affiché -->
+                <div class="youtube__shield js-youtube-shield"></div>
+                <div class="youtube__controls js-youtube-controls">
+                    <button class="button button--secondary youtube__play cursor-target js-youtube-play">Pause</button>
+                    <div class="youtube__progress cursor-target js-youtube-progress">
+                        <div class="youtube__bar js-youtube-bar"></div>
+                    </div>
+                    <!-- Le slider du volume apparaît au-dessus du bouton, au survol -->
+                    <div class="youtube__sound">
+                        <button class="button button--secondary youtube__mute cursor-target js-youtube-mute">Son</button>
+                        <div class="youtube__volume-panel">
+                            <input class="youtube__volume cursor-target js-youtube-volume" type="range" min="0" max="100" value="100" aria-label="Volume" />
+                        </div>
+                    </div>
+                    <button class="button button--secondary cursor-target js-youtube-fullscreen">Plein écran</button>
+                </div>
             </div>
             <!-- Contenu image, visible seulement avec data-modal="image" -->
             <img class="modal__image js-modal-image" alt="" />
             <!-- Contenu comparatif, visible seulement avec data-modal="comparison" -->
             <div class="modal__comparison js-modal-comparison"></div>
         </div>
-        <!-- Compteur des images de la page, visible seulement avec data-modal="image" -->
+        <!-- Compteur et flèches des images de la page, visibles seulement avec data-modal="image" -->
+        <!-- Sur ordinateur, le CSS place les flèches sur les côtés de l'écran. Sur mobile, elles restent dans cette barre -->
         <div class="window__footer modal__nav modal__count">
+            <a href="#" class="button button--secondary modal__arrow modal__arrow--prev js-modal-prev cursor-target" aria-label="Image précédente">
+                <svg class="icon">
+                    <use href="#icon-arrow"></use>
+                </svg>
+            </a>
             <p class="js-modal-count"></p>
+            <a href="#" class="button button--secondary modal__arrow modal__arrow--next js-modal-next cursor-target" aria-label="Image suivante">
+                <svg class="icon">
+                    <use href="#icon-arrow"></use>
+                </svg>
+            </a>
         </div>
     </div>
-    <!-- Flèches gauche / droite de l'écran, hors de la fenêtre pour ne pas bouger quand la largeur de l'image change -->
-    <a href="#" class="button button--secondary modal__nav modal__arrow modal__arrow--prev js-modal-prev cursor-target" aria-label="Image précédente">
-        <svg class="icon">
-            <use href="#icon-arrow"></use>
-        </svg>
-    </a>
-    <a href="#" class="button button--secondary modal__nav modal__arrow modal__arrow--next js-modal-next cursor-target" aria-label="Image suivante">
-        <svg class="icon">
-            <use href="#icon-arrow"></use>
-        </svg>
-    </a>
 </div>

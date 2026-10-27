@@ -11,3 +11,15 @@ body {
     line-height: 1.6;
     background: var(--color-background);
 }
+
+// Menu mobile ou modale ouvert : la page ne scrolle plus derrière.
+// ScrollSmoother.paused() ne bloque pas la molette, overflow: hidden si.
+// scrollbar-gutter garde la place de la barre de défilement : la page ne bouge pas quand elle disparaît
+html {
+    scrollbar-gutter: stable;
+}
+
+html.nav-is-active,
+html.modal-is-open {
+    overflow: hidden;
+}

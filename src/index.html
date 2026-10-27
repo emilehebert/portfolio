@@ -12,15 +12,22 @@
                     <span class="rotating-text" data-component="RotatingText" data-words="Déterminé|Ambitieux|Motivé|Débrouillard"> Déterminé </span>.
                 </h3>
                 <div class="nom" data-lag=".00001">
-                    <h1 data-component="ScrambledText" data-chars="EMILEX.:;=" data-duration="2" data-intro>Emile</h1>
-                    <h1 data-component="ScrambledText" data-chars="HEBERTX.:;=" data-duration="2" data-intro>Hebert</h1>
+                    <h1 data-component="ScrambledText" data-chars="EMILEX.:;=" data-duration="2" data-intro data-lag="0.1">Emile</h1>
+                    <h1 data-component="ScrambledText" data-chars="HEBERTX.:;=" data-duration="2" data-intro data-lag="0.1">Hebert</h1>
                 </div>
             </div>
             <div class="hero__media">
                 <!-- SCROLLYTELLING (désactivé) : remettre la classe js-pinned sur .window pour que le portrait descende -->
-                <div class="window" data-pin-overflow="img" data-pin-end=".hero-story-track__landing">
+                <div class="window" data-pin-overflow="img" data-pin-end=".hero-story-track__landing" data-speed="1.2">
                     <div class="window__content">
-                        <img src="assets/images/Portfolio_portrait_colors_web.webp" width="683" height="1794" alt="Portrait" fetchpriority="high" />
+                        <img
+                            src="assets/images/Portfolio_portrait_colors_web.webp"
+                            width="683"
+                            height="1794"
+                            alt="Portrait"
+                            fetchpriority="high"
+                            data-lag="0.2"
+                        />
                     </div>
                     <div class="window__footer">
                         <p class="small">Photo : Loïc Blanchette Favela</p>

@@ -21,6 +21,15 @@
         width: 100%;
         max-width: min(2000px, (100dvh - 150px) * 16 / 9); // rentre aussi en hauteur (dvh : hauteur visible, sans les barres du navigateur mobile)
     }
+
+    // Espace entre le titre et le X. Le titre reste centré, le X reste en haut quand le titre fait deux lignes
+    .window__header {
+        gap: var(--spacing-s);
+
+        .button {
+            align-self: flex-start;
+        }
+    }
 }
 
 /*
@@ -45,12 +54,12 @@
     justify-content: center;
 }
 
-// Flèches fixes au milieu de l'écran, à gauche et à droite
+// Ordinateur : flèches fixes au milieu de l'écran, à gauche et à droite
+// (la fenêtre n'a pas de position, donc elles se placent par rapport à la modale)
 .modal__arrow {
     padding: var(--spacing-s) var(--spacing-s);
     position: absolute;
     top: 50%;
-    z-index: 1; // par-dessus la fenêtre sur les petits écrans
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -67,6 +76,18 @@
 
 .modal__arrow--next {
     right: var(--spacing-s);
+}
+
+// Mobile : flèches dans la barre du bas, de chaque côté du compteur, jamais par-dessus l'image
+@media (max-width: $breakpoint-sm) {
+    .modal__count {
+        justify-content: space-between;
+    }
+
+    .modal__arrow {
+        position: static;
+        transform: none;
+    }
 }
 
 // Une seule image sur la page : rien à parcourir
@@ -90,6 +111,20 @@
         max-width: 100%;
         max-height: calc(100dvh - 210px); // place pour le header, la navigation et les marges
         object-fit: contain;
+    }
+
+    // Mobile : fenêtre de toute la hauteur, la barre du bas reste en bas de l'écran peu importe l'image
+    @media (max-width: $breakpoint-sm) {
+        .window {
+            width: 100%;
+            height: 100%;
+        }
+
+        .window__content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }
 

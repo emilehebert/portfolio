@@ -3,12 +3,147 @@
    Vidéo YouTube (YouTube.js) en 16:9 : l'API remplace .js-video par une iframe
    ========================================================================== */
 
-[data-component='YouTube'] {
+[data-component="YouTube"] {
     height: auto;
     aspect-ratio: 16 / 9;
 
+    // L'iframe dépasse en haut et en bas : la vidéo garde sa taille (bandes noires ajoutées par YouTube),
+    // mais l'overlay de YouTube (titre, partager, « Plus de vidéos », logo) se place dans les bandes, coupées par overflow: hidden
     iframe {
+        position: absolute;
+        top: -120px;
+        left: 0;
         display: block;
+        height: calc(100% + 240px);
         border: 0;
+    }
+}
+
+/*
+ Contrôles maison (YouTube.js) : visibles 3 s après un mouvement de souris, et toujours en pause
+ ========================================================================== */
+
+// Couche transparente par-dessus l'iframe : capte la souris et les clics à la place de YouTube
+.youtube__shield {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    // Écran de fin (YouTube.js) : les clics passent à YouTube (vidéo suggérée, profil)
+    .is-ending & {
+        pointer-events: none;
+    }
+}
+
+.youtube__controls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s $ease-out-cubic;
+
+    // :focus-within : au clavier (Tab), les contrôles restent visibles avec le bouton focus
+    .is-controls-visible &,
+    .is-paused &,
+    &:focus-within {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+// Largeur fixe du texte le plus long (« Lecture », « Muet ») : la barre de progression ne bouge pas quand le texte change
+.youtube__play,
+.youtube__mute {
+    flex-shrink: 0;
+    box-sizing: content-box;
+    text-align: center;
+}
+
+.youtube__play {
+    width: 7ch;
+}
+
+.youtube__mute {
+    width: 4ch;
+}
+
+// Barre de progression : cliquer dessus avance ou recule la vidéo
+.youtube__progress {
+    flex: 1;
+    height: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.youtube__bar {
+    height: 100%;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+// Bouton Son + slider : le panneau est en absolute, la barre de progression ne bouge pas quand il apparaît
+.youtube__sound {
+    position: relative;
+    flex-shrink: 0;
+
+    &:hover,
+    &:focus-within {
+        .youtube__volume-panel {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+}
+
+// Collé au bouton (bottom: 100%) : la souris passe du bouton au panneau sans perdre le survol
+.youtube__volume-panel {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    display: flex;
+    padding: var(--spacing-xs);
+    border: 1px solid var(--color-secondary);
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+    transition: opacity 0.2s $ease-out-cubic;
+}
+
+// Slider vertical du volume (0 en bas) : la partie remplie suit --volume (YouTube.js)
+.youtube__volume {
+    --volume: 100%;
+    width: 8px;
+    height: 100px;
+    margin: 0;
+    appearance: none;
+    writing-mode: vertical-lr;
+    direction: rtl;
+    background: linear-gradient(0deg, var(--color-primary) var(--volume), rgba(255, 255, 255, 0.3) var(--volume));
+    cursor: none;
+
+    &::-webkit-slider-thumb {
+        width: 16px;
+        height: 16px;
+        appearance: none;
+        border: 1px solid var(--color-secondary);
+        background: var(--gradient-secondary);
+    }
+
+    &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--color-secondary);
+        border-radius: 0;
+        background: var(--gradient-secondary);
     }
 }

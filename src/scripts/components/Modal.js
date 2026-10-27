@@ -70,6 +70,7 @@ export default class Modal {
         }
 
         this.element.classList.add("is-open");
+        document.documentElement.classList.add("modal-is-open"); // bloque le scroll (body.scss)
         ScrollSmoother.get().paused(true);
     }
 
@@ -84,6 +85,7 @@ export default class Modal {
     close(event) {
         event.preventDefault();
         this.element.classList.remove("is-open");
+        document.documentElement.classList.remove("modal-is-open");
         ScrollSmoother.get().paused(false);
     }
 
