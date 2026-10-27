@@ -32,7 +32,45 @@
 .modal--image .modal__video,
 .modal--image .modal__comparison,
 .modal--comparison .modal__video,
-.modal--comparison .modal__image {
+.modal--comparison .modal__image,
+.modal:not(.modal--image) .modal__nav {
+    display: none;
+}
+
+/*
+ Navigation entre les images de la page (Modal.js) : flèches et compteur
+ ========================================================================== */
+
+.modal__count {
+    justify-content: center;
+}
+
+// Flèches fixes au milieu de l'écran, à gauche et à droite
+.modal__arrow {
+    padding: var(--spacing-s) var(--spacing-s);
+    position: absolute;
+    top: 50%;
+    z-index: 1; // par-dessus la fenêtre sur les petits écrans
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+}
+
+.modal__arrow--prev {
+    left: var(--spacing-s);
+
+    .icon {
+        transform: rotate(180deg); // même flèche que le site, tournée vers la gauche
+    }
+}
+
+.modal__arrow--next {
+    right: var(--spacing-s);
+}
+
+// Une seule image sur la page : rien à parcourir
+.modal--single .modal__nav {
     display: none;
 }
 
@@ -50,7 +88,7 @@
         display: block;
         width: auto;
         max-width: 100%;
-        max-height: calc(100dvh - 150px); // place pour le header et les marges
+        max-height: calc(100dvh - 210px); // place pour le header, la navigation et les marges
         object-fit: contain;
     }
 }

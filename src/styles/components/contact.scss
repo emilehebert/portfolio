@@ -181,6 +181,24 @@
 
         .fields {
             grid-template-rows: auto auto 1fr;
+            // Place réservée sous le message pour son erreur (les autres erreurs vont dans le gap)
+            padding-bottom: var(--spacing-md);
+        }
+
+        // L'erreur se glisse dans l'espace sous le champ : la page ne grandit pas, donc pas de scroll
+        .field {
+            position: relative;
+        }
+
+        .field__error {
+            position: absolute;
+            top: calc(100% + var(--spacing-xs));
+            left: 0;
+            right: 0;
+            line-height: 1.2; // laisse de l'air avant le label du champ suivant
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         // Le message s'étire pour remplir l'écran (scroll seulement si l'écran est vraiment trop bas)

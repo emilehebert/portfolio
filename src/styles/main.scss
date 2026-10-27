@@ -3,54 +3,55 @@
 
 // TOOLS
 // mixins et fonctions utilisés globalement dans le SCSS (Sass)
-@import 'tools/cover';
-@import 'tools/typo';
-@import 'tools/panel';
+@import "tools/cover";
+@import "tools/typo";
+@import "tools/panel";
 
 // SETTINGS
 // Contient les variables sur les polices, les définitions de couleurs, les définitions de  grandeurs,   etc.
-@import 'settings/colors';
-@import 'settings/easing';
-@import 'settings/fonts';
-@import 'settings/dimensions';
+@import "settings/colors";
+@import "settings/easing";
+@import "settings/fonts";
+@import "settings/dimensions";
 
 // GENERIC
 // Permet de réinitialiser les CSS et de changer le modèle de boîte en box-sizing: border-box
-@import 'generic/normalize';
-@import 'generic/reset';
+@import "generic/normalize";
+@import "generic/reset";
 
 // ELEMENTS
 // Modification des styles généraux de la page. Ce sont les styles qui seront généralement hérités par les éléments de la page.
-@import 'elements/body';
-@import 'elements/headings';
-@import 'elements/links';
-@import 'elements/wrapper';
+@import "elements/body";
+@import "elements/headings";
+@import "elements/links";
+@import "elements/wrapper";
 
 // COMPONENTS
 // Composants d'interface utilisateur spécifiques.
-@import 'components/icons';
-@import 'components/button';
-@import 'components/icon-button';
-@import 'components/window';
-@import 'components/grids';
-@import 'components/halftonemarquee';
-@import 'components/dither-veil';
-@import 'components/target-cursor';
-@import 'components/scrambled-text';
-@import 'components/rotating-text';
-@import 'components/comparison';
-@import 'components/accordion';
-@import 'components/modal';
-@import 'components/drag-windows';
-@import 'components/youtube';
-@import 'components/header';
-@import 'components/footer';
-@import 'components/hero';
-@import 'components/about';
-@import 'components/short-story';
-@import 'components/projets';
-@import 'components/single-projet';
-@import 'components/scroll-stack';
-@import 'components/contact';
-@import 'components/declaration-ia';
-@import 'components/error-404';
+@import "components/icons";
+@import "components/button";
+@import "components/icon-button";
+@import "components/window";
+@import "components/grids";
+@import "components/halftonemarquee";
+@import "components/dither-veil";
+@import "components/target-cursor";
+@import "components/scrambled-text";
+@import "components/rotating-text";
+@import "components/comparison";
+@import "components/accordion";
+@import "components/modal";
+@import "components/drag-windows";
+@import "components/youtube";
+@import "components/header";
+@import "components/footer";
+@import "components/hero";
+@import "components/about";
+@import "components/stage";
+@import "components/short-story";
+@import "components/projets";
+@import "components/single-projet";
+@import "components/scroll-stack";
+@import "components/contact";
+@import "components/declaration-ia";
+@import "components/error-404";

@@ -9,7 +9,7 @@
         </div>
         <div class="window__content">
             <!-- Contenu vidéo, visible seulement avec data-modal="video" -->
-            <div class="window__media modal__video" data-component="YouTube" data-video-id="jT8qgr-4wow">
+            <div class="window__media modal__video" data-component="YouTube" data-video-id="9r9vmKvIosQ">
                 <div class="js-video"></div>
             </div>
             <!-- Contenu image, visible seulement avec data-modal="image" -->
@@ -17,5 +17,20 @@
             <!-- Contenu comparatif, visible seulement avec data-modal="comparison" -->
             <div class="modal__comparison js-modal-comparison"></div>
         </div>
+        <!-- Compteur des images de la page, visible seulement avec data-modal="image" -->
+        <div class="window__footer modal__nav modal__count">
+            <p class="js-modal-count"></p>
+        </div>
     </div>
+    <!-- Flèches gauche / droite de l'écran, hors de la fenêtre pour ne pas bouger quand la largeur de l'image change -->
+    <a href="#" class="button button--secondary modal__nav modal__arrow modal__arrow--prev js-modal-prev cursor-target" aria-label="Image précédente">
+        <svg class="icon">
+            <use href="#icon-arrow"></use>
+        </svg>
+    </a>
+    <a href="#" class="button button--secondary modal__nav modal__arrow modal__arrow--next js-modal-next cursor-target" aria-label="Image suivante">
+        <svg class="icon">
+            <use href="#icon-arrow"></use>
+        </svg>
+    </a>
 </div>

@@ -79,7 +79,7 @@
             <canvas class="halftone-marquee__canvas"></canvas>
         </div>
         <div class="wrapper">
-            <h2 data-speed="1.05">En tant que créateur multimédia...</h2>
+            <h2 data-speed="1.05">En tant que créateur <span class="accent--primary">multimédia</span>...</h2>
             <div class="about__grid">
                 <div class="window friend cursor-target" data-modal="image" data-speed="1.1" data-lag=".21">
                     <div class="window__header">
@@ -106,10 +106,13 @@
                         J'approfondis la
                         <span class="accent--primary">qualité visuelle</span>
                         de mes projets
-                        <span class="accent--primary">3D, Personnelles et scolaires</span>
+                        <span class="accent--primary">3D</span>, <span class="accent--primary"></span> <span class="accent--primary">Vidéo</span>,
+                        <span class="accent--primary">Design</span>, <span class="accent--primary">Interactif</span> que ce soit
+                        <span class="accent--primary">personnel</span> ou
+                        <span class="accent--primary">scolaire</span>
                         en me mettant à la place du spectateur pour sentir si ça surprend et se comprend d'un coup d'œil. Ma
                         <span class="accent--primary">vision créative</span>
-                        me pousse à peaufiner le détail que personne d'autre n'aurait remarqué.
+                        me pousse à peaufiner les détails que personne d'autre n'aurait remarqué.
                     </p>
                 </div>
 
@@ -196,6 +199,26 @@
                                     title="Ma Sony DCR-HC26, qui m'a été offerte par un ami."
                                 />
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="window webjam cursor-target" data-modal="image" data-speed="1.1" data-lag=".21">
+                    <div class="window__header">
+                        <p>Prix gagné lors du WebJam 2026</p>
+                    </div>
+                    <div class="window__content">
+                        <div class="window__media" data-component="DitherVeil">
+                            <img
+                                data-src="assets/images/About-Webjam-Victory.webp"
+                                width="1600"
+                                height="1067"
+                                data-srcset="assets/images/About-Webjam-Victory-Small.webp 800w, assets/images/About-Webjam-Victory.webp 1600w"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                loading="lazy"
+                                alt="Mon équipe et moi tenant le certificat de la meilleure intégration au WebJam 2026"
+                                title="Prix de la meilleure intégration de notre site web."
+                            />
                         </div>
                     </div>
                 </div>
@@ -648,15 +671,31 @@
     </div>
 </section>
 
-<!-- <section class="stage has-bg-grid">
+<section class="stage has-bg-grid" aria-labelledby="stage-titre">
     <div class="bg-grid" style="--grid-top: 90%" data-speed="0.25" aria-hidden="true"></div>
-    <div id="projets" class="halftone-marquee" data-component="HalftoneMarquee" data-text="Stage recherche \" aria-hidden="true">
+    <div id="stage" class="halftone-marquee" data-component="HalftoneMarquee" data-text="Stage recherche \" aria-hidden="true">
         <canvas class="halftone-marquee__canvas"></canvas>
     </div>
     <div class="wrapper">
-        <h2>Stage recherché</h2>
+        <h2 id="stage-titre">Je suis présentement à la recherche d'un <span class="accent--primary">stage</span></h2>
+        <div class="window" data-lag="0.05">
+            <div class="window__header">
+                <p id="stage-domaines">Stage recherché en :</p>
+            </div>
+            <div class="window__content">
+                <ul class="stage__tags" aria-labelledby="stage-domaines">
+                    <li class="tag stage__tag" data-component="ScrambledText" data-intro="true" data-lag="0.11">Design</li>
+                    <li class="tag stage__tag" data-component="ScrambledText" data-intro="true" data-lag="0.13">Création de média</li>
+                    <li class="tag stage__tag" data-component="ScrambledText" data-intro="true" data-lag="0.13">VFX/SFX</li>
+                    <li class="tag stage__tag" data-component="ScrambledText" data-intro="true" data-lag="0.15">Jeu vidéo</li>
+                    <li class="tag stage__tag" data-component="ScrambledText" data-intro="true" data-lag="0.15">Montage vidéo</li>
+                    <li class="tag stage__tag" data-component="ScrambledText" data-intro="true" data-lag="0.11">Installation interactive</li>
+                    <li class="tag stage__tag" data-component="ScrambledText" data-intro="true" data-lag="0.13">Animation 3D</li>
+                </ul>
+            </div>
+        </div>
     </div>
-</section> -->
+</section>
 
 <!-- Footer -->
 {% include '_partials/_footer.html' %}

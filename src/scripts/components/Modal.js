@@ -11,6 +11,11 @@ export default class Modal {
         this.closeLink = this.element.querySelector(".js-close");
         this.title = this.element.querySelector(".js-modal-title");
 
+        // Toutes les images de la page, dans l'ordre, pour les flèches de la modale
+        this.imageLinks = [...this.links].filter((link) => link.dataset.modal === "image");
+        this.imageIndex = 0;
+        this.count = this.element.querySelector(".js-modal-count");
+
         this.init();
     }
 
@@ -39,6 +44,10 @@ export default class Modal {
         });
 
         this.closeLink.addEventListener("click", this.close.bind(this));
+        this.element.querySelector(".js-modal-prev").addEventListener("click", (event) => this.showSibling(event, -1));
+        this.element.querySelector(".js-modal-next").addEventListener("click", (event) => this.showSibling(event, 1));
+        document.addEventListener("keydown", this.onKeydown.bind(this));
+        this.element.classList.toggle("modal--single", this.imageLinks.length < 2);
         this.element.addEventListener("click", this.onClickOutside.bind(this));
     }
 
@@ -84,11 +93,35 @@ export default class Modal {
         const source = link.querySelector("img");
         if (!image || !source) return;
 
-        image.src = source.src; // la grande version (src), pas la petite du srcset qu'affiche la page sur mobile
+        // La grande version (src), pas la petite du srcset qu'affiche la page sur mobile.
+        // data-src si l'image n'est pas encore chargée dans la page (lazy load)
+        image.src = source.src || source.dataset.src;
         image.alt = source.alt;
 
         const name = link.querySelector(".window__header p");
         this.title.textContent = name ? name.textContent : source.alt;
+
+        this.imageIndex = this.imageLinks.indexOf(link);
+        this.count.textContent = `${this.imageIndex + 1}/${this.imageLinks.length}`;
+    }
+
+    // Flèches : image précédente (-1) ou suivante (1), on boucle au bout de la liste
+    showSibling(event, direction) {
+        if (event) event.preventDefault();
+        const total = this.imageLinks.length;
+        this.showImage(this.imageLinks[(this.imageIndex + direction + total) % total]);
+    }
+
+    // Clavier : flèches gauche / droite pour changer d'image, Échap pour fermer
+    onKeydown(event) {
+        if (!this.element.classList.contains("is-open")) return;
+
+        if (event.key === "Escape") {
+            this.close(event);
+        } else if (this.element.classList.contains("modal--image")) {
+            if (event.key === "ArrowLeft") this.showSibling(event, -1);
+            if (event.key === "ArrowRight") this.showSibling(event, 1);
+        }
     }
 
     // Modale comparatif : copie le comparatif avant/après de la même fenêtre, en plus grand

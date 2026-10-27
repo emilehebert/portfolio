@@ -26,18 +26,19 @@ export default class ContactForm {
     }
 
     // Retourne le message d'erreur du champ, ou "" s'il est valide
+    // Messages courts : ils doivent tenir sur une ligne, dans l'espace sous le champ
     getError(field) {
         const value = field.value.trim();
 
         if (field.required && !value) return "Ce champ est requis.";
         if (field.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-            return "Entrez un courriel valide (ex.: nom@domaine.com).";
+            return "Courriel invalide.";
         }
         if (field.type === "tel" && value && value.replace(/\D/g, "").length < 10) {
-            return "Entrez un numéro à 10 chiffres.";
+            return "10 chiffres requis.";
         }
         if (field.tagName === "TEXTAREA" && value && value.length < 10) {
-            return "Votre message doit contenir au moins 10 caractères.";
+            return "10 caractères minimum.";
         }
         return "";
     }

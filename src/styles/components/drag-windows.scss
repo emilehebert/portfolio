@@ -43,6 +43,15 @@
     }
 }
 
+// En colonne (mobile) : les captures de pages très hautes sont coupées, la modale montre l'image entière
+.drag-windows:not(.is-scattered) .drag-windows__window .window__media {
+    max-height: 560px;
+
+    img {
+        object-position: top;
+    }
+}
+
 // Sur le bureau : fenêtres posées en absolu (left / top en % mis par le JS)
 .is-scattered .drag-windows__window {
     position: absolute;
