@@ -41,7 +41,14 @@
 }
 
 .window__footer {
+    gap: var(--spacing-s); // espace entre le texte et le bouton quand le texte prend toute la place
     border-top: 1px solid var(--color-primary);
+
+    // Le bouton garde sa taille sur une ligne, c'est le texte qui passe à la ligne
+    .button {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
 }
 
 /*
