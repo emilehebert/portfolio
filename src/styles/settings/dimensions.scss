@@ -25,6 +25,15 @@ $media-dither-desktop: 'screen and (min-width: #{$breakpoint-sm + 1px}) and (hov
     --spacing-xl: 100px;
     --spacing-xxl: 350px;
 
+    // Espacement des sections (pareil sur toutes les pages)
+    // Les sections ont un padding seulement en bas : l'espace au-dessus d'un bandeau vient de la section d'avant
+    --section-padding: 100px; // fin d'une section -> bandeau ou titre de la suivante
+    --section-gap: 50px; // bandeau ou titre de section -> contenu
+    @media (max-width: $breakpoint-sm) {
+        --section-padding: 50px;
+        --section-gap: 30px;
+    }
+
     --border-radius: 3px;
     --grid-gap: 24px;
     --grid-gap-mobile: 12px;

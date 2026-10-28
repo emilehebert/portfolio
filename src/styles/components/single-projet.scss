@@ -33,10 +33,7 @@
 
 .hero--projet {
     min-height: 750px;
-    padding: var(--spacing-lg) 0 var(--spacing-lg);
-    @media (max-width: $breakpoint-sm) {
-        padding: var(--spacing-lg) 0;
-    }
+    padding: var(--spacing-lg) 0 var(--section-padding);
     /*
      Structure générale
      ========================================================================== */
@@ -202,28 +199,16 @@
 }
 
 /* ==========================================================================
-   projet-section / 
-   ========================================================================== */
-
-.projet-section {
-    padding: var(--spacing-xl) 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
-}
-
-/* ==========================================================================
    étapes de conceptualisation / 
    ========================================================================== */
 
 .conception {
-    padding: var(--spacing-xl) 0;
+    padding: 0 0 var(--section-padding);
 
     .etapes {
         display: flex;
         flex-direction: column;
         gap: 200px;
-        margin-top: var(--spacing-lg);
     }
 
     .etape {
@@ -257,7 +242,7 @@
    ========================================================================== */
 
 .galerie {
-    padding: var(--spacing-xl) 0;
+    padding: 0 0 var(--section-padding);
 
     @media (max-width: $breakpoint-sm) {
         .window__footer {
@@ -271,9 +256,12 @@
    ========================================================================== */
 
 .bilan {
-    padding: var(--spacing-xl) 0;
+    padding: 0 0 var(--section-padding);
 
-    .accordion {
-        margin: var(--spacing-md) 0;
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md); // espace entre l'accordéon et le bouton
     }
 }

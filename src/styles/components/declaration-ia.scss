@@ -2,15 +2,27 @@
    declaration / 
    ========================================================================== */
 
-.hero--declaration {
-    padding: var(--spacing-xl) 0;
+// 1re section : contient aussi le titre de la page
+.declaration-section.declaration {
+    padding-top: var(--spacing-xl);
     @media (max-width: $breakpoint-sm) {
-        padding: var(--spacing-lg) 0;
+        padding-top: var(--spacing-lg);
+    }
+}
+
+// Espace sous le titre (le gap du wrapper ajoute déjà --spacing-sm)
+.declaration__titre {
+    margin-bottom: calc(var(--spacing-lg) - var(--spacing-sm));
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    @media (max-width: $breakpoint-sm) {
+        margin-bottom: calc(var(--spacing-lg) * 2 - var(--spacing-sm));
     }
 }
 
 .declaration-section {
-    padding: var(--spacing-xl) 0;
+    padding: 0 0 var(--section-padding);
     .wrapper {
         display: flex;
         flex-direction: column;

@@ -21,7 +21,7 @@
 
 .hero {
     min-height: 750px;
-    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    padding: var(--spacing-xl) 0 var(--section-padding);
     position: relative;
     overflow: visible;
 
@@ -31,7 +31,7 @@
     }
 
     @media screen and (max-width: $breakpoint-sm) {
-        padding: var(--spacing-lg) 0;
+        padding: var(--spacing-lg) 0 var(--section-padding);
     }
     .wrapper {
         position: relative;

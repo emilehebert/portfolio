@@ -9,6 +9,11 @@
     background: var(--color-primary); // visible avant que le canvas arrive
 }
 
+// Espace sous chaque bandeau : padding sur le contenu juste après (pareil sur tout le site)
+.halftone-marquee + .wrapper {
+    padding-top: var(--section-gap);
+}
+
 .halftone-marquee__canvas {
     display: block;
     width: 100%;

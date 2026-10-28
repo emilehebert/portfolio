@@ -3,18 +3,12 @@
    ========================================================================== */
 
 .stage {
-    padding: var(--spacing-xl) 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
+    padding: 0 0 var(--section-padding);
 
     .wrapper {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-lg);
-        @media screen and (max-width: $breakpoint-sm) {
-            gap: var(--spacing-md);
-        }
+        gap: var(--section-gap);
     }
 
     .window__content {
