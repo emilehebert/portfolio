@@ -4,7 +4,23 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ title }}</title>
-        <meta name="description" content="{{ description | default("Portfolio d'Émile Hébert, créateur multimédia. Design, intégration web, animation 3D et jeux vidéo.") }}" />
+        {% set desc = description | default("Portfolio d'Émile Hébert, créateur multimédia. Design, intégration web, animation 3D et jeux vidéo.") %}
+        {% set siteUrl = "https://emilehebert.ca/" %}
+        <meta name="description" content="{{ desc }}" />
+        {% if page is defined %}<link rel="canonical" href="{{ siteUrl }}{{ page }}" />{% endif %}
+
+        <!-- Aperçu de lien (Messenger, LinkedIn, Discord) -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Émile Hébert" />
+        <meta property="og:locale" content="fr_CA" />
+        {% if page is defined %}<meta property="og:url" content="{{ siteUrl }}{{ page }}" />{% endif %}
+        <meta property="og:title" content="{{ title }}" />
+        <meta property="og:description" content="{{ desc }}" />
+        <meta property="og:image" content="{{ siteUrl }}assets/images/og/{{ ogImage | default('og-image.jpg') }}" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="{{ title }}" />
+        <meta name="twitter:card" content="summary_large_image" />
 
         <!-- Polices du haut de page chargées tout de suite, en même temps que le CSS (évite que le texte bouge) -->
         <link rel="preload" href="assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin />

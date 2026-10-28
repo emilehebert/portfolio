@@ -1,4 +1,8 @@
-{% set title = "FitGen, Développement web | Émile Hébert" %} {% include '_partials/_header.html' %}
+{% set title = "FitGen, Développement web | Émile Hébert" %}
+{% set page = "fit-gen.html" %}
+{% set description = "FitGen, une page web qui génère des tenues aléatoires à partir de mes propres vêtements, avec des visages dessinés à la main." %}
+{% set ogImage = "og-fit-gen.jpg" %}
+{% include '_partials/_header.html' %}
 
 <section class="hero--projet has-bg-grid">
     <div class="bg-grid" style="--grid-top: 5%" data-speed="0.25" aria-hidden="true"></div>
@@ -110,7 +114,7 @@
                                 width="755"
                                 height="800"
                                 fetchpriority="high"
-                                alt="Mes amis et moi"
+                                alt="Interface de FitGen avec une tenue générée, un t-shirt noir, un jeans et des espadrilles"
                             />
                         </div>
                     </div>
@@ -376,7 +380,7 @@
                     <div class="window cursor-target" data-modal="image">
                         <div class="window__content">
                             <div class="window__media" data-component="DitherVeil" data-reveal="full">
-                                <img data-src="assets/images/fitgen/Dizzy-Face-Jeans-Outfit.webp" width="587" height="874" loading="lazy" alt="Tenue générée" />
+                                <img data-src="assets/images/fitgen/Dizzy-Face-Jeans-Outfit.webp" width="587" height="874" loading="lazy" alt="Tenue générée avec un visage étourdi, un t-shirt gris et un jeans" />
                             </div>
                         </div>
                         <div class="window__footer">
@@ -391,7 +395,7 @@
                                     width="587"
                                     height="874"
                                     loading="lazy"
-                                    alt="Autre tenue générée"
+                                    alt="Tenue générée avec un chapeau de cowboy, un chandail noir et un pantalon beige"
                                 />
                             </div>
                         </div>
@@ -425,7 +429,7 @@
                                     width="668"
                                     height="671"
                                     loading="lazy"
-                                    alt="Version finale de FitGen : tenue avec un t-shirt noir et un jeans, flèches et bouton du dé"
+                                    alt="Version finale de FitGen avec un t-shirt noir, un jeans, les flèches et le bouton du dé"
                                 />
                                 <svg class="icon-button icon icon--md" aria-label="Visiter le site web final" role="img">
                                     <use href="#icon-external-link"></use>

@@ -1,4 +1,8 @@
-{% set title = "Project X, Site WordPress | Émile Hébert" %} {% include '_partials/_header.html' %}
+{% set title = "Project X, Site WordPress | Émile Hébert" %}
+{% set page = "project-x.html" %}
+{% set description = "Project X, le site WordPress d'une agence B2B fictive conçu en équipe de quatre, de l'identité visuelle jusqu'à l'intégration." %}
+{% set ogImage = "og-project-x.jpg" %}
+{% include '_partials/_header.html' %}
 
 <section class="hero--projet has-bg-grid">
     <div class="bg-grid" style="--grid-top: 5%" data-speed="0.25" aria-hidden="true"></div>
@@ -100,7 +104,7 @@
                                 srcset="assets/images/projectx/Hero-Thumbnail-Small.webp 800w, assets/images/projectx/Hero-Thumbnail.webp 1116w"
                                 sizes="(max-width: 768px) 100vw, 50vw"
                                 fetchpriority="high"
-                                alt="Mes amis et moi"
+                                alt="Logo de Project X avec le slogan Votre visibilité, enfin accessible"
                             />
                         </div>
                     </div>
@@ -135,7 +139,7 @@
                         data-srcset="assets/images/projectx/Figma-Team-Mockup-Small.webp 800w, assets/images/projectx/Logo-Thumbnail.webp 1444w"
                         sizes="(max-width: 768px) 100vw, 50vw"
                         loading="lazy"
-                        alt="Version finale du site"
+                        alt="Maquette Figma de la page d&#x27;accueil de Project X avec la section Notre équipe"
                     />
                 </div>
             </div>
@@ -437,7 +441,7 @@
                                     data-srcset="assets/images/projectx/Logo-Thumbnail-Small.webp 800w, assets/images/projectx/Logo-Thumbnail.webp 1444w"
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                     loading="lazy"
-                                    alt="Version finale du site"
+                                    alt="Logo de Project X avec le slogan Votre visibilité, enfin accessible"
                                 />
                                 <svg class="icon-button icon icon--md" aria-label="Visiter le site web final" role="img">
                                     <use href="#icon-external-link"></use>
