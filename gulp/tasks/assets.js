@@ -4,18 +4,16 @@
  */
 
 // Dependencies
-import { src, dest } from 'gulp';
-import plumber from 'gulp-plumber';
-import newer from 'gulp-newer';
-import errorHandler from '../util/errorHandler.js';
+import { src, dest } from "gulp";
+import plumber from "gulp-plumber";
+import newer from "gulp-newer";
+import errorHandler from "../util/errorHandler.js";
 
 // Config
-import { paths } from '../config.js';
+import { paths } from "../config.js";
 
 // Task
 export function assets() {
-  return src(paths.assets.src, { encoding: false })
-    .pipe(plumber({ errorHandler }))
-    .pipe(newer(paths.assets.dest))
-    .pipe(dest(paths.assets.dest));
+    src("src/sitemap.txt").pipe(dest(paths.dest)); // copie à la racine
+    return src(paths.assets.src, { encoding: false }).pipe(plumber({ errorHandler })).pipe(newer(paths.assets.dest)).pipe(dest(paths.assets.dest));
 }
