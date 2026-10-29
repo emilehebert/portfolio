@@ -40,3 +40,18 @@
         --grid-size: 50px;
     }
 }
+
+// Section qui commence par un bandeau : --grid-top part du bandeau, pas du padding du haut
+.bg-grid:has(~ .halftone-marquee) {
+    top: calc(var(--grid-top) + var(--section-padding));
+}
+
+// Positions d'arrivée communes (accueil, contact, 404, usage de l'IA)
+// En px fixes : les grilles ne bougent pas quand on redimensionne la fenêtre
+.bg-grid--a {
+    --grid-top: 55px;
+}
+
+.bg-grid--b {
+    --grid-top: 580px;
+}

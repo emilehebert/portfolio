@@ -33,7 +33,7 @@
 
 .hero--projet {
     min-height: 750px;
-    padding: var(--spacing-lg) 0 var(--section-padding);
+    padding-top: var(--spacing-lg);
     /*
      Structure générale
      ========================================================================== */
@@ -203,8 +203,6 @@
    ========================================================================== */
 
 .conception {
-    padding: 0 0 var(--section-padding);
-
     .etapes {
         display: flex;
         flex-direction: column;
@@ -242,8 +240,6 @@
    ========================================================================== */
 
 .galerie {
-    padding: 0 0 var(--section-padding);
-
     @media (max-width: $breakpoint-sm) {
         .window__footer {
             display: none;
@@ -256,8 +252,6 @@
    ========================================================================== */
 
 .bilan {
-    padding: 0 0 var(--section-padding);
-
     .wrapper {
         display: flex;
         flex-direction: column;

@@ -1,0 +1,9 @@
+/* ==========================================================================
+   SECTION / ELEMENT
+   ========================================================================== */
+
+// Même padding en haut et en bas pour toutes les sections
+// Entre deux sections : padding du bas + padding du haut = 100px (50px en mobile)
+section {
+    padding: var(--section-padding) 0;
+}

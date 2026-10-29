@@ -37,6 +37,7 @@ export default class Scroller {
 
     // PARALLAX MOBILE
     // data-speed-mobile="0.25" : comme data-speed, mais seulement sur mobile ($breakpoint-sm).
+    // Accepte aussi clamp(0.25) : l'élément part de sa vraie position au chargement.
     // Ex. page contact : à l'ordinateur, la page tient dans l'écran et les grilles restent fixes.
     // gsap.matchMedia retire l'effet tout seul si la fenêtre repasse en format ordinateur.
     initMobileSpeeds() {
@@ -45,7 +46,8 @@ export default class Scroller {
 
         gsap.matchMedia().add("(max-width: 768px)", () => {
             for (let i = 0; i < items.length; i++) {
-                this.smoother.effects(items[i], { speed: Number(items[i].dataset.speedMobile) });
+                const speed = items[i].dataset.speedMobile;
+                this.smoother.effects(items[i], { speed: isNaN(speed) ? speed : Number(speed) });
             }
         });
     }

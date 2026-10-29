@@ -3,19 +3,11 @@
    ========================================================================== */
 
 .contact {
-    padding: var(--section-padding) 0;
+    padding: calc(var(--section-padding) * 2) 0; // seule section de la page (pas de footer) : double espace en haut et en bas
     .wrapper {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-md); // plus petit que --section-gap : la page doit tenir dans l'écran
-    }
-
-    // Mobile : le formulaire (opaque) prend presque toute la page.
-    // La 1re grille remonte derrière le titre, sinon le parallax la cache sous le formulaire.
-    @media (max-width: $breakpoint-sm) {
-        .bg-grid:first-of-type {
-            top: 0;
-        }
+        gap: var(--spacing-md); // plus petit que --section-padding : la page doit tenir dans l'écran
     }
 }
 

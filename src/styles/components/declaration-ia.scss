@@ -4,10 +4,7 @@
 
 // 1re section : contient aussi le titre de la page
 .declaration-section.declaration {
-    padding-top: var(--spacing-xl);
-    @media (max-width: $breakpoint-sm) {
-        padding-top: var(--spacing-lg);
-    }
+    padding-top: calc(var(--section-padding) * 2); // double espace sous le menu
 }
 
 // Espace sous le titre (le gap du wrapper ajoute déjà --spacing-sm)
@@ -22,7 +19,6 @@
 }
 
 .declaration-section {
-    padding: 0 0 var(--section-padding);
     .wrapper {
         display: flex;
         flex-direction: column;

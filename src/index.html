@@ -1,11 +1,10 @@
-{% set title = "Émile Hébert | Portfolio" %}
-{% set page = "" %}
-{% set description = "Portfolio d'Émile Hébert, créateur multimédia finissant en TIM au Cégep Édouard-Montpetit. Design, intégration web, animation 3D et jeux vidéo." %}
-{% include '_partials/_header.html' %}
+{% set title = "Émile Hébert | Portfolio" %} {% set page = "" %} {% set description = "Portfolio d'Émile Hébert, créateur multimédia finissant en TIM au Cégep
+Édouard-Montpetit. Design, intégration web, animation 3D et jeux vidéo." %} {% include '_partials/_header.html' %}
 
 <div class="hero-story-track">
     <section class="hero has-bg-grid" data-component="HeroPortraitScroll">
-        <div class="bg-grid" style="--grid-top: 6.9%" data-speed="clamp(0.25)" aria-hidden="true"></div>
+        <div class="bg-grid bg-grid--a" data-speed="clamp(0.25)" aria-hidden="true"></div>
+        <div class="bg-grid bg-grid--b" data-speed="clamp(0.25)" aria-hidden="true"></div>
         <div class="wrapper">
             <div class="hero__content" data-speed="1">
                 <h3>
@@ -77,14 +76,12 @@
     </section>
     -->
 
-    <section class="about has-bg-grid">
+    <section class="about">
         <!-- SCROLLYTELLING (désactivé) : place d'arrivée du portrait
         <div class="wrapper">
             <div class="hero-story-track__landing" aria-hidden="true"></div>
         </div>
         -->
-        <div class="bg-grid" style="--grid-top: 36.4%" data-speed="0.25"></div>
-        <div class="bg-grid" style="--grid-top: 115%" data-speed="0.25"></div>
         <div id="about" class="halftone-marquee" data-component="HalftoneMarquee" data-text="A propos \">
             <canvas class="halftone-marquee__canvas"></canvas>
         </div>
@@ -335,7 +332,7 @@
 </div>
 
 <section class="projets has-bg-grid">
-    <div class="bg-grid" style="--grid-top: 90%" data-speed="0.25" aria-hidden="true"></div>
+    <div class="bg-grid" style="--grid-top: 30%" data-speed="0.25" aria-hidden="true"></div>
     <div id="projets" class="halftone-marquee" data-component="HalftoneMarquee" data-text="Mes projets \" aria-hidden="true">
         <canvas class="halftone-marquee__canvas"></canvas>
     </div>

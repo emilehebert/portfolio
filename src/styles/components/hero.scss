@@ -21,7 +21,7 @@
 
 .hero {
     min-height: 750px;
-    padding: var(--spacing-xl) 0 var(--section-padding);
+    padding-top: calc(var(--section-padding) * 2); // 1re section : double espace sous le menu
     position: relative;
     overflow: visible;
 
@@ -30,9 +30,6 @@
         z-index: 1;
     }
 
-    @media screen and (max-width: $breakpoint-sm) {
-        padding: var(--spacing-lg) 0 var(--section-padding);
-    }
     .wrapper {
         position: relative;
         z-index: 1;

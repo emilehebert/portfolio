@@ -11,7 +11,7 @@
 
 // Espace sous chaque bandeau : padding sur le contenu juste après (pareil sur tout le site)
 .halftone-marquee + .wrapper {
-    padding-top: var(--section-gap);
+    padding-top: var(--section-padding);
 }
 
 .halftone-marquee__canvas {

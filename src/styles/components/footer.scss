@@ -3,6 +3,7 @@
    ========================================================================== */
 
 .footer {
+    margin-top: var(--section-padding); // + le padding du bas de la dernière section = même espace qu'entre deux sections
     background: var(--gradient-background);
 
     /*
