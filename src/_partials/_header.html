@@ -39,7 +39,7 @@
         <script src="scripts/main.js" defer></script>
     </head>
 
-    <body data-component="TargetCursor">
+    <body id="top" data-component="TargetCursor">
         <!-- Modale unique : vidéo de présentation (data-modal="video") et image en grand (data-modal="image") -->
         {% include '_modal.html' %}
 
@@ -47,7 +47,7 @@
             <header class="header" data-component="Header">
             <div class="wrapper">
                 <div class="header__brand">
-                    <a class="logo cursor-target" href="index.html" aria-label="Accueil">
+                    <a class="logo cursor-target" href="/" aria-label="Accueil">
                       <svg class="icon icon--lg">
                         <use xlink:href="#icon-logo"></use>
                       </svg>
@@ -66,10 +66,10 @@
                             <button class="button button--secondary header__close js-toggle cursor-target" aria-label="Fermer le menu">X</button>
                         </div>
                         <ul class="window__content header__links">
-                            <li><a class="cursor-target" href="index.html#about" data-component="ScrambledText">À propos</a></li>
-                            <li><a class="cursor-target" href="index.html#projets" data-component="ScrambledText">Projets</a></li>
-                            <li><a class="cursor-target" href="declaration-ia.html" data-component="ScrambledText">Usage d'IA</a></li>
-                            <li><a class="cursor-target" href="contact.html" data-component="ScrambledText">Contact</a></li>
+                            <li><a class="cursor-target" href="/#about" data-component="ScrambledText">À propos</a></li>
+                            <li><a class="cursor-target" href="/#projets" data-component="ScrambledText">Projets</a></li>
+                            <li><a class="cursor-target" href="/declaration-ia" data-component="ScrambledText">Usage d'IA</a></li>
+                            <li><a class="cursor-target" href="/contact" data-component="ScrambledText">Contact</a></li>
                             <li class="header__video"><a href="#" class="button cursor-target" data-component="ScrambledText" data-modal="video" data-title="Ma vidéo de présentation">Vidéo de présentation</a></li>
                         </ul>
                         <div class="window__footer header__socials list-icons" data-component="IconLabel">
