@@ -6,16 +6,14 @@ de mon portfolio, et où je ne l'ai pas utilisée." %} {% include '_partials/_he
     <div class="bg-grid bg-grid--b" data-speed="clamp(0.25)" aria-hidden="true"></div>
     <div class="wrapper">
         <div class="declaration__titre">
-            <h2 data-component="ScrambledText" data-chars="L’IA est un outil, pas l’auteur.z.:;=" data-duration="1" data-intro>
-                L’IA est un outil, pas l’auteur.
-            </h2>
+            <h2 data-component="ScrambledText" data-duration="1" data-intro>L’IA est un outil, pas l’auteur.</h2>
             <p>
                 J’utilise l’IA comme un outil de travail, pas comme un raccourci. Elle m’aide à intégrer du code plus vite et à valider mes formulations, mais
                 toutes les décisions créatives viennent de moi. Ici, je détaille honnêtement où elle est intervenue dans la conception de mon portfolio, et où
                 elle ne l’a pas fait.
             </p>
         </div>
-        <div class="accordion" data-component="Accordion" data-single-open data-force-open>
+        <div class="accordion" data-component="Accordion" data-lag="0.1" data-single-open data-force-open>
             <div class="accordion-item">
                 <div class="accordion-title is-open cursor-target">
                     <svg class="icon icon--xs">
@@ -73,14 +71,14 @@ de mon portfolio, et où je ne l'ai pas utilisée." %} {% include '_partials/_he
 
 <section class="declaration-section prompt has-bg-grid">
     <div class="wrapper">
-        <h2 data-component="ScrambledText">Comment je formule mes prompts</h2>
+        <h2 data-component="ScrambledText" data-intro>Comment je formule mes prompts</h2>
         <p>
             Je n’écris jamais « fais-moi une page ». Claude m’aide d’abord à <span class="accent--primary">structurer mon prompt</span>, que je
             <span class="accent--primary">relis et ajuste</span>
             avant de m’en servir.
         </p>
         <p>Exemple de prompt que j’utilise.</p>
-        <div class="paragraphe">
+        <div class="paragraphe" data-lag="0.1">
             <p class="me">Écris-moi un prompt pour que n’importe quelle image de mon site puisse s’ouvrir en grand au clic. Je vais le donner à Claude Code.</p>
             <p class="claude">
                 <strong>Voici un prompt prêt à être utilisé :</strong>
@@ -106,9 +104,9 @@ de mon portfolio, et où je ne l'ai pas utilisée." %} {% include '_partials/_he
 </section>
 <section class="declaration-section regard has-bg-grid">
     <div class="wrapper">
-        <h2>Mon regard sur l’IA</h2>
+        <h2 data-component="ScrambledText" data-intro>Mon regard sur l’IA</h2>
         <p>Elle peut remplacer mon exécution, jamais ma créativité.</p>
-        <div class="paragraphe">
+        <div class="paragraphe" data-lag="0.1">
             <p>
                 L’IA est pratique, surtout pour le <span class="accent--primary">côté technique</span>. Elle ouvre des portes à ceux qui s’empêchaient de créer
                 à cause de la complexité. On peut maintenant réaliser énormément de choses en quelques prompts, tout en gardant
