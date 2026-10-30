@@ -10,6 +10,9 @@
 
 .scrambled-text__char {
     display: inline-block;
+    // Safari annule le clic si le texte sous la souris est remplacé entre l'appui et le relâchement
+    // (le brouillage le remplace à chaque image). Le clic tombe donc sur le mot, qui ne change jamais.
+    pointer-events: none;
 
     // Pendant l'intro la lettre garde sa largeur (ScrambledText.js),
     // le caractère brouillé est centré dans sa case
