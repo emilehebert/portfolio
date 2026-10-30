@@ -10,7 +10,6 @@
     touch-action: none;
     user-select: none;
     border-radius: var(--border-radius);
-    border: 1px solid var(--color-primary);
 
     img {
         pointer-events: none;
@@ -30,9 +29,7 @@
     .comparison__before {
         position: absolute;
         inset: 0;
-        clip-path: inset(
-            0 calc(100% - var(--position)) 0 0
-        ); // coupe l'image ET son label
+        clip-path: inset(0 calc(100% - var(--position)) 0 0); // coupe l'image ET son label
 
         img {
             height: 100%;

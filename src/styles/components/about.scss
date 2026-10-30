@@ -73,7 +73,7 @@
     }
     .webjam {
         grid-column: 1 / 7;
-        grid-row: 13 / 21;
+        grid-row: 14 / 22;
         z-index: 3; // au-dessus de .couple, sinon sa photo cache le bouton « site WebJam »
     }
     .skill--soft {
@@ -186,6 +186,10 @@
         .friend {
             grid-column: 1 / 4;
             grid-row: 5 / 11;
+
+            img {
+                object-position: center 30%; // têtes gardées au recadrage (le dither suit l'object-position)
+            }
         }
         .intro {
             grid-column: 1 / 5;
