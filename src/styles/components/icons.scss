@@ -62,7 +62,7 @@
         position: absolute;
         color: var(--color-white);
         font-weight: 400;
-        bottom: 120%;
+        bottom: 135%;
         left: 50%;
         transform: translateX(-50%);
         white-space: nowrap;
@@ -95,16 +95,7 @@
     .list-icons:not(.header__socials) {
         --button-max: 52px; // taille desktop
         // largeur disponible ÷ 6
-        --button-size: min(
-            calc(
-                (
-                        100vw - var(--spacing-md) - 2 * var(--spacing-s) - 2px -
-                            5 * var(--spacing-s)
-                    ) /
-                    6
-            ),
-            var(--button-max)
-        );
+        --button-size: min(calc((100vw - var(--spacing-md) - 2 * var(--spacing-s) - 2px - 5 * var(--spacing-s)) / 6), var(--button-max));
         gap: var(--spacing-s);
 
         .logo--icon {

@@ -20,10 +20,20 @@
 }
 
 .hero {
-    min-height: 750px;
-    padding-top: calc(var(--section-padding) * 2); // 1re section : double espace sous le menu
+    min-height: 700px;
+    // Un seul espace sous le menu (au lieu du double des autres 1res sections) : le hero est
+    // plus court et le haut du bandeau « A propos » dépasse en bas de l'écran (invite à défiler)
+    padding-top: var(--section-padding);
     position: relative;
     overflow: visible;
+
+    // Ordinateur : centre le portrait entre le menu et le bandeau, parallax (data-speed 1.2) compris.
+    // Au-dessus de 1440px, la photo grandit (cheveux collés au menu) : on déplace jusqu'à 35px
+    // d'espace du bas vers le haut. Sur un écran plus haut que 910px, on ajoute de l'espace en haut.
+    @media screen and (min-width: #{$breakpoint-sm + 1px}) {
+        padding-top: calc(var(--section-padding) + clamp(0px, (100vw - #{$breakpoint-xl}) * 0.075, 35px) + max(0px, (100vh - 910px) * 0.14));
+        padding-bottom: calc(var(--section-padding) - clamp(0px, (100vw - #{$breakpoint-xl}) * 0.065, 30px));
+    }
 
     // Passe au-dessus des sections suivantes seulement quand le portrait descend (scrollytelling)
     &:has(.js-pinned) {
@@ -78,17 +88,16 @@
     left: 0;
     transform: translate(var(--spacing-m), -50%);
     z-index: 5;
+    transition: translate 0.5s $ease-in-out-cubic, visibility 0.5s;
     @media screen and (max-width: $breakpoint-xl) {
         display: none;
     }
-    @media screen and (max-width: $breakpoint-sm) {
-        display: flex;
-        left: auto;
-        right: 0;
-        transform: translate(calc(var(--spacing-m) * -1), -50%);
-    }
-    @media screen and (max-width: $breakpoint-xs) {
-        display: none;
+
+    // Hero dépassé (SocialsDock.js) : le bloc sort de l'écran par la gauche, le bouton « Réseaux » du header prend le relais.
+    // translate s'ajoute au transform du dessus : -100 % de sa largeur, plus deux marges pour qu'il sorte au complet
+    .socials-is-docked & {
+        translate: calc(-100% - var(--spacing-m) * 2) 0;
+        visibility: hidden;
     }
 }
 
@@ -122,11 +131,7 @@
         // Passe de 200% (à $breakpoint-sm) à 265% (à $breakpoint-xl).
         // 40% de la hauteur du contenu de la fenêtre (~354px) ≈ 142px,
         // réparti sur les 672px entre les deux breakpoints : 142 / 672 ≈ 0.21.
-        height: clamp(
-            200%,
-            calc(200% + (100vw - #{$breakpoint-sm}) * 0.21),
-            265%
-        );
+        height: clamp(200%, calc(200% + (100vw - #{$breakpoint-sm}) * 0.21), 265%);
         width: auto;
         // Mobile : recentrage horizontal de la personne fait dans HeroPortraitScroll.js
 

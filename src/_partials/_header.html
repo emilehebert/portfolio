@@ -81,34 +81,53 @@
                         <ul class="window__content header__links">
                             <li><a class="cursor-target" href="/#about" data-component="ScrambledText">À propos</a></li>
                             <li><a class="cursor-target" href="/#projets" data-component="ScrambledText">Projets</a></li>
-                            <li><a class="cursor-target" href="/declaration-ia" data-component="ScrambledText">Usage d'IA</a></li>
+                            <li><a class="cursor-target" href="/declaration-ia" data-component="ScrambledText">IA</a></li>
                             <li><a class="cursor-target" href="/contact" data-component="ScrambledText">Contact</a></li>
                             <li class="header__video"><a href="#" class="button cursor-target" data-component="ScrambledText" data-modal="video" data-title="Ma vidéo de présentation">Vidéo de présentation</a></li>
+                            {% if page is defined and page != "contact.html" %}
+                            <!-- Bouton des réseaux (SocialsDock.js) : sur toutes les pages sauf contact et 404, liens copiés du footer -->
+                            <li class="header__socials-item">
+                                <div class="socials-dock" data-component="SocialsDock" data-source=".footer .list-icons" data-trigger=".hero">
+                                    <button class="button button--secondary socials-dock__button cursor-target" type="button" aria-expanded="false" aria-controls="socials-dock-panel">
+                                        Réseaux
+                                        <svg class="icon icon--sm socials-dock__chevron" aria-hidden="true">
+                                            <use xlink:href="#icon-chevron"></use>
+                                        </svg>
+                                    </button>
+                                    <div class="list-icons socials-dock__panel" id="socials-dock-panel"></div>
+                                </div>
+                            </li>
+                            {% endif %}
                         </ul>
                         <div class="window__footer header__socials list-icons" data-component="IconLabel">
-                            <a href="https://github.com/emilehebert" target="_blank" class="logo--link cursor-target" aria-label="GitHub">
+                            <a href="https://github.com/emilehebert" target="_blank" rel="noopener" class="logo--link cursor-target" aria-label="GitHub">
                                 <svg class="icon icon--lg logo--icon">
                                     <use xlink:href="#icon-github"></use>
                                 </svg>
                             </a>
-                            <a href="https://www.youtube.com/@emile_heb" target="_blank" class="logo--link cursor-target" aria-label="YouTube">
+                            <a href="https://www.youtube.com/@emile_heb" target="_blank" rel="noopener" class="logo--link cursor-target" aria-label="YouTube">
                                 <svg class="icon icon--lg logo--icon">
                                     <use xlink:href="#icon-youtube"></use>
                                 </svg>
                             </a>
-                            <a href="https://ca.pinterest.com/hebertemile/" target="_blank" class="logo--link cursor-target" aria-label="Pinterest">
+                            <a href="https://ca.pinterest.com/hebertemile/" target="_blank" rel="noopener" class="logo--link cursor-target" aria-label="Pinterest">
                                 <svg class="icon icon--lg logo--icon">
                                     <use xlink:href="#icon-pinterest"></use>
                                 </svg>
                             </a>
-                            <a href="https://www.linkedin.com/in/%C3%A9mile-h%C3%A9bert-9b5849308/" target="_blank" class="logo--link cursor-target " aria-label="LinkedIn">
+                            <a href="https://www.linkedin.com/in/%C3%A9mile-h%C3%A9bert-9b5849308/" target="_blank" rel="noopener" class="logo--link cursor-target " aria-label="LinkedIn">
                                 <svg class="icon icon--lg logo--icon">
                                     <use xlink:href="#icon-linkedin"></use>
                                 </svg>
                             </a>
-                            <a href="https://www.artstation.com/emile-hebert" target="_blank" class="logo--link cursor-target" aria-label="ArtStation">
+                            <a href="https://www.artstation.com/emile-hebert" target="_blank" rel="noopener" class="logo--link cursor-target" aria-label="ArtStation">
                                 <svg class="icon icon--lg logo--icon">
                                     <use xlink:href="#icon-artstation"></use>
+                                </svg>
+                            </a>
+                            <a href="https://shadzmp4.itch.io/" target="_blank" rel="noopener" class="logo--link cursor-target" aria-label="Itch.io">
+                                <svg class="icon icon--lg logo--icon">
+                                    <use xlink:href="#icon-itchio"></use>
                                 </svg>
                             </a>
                         </div>

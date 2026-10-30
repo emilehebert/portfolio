@@ -11,6 +11,7 @@
     z-index: 10;
     transition: transform 0.4s $ease-in-cubic;
     border-bottom: 1px solid var(--color-primary);
+    --socials-dock-width: 125px; // largeur du bouton des réseaux : les liens glissent d'autant (SocialsDock.js)
 
     &::before {
         background: var(--gradient-background);
@@ -23,11 +24,13 @@
         z-index: -10;
     }
 
-    .header-is-hidden.is-scrolling-down:not(.nav-is-active) & {
+    // Reste affiché pendant que le menu mobile ou la boîte des réseaux (SocialsDock.js) est ouvert
+    .header-is-hidden.is-scrolling-down:not(.nav-is-active, .socials-is-open) & {
         transform: translateY(-100%) translateY(1px);
     }
 
     .wrapper {
+        position: relative; // repère du bouton des réseaux sur desktop
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -171,6 +174,25 @@
         }
     }
 
+    // Desktop : le bouton occupe la place à droite quand le hero est dépassé.
+    .header__nav {
+        @media screen and (min-width: $breakpoint-md) {
+            .header__links {
+                position: relative;
+            }
+
+            .header__links > li:not(.header__socials-item) {
+                transition: transform 0.4s $ease-out-cubic;
+
+                // Page sans hero, avec le bouton (pas contact) : toujours en place
+                .socials-is-docked &,
+                body:has(.socials-dock):not(:has(.hero)) & {
+                    transform: translateX(calc(-1 * (var(--socials-dock-width) + var(--spacing-md))));
+                }
+            }
+        }
+    }
+
     .header__toggle {
         --bar-height: 3px;
         --bar-width: 30px;
@@ -301,5 +323,99 @@
     .color-toggle__input:focus-visible + & {
         outline: 1px dotted var(--color-white);
         outline-offset: 2px;
+    }
+}
+
+/*
+ Réseaux dans le header (SocialsDock.js)
+ Le JS met seulement les classes, les animations sont les transitions ci-dessous :
+   html.socials-is-docked   hero dépassé : le bloc flottant disparaît, le bouton apparaît
+   .socials-dock.is-active  boîte ouverte
+ ========================================================================== */
+
+.socials-dock {
+    position: relative;
+}
+
+.header__socials-item {
+    @media screen and (max-width: ($breakpoint-md - 1px)) {
+        display: none;
+    }
+
+    @media screen and (min-width: $breakpoint-md) {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+    }
+}
+
+// Desktop : caché dans le hero, apparaît une fois le hero passé (page sans hero : toujours là).
+.socials-dock__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-s);
+    width: var(--socials-dock-width);
+
+    @media screen and (min-width: $breakpoint-md) {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.4s,
+            visibility 0.4s;
+
+        // Page sans hero : toujours visible
+        .socials-is-docked &,
+        body:has(.socials-dock):not(:has(.hero)) & {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+.socials-dock__chevron {
+    transform: rotate(90deg); // pointe vers le bas
+    transition: transform 0.3s $ease-out-cubic;
+
+    .is-active & {
+        transform: rotate(-90deg);
+    }
+}
+
+// Boîte : glisse vers le bas en apparaissant. visibility la sort aussi de l'ordre du Tab quand elle est fermée
+.socials-dock__panel {
+    position: absolute;
+    top: calc(100% + var(--spacing-s));
+    right: 0;
+    flex-wrap: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 calc(-1 * var(--spacing-s));
+    transition:
+        opacity 0.3s,
+        translate 0.3s $ease-out-cubic,
+        visibility 0.3s;
+
+    .is-active > & {
+        opacity: 1;
+        visibility: visible;
+        translate: 0 0;
+    }
+
+    // Pont invisible entre le bouton et la boîte : la souris peut descendre sans que la boîte se ferme
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 100%;
+        height: var(--spacing-s);
+    }
+
+    // Les noms passent sous les icônes : au-dessus, ils cacheraient le bouton
+    .logo--label {
+        bottom: auto;
+        top: 135%;
     }
 }

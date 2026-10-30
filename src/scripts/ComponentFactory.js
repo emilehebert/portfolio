@@ -15,6 +15,7 @@ import RotatingText from "./components/RotatingText.js";
 import HalftoneMarquee from "./components/HalftoneMarquee.js";
 import Scroller from "./components/Scroller.js";
 import ScrollStack from "./components/ScrollStack.js";
+import SocialsDock from "./components/SocialsDock.js";
 
 export default class ComponentFactory {
     constructor() {
@@ -37,6 +38,7 @@ export default class ComponentFactory {
             HalftoneMarquee,
             Scroller,
             ScrollStack,
+            SocialsDock,
         };
         this.init();
     }

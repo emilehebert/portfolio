@@ -7,6 +7,12 @@
      Structure générale
      ========================================================================== */
 
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--section-padding);
+    }
+
     .cards {
         display: flex;
         flex-direction: column;
