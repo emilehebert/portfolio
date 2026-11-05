@@ -17,3 +17,10 @@ export function assets() {
     src("src/sitemap.txt").pipe(dest(paths.dest)); // copie à la racine
     return src(paths.assets.src, { encoding: false }).pipe(plumber({ errorHandler })).pipe(newer(paths.assets.dest)).pipe(dest(paths.assets.dest));
 }
+
+// Copie le CV à dist/cv pour qu'il soit servi à /cv/Emile_Hebert_CV.pdf
+export function cv() {
+    return src("src/cv/**/*", { encoding: false })
+        .pipe(plumber({ errorHandler }))
+        .pipe(dest(`${paths.dest}/cv`));
+}
