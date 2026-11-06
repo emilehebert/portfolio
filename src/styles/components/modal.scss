@@ -42,8 +42,16 @@
 .modal--image .modal__comparison,
 .modal--comparison .modal__video,
 .modal--comparison .modal__image,
-.modal:not(.modal--image) .modal__nav {
+.modal:not(.modal--image) .modal__nav,
+.modal:not(.modal--video) .modal__quality {
     display: none;
+}
+
+// Bouton de la vidéo (YouTube.js) : collé au X, c'est le titre qui passe à la ligne
+.modal__quality {
+    flex-shrink: 0;
+    margin-left: auto;
+    white-space: nowrap;
 }
 
 /*

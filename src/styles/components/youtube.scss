@@ -8,7 +8,7 @@
     aspect-ratio: 16 / 9;
 
     // L'iframe dépasse en haut et en bas : la vidéo garde sa taille (bandes noires ajoutées par YouTube),
-    // mais l'overlay de YouTube (titre, partager, « Plus de vidéos », logo) se place dans les bandes, coupées par overflow: hidden
+    // mais l'overlay de YouTube (titre, partager, « Plus de vidéos », logo, barre de contrôle) se place dans les bandes, coupées par overflow: hidden
     iframe {
         position: absolute;
         top: -120px;
@@ -17,6 +17,23 @@
         height: calc(100% + 240px);
         border: 0;
     }
+
+    // Bouton « Qualité YouTube » (YouTube.js) : l'iframe reprend sa taille, sa barre n'est plus coupée
+    &.is-native iframe {
+        top: 0;
+        height: 100%;
+    }
+}
+
+// Notre couche et nos contrôles laissent la place à ceux de YouTube
+.is-native .youtube__shield,
+.is-native .youtube__controls {
+    display: none;
+}
+
+// La page ne reçoit plus la souris dans l'iframe : on cache le curseur du site, sinon il reste figé au bord de la vidéo
+html:has([data-component="YouTube"] iframe:hover) .target-cursor {
+    opacity: 0;
 }
 
 /*

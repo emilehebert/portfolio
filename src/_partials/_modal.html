@@ -5,12 +5,14 @@
     <div class="window">
         <div class="window__header">
             <p class="js-modal-title"></p>
+            <!-- Visible seulement avec data-modal="video" : passe de nos contrôles à ceux de YouTube, les seuls qui changent la qualité (YouTube.js) -->
+            <button class="button button--secondary modal__quality cursor-target js-youtube-native" type="button">Contrôles YouTube</button>
             <a href="#" class="button button--secondary js-close cursor-target" data-component="ScrambledText">X</a>
         </div>
         <div class="window__content">
             <!-- Contenu vidéo, visible seulement avec data-modal="video" -->
-            <!-- data-controls="false" : pas la barre de YouTube, on affiche nos propres contrôles (.js-youtube-controls) -->
-            <div class="window__media modal__video" data-component="YouTube" data-video-id="9r9vmKvIosQ" data-controls="false">
+            <!-- La barre de YouTube est coupée par le CSS : on affiche nos propres contrôles (.js-youtube-controls), sauf avec le bouton .js-youtube-native -->
+            <div class="window__media modal__video" data-component="YouTube" data-video-id="9r9vmKvIosQ">
                 <div class="js-video"></div>
                 <!-- Couche par-dessus l'iframe : YouTube ne voit pas la souris, donc son overlay ne reste pas affiché -->
                 <div class="youtube__shield js-youtube-shield"></div>

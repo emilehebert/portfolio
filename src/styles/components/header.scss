@@ -347,6 +347,7 @@
         top: 50%;
         right: 0;
         transform: translateY(-50%);
+        pointer-events: none; // posé par-dessus le bouton vidéo dans le hero : seuls le bouton et la boîte captent la souris
     }
 }
 
@@ -359,6 +360,7 @@
     width: var(--socials-dock-width);
 
     @media screen and (min-width: $breakpoint-md) {
+        pointer-events: auto;
         opacity: 0;
         visibility: hidden;
         transition:
@@ -389,6 +391,7 @@
     top: calc(100% + var(--spacing-s));
     right: 0;
     flex-wrap: nowrap;
+    pointer-events: auto;
     opacity: 0;
     visibility: hidden;
     translate: 0 calc(-1 * var(--spacing-s));

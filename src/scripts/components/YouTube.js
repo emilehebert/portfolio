@@ -140,7 +140,24 @@ export default class YouTube {
         this.element.addEventListener("mousemove", this.showControls.bind(this));
         this.element.addEventListener("mouseleave", this.hideControls.bind(this));
 
+        // Dans la barre de la fenêtre, pas dans la vidéo
+        this.nativeButton = this.element.closest(".window").querySelector(".js-youtube-native");
+        this.nativeButton.addEventListener("click", this.toggleNative.bind(this));
+
         this.updateVolume(this.player.isMuted() ? 0 : this.player.getVolume());
+    }
+
+    // Seule la barre de YouTube change la qualité, son API ne le permet plus. Le CSS (.is-native) la fait apparaître
+    // à la place de nos contrôles : la vidéo continue sans recharger et garde la qualité choisie.
+    toggleNative() {
+        const isNative = this.element.classList.toggle("is-native");
+        this.nativeButton.textContent = isNative ? "Contrôles du site" : "Contrôles YouTube";
+
+        // Retour à nos contrôles : ils reprennent le volume et le moment choisis dans la barre de YouTube
+        if (!isNative) {
+            this.updateVolume(this.player.isMuted() ? 0 : this.player.getVolume());
+            this.updateProgress();
+        }
     }
 
     updateControls(state) {
