@@ -35,6 +35,23 @@
         <meta property="og:image:alt" content="{{ title }}" />
         <meta name="twitter:card" content="summary_large_image" />
 
+        {% if page is defined and page == "" %}
+        <!-- Image préférée pour Google (Recherche, Sheets) : sans texte, comme le recommande sa documentation -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "url": "{{ siteUrl }}",
+                "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "{{ siteUrl }}assets/images/og/og-portrait.jpg",
+                    "width": 1200,
+                    "height": 630
+                }
+            }
+        </script>
+        {% endif %}
+
         <!-- Polices du haut de page chargées tout de suite, en même temps que le CSS (évite que le texte bouge) -->
         <link rel="preload" href="assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="preload" href="assets/fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin />

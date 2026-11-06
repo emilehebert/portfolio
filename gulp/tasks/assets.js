@@ -15,6 +15,7 @@ import { paths } from "../config.js";
 // Task
 export function assets() {
     src("src/sitemap.txt").pipe(dest(paths.dest)); // copie à la racine
+    src("src/assets/favicon/favicon.ico", { encoding: false }).pipe(dest(paths.dest)); // /favicon.ico, l'adresse par défaut
     return src(paths.assets.src, { encoding: false }).pipe(plumber({ errorHandler })).pipe(newer(paths.assets.dest)).pipe(dest(paths.assets.dest));
 }
 
