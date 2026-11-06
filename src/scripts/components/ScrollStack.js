@@ -51,6 +51,11 @@ export default class ScrollStack {
 
         const { distance, offset, scale, dim, hold } = this.options;
 
+        // La dernière image se pose (nombre d'images - 1) × offset plus bas que la première (transform y),
+        // donc elle dépasse sous l'étape. On réserve cette place, sinon elle mange l'espace avant la suite
+        // (ex. en mobile, la pile de 3 images collait au bandeau « Galerie »).
+        step.style.paddingBottom = `${(cards.length - 1) * offset}px`;
+
         // Le haut de l'image reste en place quand elle rétrécit
         gsap.set(cards, { transformOrigin: "50% 0%", filter: "brightness(1)" });
 
